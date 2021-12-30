@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+      <a class="navbar-brand" href="/">Dong's Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Search</a>
+          </li>
+          <li class="nav-item">
+            <a  data-toggle="modal" data-target="#loginModal" href="" class="nav-link">Log in</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <img class="user-avatar" src ="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png">
+             User Name
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+              <a class="dropdown-item" href="#">Bài đăng của tôi</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Thoát đăng nhập</a>
+            </div>
+          </li>
+        </ul>
+        <script>
+         {{!-- Switch page active --}}
+
+        </script>
+
+      </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-title text-center">
+            <h4>Login</h4>
+          </div>
+          <div class="d-flex flex-column text-center">
+            <div class="mb-4 d-flex justify-content-center login-wrapper">
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <a href="#" class="btn btn-primary facebook"> <span>Login with Facebook</span> <i class="fab fa-facebook-f"></i> </a> </div>
+                </div>
+                <div class="mb-4 d-flex justify-content-center login-wrapper">
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <a href="#" class="btn btn-primary google-plus"> Login with Google <i class="fab fa-google"></i> </a> </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <div class="signup-section">Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.</div>
+        </div>
+    </div>
+  </div>
+  <script>
+      jQuery(document).ready(function() {             
+      jQuery('#loginModal').modal('show');
+        jQuery(function () {
+          jQuery('[data-toggle="tooltip"]').tooltip()
+        })
+      });
+  </script>
+</nav>
