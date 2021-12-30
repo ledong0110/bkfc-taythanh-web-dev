@@ -1,0 +1,22 @@
+{
+  "name": "bkfcwebdev",
+  "version": "1.0.0",
+  "description": "Here is a project built for educational purpose. It aims to provide the information of University entrance in Ho Chi Minh city University of Technology. Copyright is owned by BKFC Tây Thạnh",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ledong0110/bkfc-taythanh-web-dev.git"
+  },
+  "keywords": [
+    "web-bkfc-hcmut"
+  ],
+  "author": "BKFC Tay Thanh Devs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ledong0110/bkfc-taythanh-web-dev/issues"
+  },
+  "homepage": "https://github.com/ledong0110/bkfc-taythanh-web-dev#readme"
+}
