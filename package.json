@@ -4,7 +4,11 @@
   "description": "Here is a project built for educational purpose. It aims to provide the information of University entrance in Ho Chi Minh city University of Technology. Copyright is owned by BKFC Tây Thạnh",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --inspect src/index.js",
+    "beautify": "lint-staged",
+    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,24 @@
   "bugs": {
     "url": "https://github.com/ledong0110/bkfc-taythanh-web-dev/issues"
   },
-  "homepage": "https://github.com/ledong0110/bkfc-taythanh-web-dev#readme"
+  "homepage": "https://github.com/ledong0110/bkfc-taythanh-web-dev#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --tab-width 4 --trailing-comma all --write"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.1.4",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-sequence": "^5.3.1",
+    "mongoose-slug-generator": "^1.0.4"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  }
 }
