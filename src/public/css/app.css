@@ -2,12 +2,12 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800,900");
 /* :: 2.0 Import All CSS */
-@import url("bootstrap.min.css");
-@import url("classy-nav.css");
-@import url("owl.carousel.min.css");
-@import url("animate.css");
-@import url("magnific-popup.css");
-@import url("font-awesome.min.css");
+@import url(bootstrap.min.css);
+@import url(classy-nav.css);
+@import url(owl.carousel.min.css);
+@import url(animate.css);
+@import url(magnific-popup.css);
+@import url(font-awesome.min.css);
 /* :: 3.0 Base CSS */
 * {
   margin: 0;
@@ -451,12 +451,12 @@ img {
 
 .breaking-news-area .breaking-news-ticker .title {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 180px;
-  flex: 0 0 180px;
-  max-width: 180px;
-  width: 180px;
+  -ms-flex: 0 0 170px;
+  flex: 0 0 170px;
+  max-width: 170px;
+  width: 170px;
   background-color: #ef1b48;
-  height: 55px; }
+  height: 45px; }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .breaking-news-area .breaking-news-ticker .title {
@@ -489,7 +489,7 @@ img {
   line-height: 1;
   color: #ffffff;
   text-align: center;
-  line-height: 55px; }
+  line-height: 47px; }
 
 @media only screen and (max-width: 767px) {
   .breaking-news-area .breaking-news-ticker .title h6 {
@@ -1775,9 +1775,3 @@ img {
 
 /* ====== The End ====== */
 /*# sourceMappingURL=style.css.map */
-.user-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-right: 4px;
-  margin-top: 8px; }
