@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Here is a project built for educational purpose. It aims to provide the information of University entrance in Ho Chi Minh city University of Technology. Copyright is owned by BKFC Tây Thạnh",
   "main": "index.js",
+
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "beautify": "lint-staged",
@@ -27,13 +28,16 @@
     "src/**/*.{js,json,scss}": "prettier --single-quote --tab-width 4 --trailing-comma all --write"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.22.2",
+    "body-parser": "^1.19.1",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^6.1.4",
     "mongoose-delete": "^0.5.4",
     "mongoose-sequence": "^5.3.1",
-    "mongoose-slug-generator": "^1.0.4"
+    "mongoose-slug-generator": "^1.0.4",
+    "multer": "^1.4.4"
   },
   "devDependencies": {
     "husky": "^7.0.4",

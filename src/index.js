@@ -14,6 +14,8 @@ db.connect();
 
 //Static file
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(__dirname + "/public"));
+
 
 //body parser for POST method
 app.use(
@@ -33,9 +35,11 @@ app.engine(
     'hbs',
     engine({
         extname: '.hbs',
-        helpers: {
-            sum: (a, b) => a + b,
-        },
+        defaultLayout: "main",
+        layoutsDir: "./src/resources/views/layouts"
+        // helpers: {
+        //     sum: (a, b) => a + b,
+        // },
     }),
 );
 app.set('view engine', 'hbs');
@@ -49,8 +53,8 @@ app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req
 
 //Routes init
 
-route(app);
-
 app.listen(port, () =>
     console.log(`App Listening at http://localhost:${port}`),
 );
+
+route(app);

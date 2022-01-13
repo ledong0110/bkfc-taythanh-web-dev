@@ -1,0 +1,49 @@
+<div class="row create-post-area p-0 m-0">
+    <div class = "d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+        <h3 class="mb-3 mt-3">
+            Tạo bài viết mới
+        </h3>
+    </div>
+    <form class="d-block ps-5 pe-5" action="/post/create" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Tiêu đề</label>
+            <input type="text" class="form-control" name="title" id="title" aria-describedby="title-help" required>
+            <div id="title-help" class="form-text">Tiêu đề của bài viết</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Miêu tả bài viết</label> <span class="des-max">(tối đa 300 ký tự)</span>
+            <textarea type="text" class="form-control" name="description" id="description" aria-describedby="description-help" required rows=3 maxlength="300"></textarea>
+            <div id="description-help" class="form-text">Phần miêu tả của bài viết sẽ được ghi dưới tiêu đề trên trang chọn bài viết</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Nội dung</label>
+            {{!-- <textarea type="text" class="form-control" name="content" id="content" aria-describedby="description-help" required rows=8></textarea> --}}
+            <div class="" name="content" id="content" required rows=8></div>
+        </div>
+        {{!-- <div class="mb-3">
+            <label for="formFile" class="form-label">Chọn file docx cho bài viết</label>
+            <span class="des-max">(tối đa 16MB)</span>
+            <input class="form-control" name="content" id="content" type="file" required accept=".docx">
+        </div> --}}
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </form>
+</div>
+
+
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/editor.js/2.16.0/editor.js" integrity="sha512-iMy2cT+iikyskTdniYki90Qh7+crFn1haltWnVvTRTj/sLIh5y1hNBO0ehUOThoYrdkzOo/AuJGVRykps8ABXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist --> --}}
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote --> --}}
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning --> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
+<script type="module" src="/js/post-editor.js"></script>

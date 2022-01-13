@@ -1,13 +1,87 @@
+// @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700;800&display=swap');
+// body{
+//     padding:0px;
+// }
+
+// .index-container {
+//     position: relative;
+// }
+
+// .index-title{
+//     /* font-size: 3.5rem; */
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 500;
+//     position: absolute;
+//     top: 33%;
+//     left: 24%;
+//     transform: translate(-50%, -50%);
+// }
+
+// .index-title-blue{
+//     /* font-size: 3.5rem; */
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 500;
+//     color: rgb(99, 187, 245);
+// }
+
+
+// .index-title-red{
+//     /* font-size: 3.5rem; */
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 500;
+//     color: rgb(255, 112, 112);
+// }
+
+// .index-title-white{
+//     /* font-size: 3.5rem; */
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 500;
+//     color: rgb(255,255,255);
+// }
+
+// /* .index-title-image{
+    
+// } */
+
+// .index-post-slide{
+//     position: absolute;
+//     top: 33%;
+//     right: 0%;
+//     transform: translate(-20%, -33%);
+// }
+
+// .index-post-title{
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 400;
+//     color: white
+// }
+
+// .index-post-snippet{
+//     font-size:20pt;
+//     font-family: 'Merriweather Sans', sans-serif;
+//     font-weight: 300;
+//     color: white
+// }
+
+
 /* [Master Stylesheet - v1.0] */
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800,900");
 /* :: 2.0 Import All CSS */
-@import url("bootstrap.min.css");
-@import url("classy-nav.css");
-@import url("owl.carousel.min.css");
-@import url("animate.css");
-@import url("magnific-popup.css");
-@import url("font-awesome.min.css");
+@import url("/css/bootstrap.min.css");
+@import url("/css/classy-nav.css");
+@import url("/css/owl.carousel.min.css");
+@import url("/css/animate.css");
+@import url("/css/magnific-popup.css");
+@import url("/css/font-awesome.min.css");
+
+.create-post-area{
+  .des-max{
+    color: #6c757d;
+    font-size: 13px;
+  }
+}
+
 /* :: 3.0 Base CSS */
 * {
   margin: 0;
@@ -15,7 +89,9 @@
 
 body {
   font-family: "Raleway", sans-serif;
-  font-size: 14px; }
+  font-size: 14px; 
+  font-weight: 500;
+}
 
 h1,
 h2,
@@ -410,12 +486,12 @@ img {
     z-index: 1; }
     .breaking-news-area .breaking-news-ticker .title {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 180px;
-      flex: 0 0 180px;
-      max-width: 180px;
-      width: 180px;
+      -ms-flex: 0 0 170px;
+      flex: 0 0 170px;
+      max-width: 170px;
+      width: 170px;
       background-color: #ef1b48;
-      height: 55px; }
+      height: 45px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .breaking-news-area .breaking-news-ticker .title {
           -webkit-box-flex: 0;
@@ -444,7 +520,7 @@ img {
         line-height: 1;
         color: #ffffff;
         text-align: center;
-        line-height: 55px; }
+        line-height: 47px; }
         @media only screen and (max-width: 767px) {
           .breaking-news-area .breaking-news-ticker .title h6 {
             line-height: 40px;
@@ -1526,11 +1602,3 @@ img {
 /* ====== The End ====== */
 
 /*# sourceMappingURL=style.css.map */
-
-.user-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    margin-right: 4px;
-    margin-top: 8px;
-}
