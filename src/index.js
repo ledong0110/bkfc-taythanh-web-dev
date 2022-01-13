@@ -14,6 +14,8 @@ db.connect();
 
 //Static file
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(__dirname + "/public"));
+
 
 //body parser for POST method
 app.use(
@@ -51,8 +53,8 @@ app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req
 
 //Routes init
 
-route(app);
-
 app.listen(port, () =>
     console.log(`App Listening at http://localhost:${port}`),
 );
+
+route(app);

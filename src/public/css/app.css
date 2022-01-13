@@ -2,12 +2,16 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800,900");
 /* :: 2.0 Import All CSS */
-@import url(bootstrap.min.css);
-@import url(classy-nav.css);
-@import url(owl.carousel.min.css);
-@import url(animate.css);
-@import url(magnific-popup.css);
-@import url(font-awesome.min.css);
+@import url("/css/bootstrap.min.css");
+@import url("/css/classy-nav.css");
+@import url("/css/owl.carousel.min.css");
+@import url("/css/animate.css");
+@import url("/css/magnific-popup.css");
+@import url("/css/font-awesome.min.css");
+.create-post-area .des-max {
+  color: #6c757d;
+  font-size: 13px; }
+
 /* :: 3.0 Base CSS */
 * {
   margin: 0;
@@ -15,7 +19,8 @@
 
 body {
   font-family: "Raleway", sans-serif;
-  font-size: 14px; }
+  font-size: 14px;
+  font-weight: 500; }
 
 h1,
 h2,
