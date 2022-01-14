@@ -12,9 +12,9 @@ const Post = new Schema(
         title: { type: String, required: true },
         description: { type: String, required: true},
         content: { type: Object, required: true},
-        image: { type: String },
-        slug: { type: String, slug: 'name', unique: true },
-        idV: { type: String, required: true },
+        image_url: { type: String },
+        slug: { type: String, slug: 'title', unique: true },
+        idV: { type: String},
     },
     {
         _id: false,

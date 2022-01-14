@@ -16,21 +16,23 @@
             <div id="description-help" class="form-text">Phần miêu tả của bài viết sẽ được ghi dưới tiêu đề trên trang chọn bài viết</div>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Nội dung</label>
-            {{!-- <textarea type="text" class="form-control" name="content" id="content" aria-describedby="description-help" required rows=8></textarea> --}}
-            <div class="" name="content" id="content" required ></div>
+            <label for="image_url" class="form-label">Ảnh bìa bài viết</label> <span class="des-max">(không bắt buộc)</span>
+            <input type="url" class="form-control" name="image_url" id="image_url" aria-describedby="image_url-help">
+            <div id="image_url-help" class="form-text">Ảnh bìa sẽ được hiển thị khi chọn bài viết</div>
         </div>
-        {{!-- <div class="mb-3">
-            <label for="formFile" class="form-label">Chọn file docx cho bài viết</label>
-            <span class="des-max">(tối đa 16MB)</span>
-            <input class="form-control" name="content" id="content" type="file" required accept=".docx">
-        </div> --}}
+        <div class="mb-3">
+            <label for="description" class="form-label">Nội dung</label>
+            <div class = "border border-gray">
+                <div class="pt-3" name="content" id="content" required ></div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
 </div>
 
 
 {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/editor.js/2.16.0/editor.js" integrity="sha512-iMy2cT+iikyskTdniYki90Qh7+crFn1haltWnVvTRTj/sLIh5y1hNBO0ehUOThoYrdkzOo/AuJGVRykps8ABXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
@@ -46,4 +48,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 {{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
-<script src="/js/post-editor.js"></script>
+<script type="module" src="/js/post-editor.js"></script>

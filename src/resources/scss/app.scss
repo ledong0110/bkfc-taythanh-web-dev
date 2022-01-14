@@ -40,7 +40,7 @@
 // }
 
 // /* .index-title-image{
-    
+
 // } */
 
 // .index-post-slide{
@@ -68,12 +68,23 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800,900");
 /* :: 2.0 Import All CSS */
-@import url("/css/bootstrap.min.css");
+// @import url("/css/bootstrap.min.css");
 @import url("/css/classy-nav.css");
 @import url("/css/owl.carousel.min.css");
 @import url("/css/animate.css");
 @import url("/css/magnific-popup.css");
 // @import url("/css/font-awesome.min.css");
+
+// .ce-block__content{
+//   background-color: #def8ff;
+// }
+body{
+  padding-bottom: 100px;
+}
+
+.codex-editor__redactor{
+  padding-bottom: 50px!important;
+}
 
 .create-post-area{
   .des-max{
@@ -89,7 +100,7 @@
 
 body {
   font-family: "Raleway", sans-serif;
-  font-size: 14px; 
+  font-size: 14px;
   font-weight: 500;
 }
 

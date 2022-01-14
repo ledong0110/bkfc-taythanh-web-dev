@@ -1,14 +1,16 @@
 // CREATE EDITOR
 const editor = new EditorJS({ 
     autofocus: true,
-    holder: 'content', 
+    holder: 'content',
+    placeholder: "Let's write something >> Click the '+' sign to add header, list or paste image link to insert image", 
     tools: {
         // HEADER TOOL
         header: {
             class: Header,
             inlineToolbar: true,
             config: {
-                placeholder: 'Header'
+                placeholder: 'Header',
+                defaultLevel: 5
             }
         },
 
@@ -53,25 +55,11 @@ $(function(){
     $("form.post-submit-form").on("submit", function(e){
         e.preventDefault();
         var dataStr = $(this).serializeArray();
-        // (async function(){
-        //     await formPostpromise();
-        // })();
-
-        // async function saveEditor(){ 
-        //         return new Promise((resolve, reject) => {
-        //             editor.save().then(outputData => {
-        //                 console.log("data:", outputData);
-        //                 dataStr.push({name: "content", value: outputData});
-        //                 console.log("Data submitted: ", dataStr);
-        //             });
-        //         });
-        // }
         
         editor.save().then(outputData => {
             console.log("data:", Object.values(outputData));
             dataStr.push({name:"content", value: JSON.stringify(outputData)});
-            // dataStr.push(outputData);
-            // dataStr["content"] = outputData;
+        
             console.log("Data submitted: ", dataStr);
             $.ajax({
                 type: "POST",
@@ -81,21 +69,16 @@ $(function(){
                 data: dataStr,
                 success: ()=>{
                     console.log("Uploaded post:", dataStr);
+                    Swal.fire(
+                        'Uploaded !',
+                        'Your post is now online',
+                        'success'
+                    ).then(()=>{
+                        window.location.reload();
+                    })
+                    
                 }
             })
         });
-
-        // saveEditor();
-        // console.log("Will upload:", dataStr);
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/post/create",
-        //     // type: $(this).attr("method"),
-        //     // url: $(this).attr("action"),
-        //     data: dataStr,
-        //     success: ()=>{
-        //         console.log("Uploaded post:", dataStr);
-        //     }
-        // })
     });
 });
