@@ -4,7 +4,7 @@
             Tạo bài viết mới
         </h3>
     </div>
-    <form class="d-block ps-5 pe-5" action="/post/create" method="POST">
+    <form class="post-submit-form d-block ps-5 pe-5">
         <div class="mb-3">
             <label for="title" class="form-label">Tiêu đề</label>
             <input type="text" class="form-control" name="title" id="title" aria-describedby="title-help" required>
@@ -18,7 +18,7 @@
         <div class="mb-3">
             <label for="description" class="form-label">Nội dung</label>
             {{!-- <textarea type="text" class="form-control" name="content" id="content" aria-describedby="description-help" required rows=8></textarea> --}}
-            <div class="" name="content" id="content" required rows=8></div>
+            <div class="" name="content" id="content" required ></div>
         </div>
         {{!-- <div class="mb-3">
             <label for="formFile" class="form-label">Chọn file docx cho bài viết</label>
@@ -46,4 +46,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 {{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
-<script type="module" src="/js/post-editor.js"></script>
+<script src="/js/post-editor.js"></script>

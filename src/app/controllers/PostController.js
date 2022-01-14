@@ -1,5 +1,4 @@
 const Post = require('../models/Post');
-const bodyParser = require('body-parser')
 const multer = require('multer');
 const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
 
@@ -10,7 +9,12 @@ class PostController {
     };
 
     create_post(req, res, next){
+        console.log("Post submited");
+        req.body.content = JSON.parse(req.body.content);
         console.log(req.body);
+        console.log(req.body.content.blocks);
+        // console.log(Object.values(req.body.title));
+        // console.log(Object.values(req.body.content));
         res.redirect("/");
     }
 }
