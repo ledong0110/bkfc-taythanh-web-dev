@@ -13,7 +13,7 @@ const Post = new Schema(
         description: { type: String },
         content: { type: String },
         image: { type: String },
-        slug: { type: String, slug: 'name', unique: true },
+        slug: { type: String, slug: 'title', unique: true },
         idV: { type: String, required: true },
     },
     {

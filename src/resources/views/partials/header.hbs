@@ -27,7 +27,61 @@
                     <li class="nav-item">
                         <a class="nav-link text-center" href="#">Liên hệ</a>
                     </li>
+                    {{#if authenticated}}
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="user-avatar" src ="{{users.picture}}">
+                        <span id="user-name">{{users.name}}</span> 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"  href="/logout">Log Out</a>
+                        </div>
+                    </li>
+                    {{else}}
+                    <li class="nav-item">
+                        <a  data-bs-toggle="modal" data-bs-target="#modalForm" href="" class="nav-link text-center">Đăng nhập</a>
+                    </li>
+                    {{/if}}
+                    
                 </ul>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đăng Nhập</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-column text-center">
+                            <div class="mb-4 d-flex justify-content-center">
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> 
+                                    {{!-- <a href="/login" class="btn btn-block btn-social btn-google"> Login with Google <i class="fab fa-google"></i> </a>  --}}
+                                    <a class="btn btn-block btn-social btn-google" href="/login" style="text-transform:none">
+                                        <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in" 
+                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                        Đăng nhập bằng Google
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            jQuery(document).ready(function() {             
+            jQuery('#modalForm').modal('show');
+                jQuery(function () {
+                jQuery('[data-toggle="tooltip"]').tooltip()
+                })
+            });
+        </script>    
     </nav>
+    

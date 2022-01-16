@@ -3,19 +3,36 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
+const { auth } = require('express-openid-connect');
 const app = express();
 const port = 3000;
 
 const route = require('./routes');
 const db = require('./config/db');
-
 // Connect to DB
 db.connect();
-
 //Static file
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(__dirname + "/public"));
 
+//Connect auth0
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    baseURL: 'http://localhost:3000',
+    clientID: 'yfaaZnedjIAkRN3Pnj8yccdsw6dLDUuq',
+    issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
+    secret: '-5YfLejfmuK2TuaaOdElTUn5z6GmKrWrjRBcM5BqP51wKTTWtQBBgmRHtkus1axK',
+    routes: {
+        login: false,
+        postLogoutRedirect: '/logout_setting',
+    },
+    authorizationParams: {
+        connection: 'google-oauth2',
+    },
+};
+
+app.use(auth(config));
 
 //body parser for POST method
 app.use(
@@ -48,7 +65,7 @@ console.log(__dirname);
 //Initiate global variables
 app.locals.authenticated = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: boolean);
 app.locals.user = null; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: object)
-app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: boolean)
+app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: int)
 // Home, search, contact
 
 //Routes init
