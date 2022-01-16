@@ -6,7 +6,6 @@ class SiteController {
     //[GET] /
     home(req, res, next) {
         req.app.locals.authenticated = req.oidc.isAuthenticated();
-        console.log(req.app.locals.authenticated)
         res.render('home');
     }
 
