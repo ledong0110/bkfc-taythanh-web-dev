@@ -15,6 +15,7 @@ const Post = new Schema(
         image_url: { type: String },
         slug: { type: String, slug: 'title', unique: true },
         idV: { type: String},
+
     },
     {
         _id: false,
