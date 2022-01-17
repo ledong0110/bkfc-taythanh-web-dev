@@ -5,7 +5,6 @@ const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
 class SiteController {
     //[GET] /
     home(req, res, next) {
-        req.app.locals.authenticated = req.oidc.isAuthenticated();
         res.render('home');
     }
 
@@ -21,20 +20,9 @@ class SiteController {
     
     profile(req, res) {
         const role = ['User','Content Creator', 'Knownledge Provider', 'Moderator'];
-        new Promise((resolve, reject) => {
-            if (req.app.locals.authenticated)
-                resolve();
-            else 
-                reject();
-        })
-        .then (() => {
-            let user = req.oidc.user;
-            user.admin = role[req.app.locals.admin];
-            res.render('profile', { user });
-        })
-        .catch(() => {
-            res.redirect('/login');
-        });
+        let user = req.app.locals.user;
+        user.admin = role[user.admin];
+        res.render('profile', { user });
     }
      // [GET] /login
      login(req, res) {
@@ -58,22 +46,21 @@ class SiteController {
                         admin: 0,
                     });
                     add_user.save().then();
-                    req.app.locals.admin = 0;
-                } else 
-                {
-                    req.app.locals.admin = user.admin;
-                }
+                } 
+            })
+            .then(() => {
+                req.app.locals.user = req.oidc.user;
+                req.app.locals.authenticated = req.oidc.isAuthenticated();
             })
             .catch(next);
-        req.app.locals.users = users;
-        req.app.locals.authenticated = req.oidc.isAuthenticated();
+        
+        
         res.redirect('/');
     }
     // [GET] /logout_setting
     logout_setting(req, res) {
-        req.app.locals.users = null;
+        req.app.locals.user = null;
         req.app.locals.authenticated = req.oidc.isAuthenticated();
-        req.app.locals.admin = 0;
         res.redirect('/');
     }
     // [GET] /*
