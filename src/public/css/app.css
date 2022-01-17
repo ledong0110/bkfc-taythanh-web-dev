@@ -16,6 +16,10 @@ body {
   color: #6c757d;
   font-size: 13px; }
 
+.post-des {
+  font-weight: 400;
+  color: black; }
+
 /* :: 3.0 Base CSS */
 * {
   margin: 0;

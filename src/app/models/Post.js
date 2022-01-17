@@ -10,9 +10,9 @@ const Post = new Schema(
     {
         _id: { type: Number },
         title: { type: String, required: true },
-        description: { type: String },
-        content: { type: String },
-        image: { type: String },
+        description: { type: String, required: true},
+        content: { type: Object, required: true},
+        image_url: { type: String },
         slug: { type: String, slug: 'title', unique: true },
     },
     {

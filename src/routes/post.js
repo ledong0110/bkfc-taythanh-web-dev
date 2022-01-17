@@ -7,5 +7,6 @@ const postController = require('../app/controllers/PostController');
 // newsController.index();
 router.get('/create', isContentCreator,postController.create);
 router.post('/create', postController.create_post);
+router.get('/all', postController.all_post);
 
 module.exports = router;
