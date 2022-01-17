@@ -4,6 +4,18 @@ const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
 
 class PostController {
     //[GET] /
+    all_post(req,res,next){
+        console.log("All post");
+        Post.find().sort({createdAt: -1})
+            .then((result) => {
+                console.log("All blog:", result);
+                res.render("post-all", {all_post: multipleMongooseToObject(result)});    
+            })
+            .catch(err=>{
+                res.render("post-all", {all_post: null});    
+            })
+    }
+
     create(req, res, next){
         console.log("In get create")
         res.render("post-create");

@@ -6,7 +6,14 @@ class SiteController {
     //[GET] /
     home(req, res, next) {
         req.app.locals.authenticated = req.oidc.isAuthenticated();
-        res.render('home');
+        Post.find().sort({createdAt: -1}).limit(3)
+            .then((result) => {
+                console.log("All blog:", result);
+                res.render("home", {breaking_post: multipleMongooseToObject(result)});    
+            })
+            .catch(err=>{
+                res.render("home", {breaking_post: []});    
+            })
     }
 
     // [GET] /profile
