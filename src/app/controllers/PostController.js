@@ -1,6 +1,6 @@
 const Post = require('../models/Post');
 const multer = require('multer');
-const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
+const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
 class PostController {
     //[GET] /
@@ -48,6 +48,17 @@ class PostController {
         res.redirect("/");
         // console.log(Object.values(req.body.title));
         // console.log(Object.values(req.body.content));
+    }
+
+    show(req, res, next)
+    {
+        Post.findOne({ slug: req.params.slug })
+            .then((post) => {
+                res.render('posts/show', {
+                    post: mongooseToObject(post),
+                });
+            })
+            .catch(next);
     }
     
 }

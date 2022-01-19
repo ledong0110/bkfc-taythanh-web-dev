@@ -8,5 +8,6 @@ const postController = require('../app/controllers/PostController');
 router.get('/create', isContentCreator,postController.create);
 router.post('/create', postController.create_post);
 router.get('/all', postController.all_post);
+router.get('/:slug', postController.show);
 
 module.exports = router;

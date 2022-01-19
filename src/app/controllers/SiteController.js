@@ -5,10 +5,8 @@ const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
 class SiteController {
     //[GET] /
     home(req, res, next) {
-        req.app.locals.authenticated = req.oidc.isAuthenticated();
         Post.find().sort({createdAt: -1}).limit(3)
             .then((result) => {
-                console.log("All blog:", result);
                 res.render("home", {breaking_post: multipleMongooseToObject(result)});    
             })
             .catch(err=>{
