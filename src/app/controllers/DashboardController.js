@@ -6,9 +6,19 @@ const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mo
 class DashboardController {
     //[GET] /
     user_management(req,res,next){
-        res.send("Users page")
+        User.find({})
+            .then((users) =>{
+                res.render('dashboard/user_manage', {
+                    users: multipleMongooseToObject(users),
+                }
+                );
+                // console.log(multipleMongooseToObject(users));
+            }
+            )
+            .catch(next);
     }
 
+    
     
 }
 
