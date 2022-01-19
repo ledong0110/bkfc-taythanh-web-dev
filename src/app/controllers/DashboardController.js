@@ -1,20 +1,25 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
-const multer = require('multer');
-const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
+const { convertRole } = require('../../utility/convertRole');
+const { multipleMongooseToObject } = require('../../utility/mongoose');
 
 class DashboardController {
     //[GET] /
     user_management(req,res,next){
         User.find({})
             .then((users) =>{
+                users = multipleMongooseToObject(users);
+                users.forEach((user) => user.admin = convertRole(user.admin));
+                
+                return users
+            })
+            .then((users) => {
                 res.render('dashboard/user_manage', {
-                    users: multipleMongooseToObject(users),
-                }
-                );
+                    users        
+                })  
+            })
                 // console.log(multipleMongooseToObject(users));
-            }
-            )
+            
             .catch(next);
     }
 

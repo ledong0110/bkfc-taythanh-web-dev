@@ -37,14 +37,14 @@ function isContentCreator(req, res, next)
         
             .then(() => {
                 if (req.app.locals.user.admin == 1 || req.app.locals.user.admin == 3)
-                {    
+                {        
                     return next();
                 }
                 else
                 {
                     res.send('You are not permitted to access this page !');
                 }
-            });
+            })
     }
     else
         res.send('You haven\'t logged in yet !');
@@ -63,14 +63,16 @@ function isKnownLedgeProvider(req, res, next)
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
 
-        if (req.app.locals.user.admin == 2 || req.app.locals.user.admin == 3)
-        {        
-            return next();
-        }
-        else
-        {
-            res.send('You are not permitted to access this page !');
-        }
+            .then(() => {
+                if (req.app.locals.user.admin == 2 || req.app.locals.user.admin == 3)
+                {        
+                    return next();
+                }
+                else
+                {
+                    res.send('You are not permitted to access this page !');
+                }
+            })
     }
     else
         res.send('You haven\'t logged in yet !');
@@ -89,15 +91,16 @@ function isModerator(req, res, next)
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
         
-        
-        if (req.app.locals.user.admin == 3)
-        {        
-            return next();
-        }
-        else
-        {
-            res.send('You are not permitted to access this page !');
-        }
+            .then(() => {
+                if (req.app.locals.user.admin == 3)
+                {        
+                    return next();
+                }
+                else
+                {
+                    res.send('You are not permitted to access this page !');
+                }
+            })
     }
     else
         res.send('You haven\'t logged in yet !');

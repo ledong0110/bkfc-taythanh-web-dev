@@ -1,7 +1,7 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const { multipleMongooseToObject, ...rest } = require('../../utility/mongoose');
-
+const { convertRole } = require('../../utility/convertRole');
 class SiteController {
     //[GET] /
     home(req, res, next) {
@@ -25,9 +25,8 @@ class SiteController {
     //**************************** 
     
     profile(req, res) {
-        const role = ['User','Content Creator', 'Knownledge Provider', 'Moderator'];
         let user = req.app.locals.user;
-        user.admin = role[user.admin];
+        user.admin = convertRole(user.admin);
         res.render('profile', { user });
     }
      // [GET] /login
@@ -39,29 +38,28 @@ class SiteController {
     }
     // [GET] /login_setting
     login_setting(req, res, next) {
-        let users = {
-            name: req.oidc.user.name,
-            picture: req.oidc.user.picture,
-        };
+
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
+                req.app.locals.user = req.oidc.user;
+                req.app.locals.authenticated = req.oidc.isAuthenticated();
                 if (!user) {
                     const add_user = new User({
                         name: req.oidc.user.name,
                         email: req.oidc.user.email,
-                        admin: 0,
+                        picture: req.oidc.user.picture,
+                        admin: 0
                     });
-                    add_user.save().then();
-                } 
+                    add_user.save()
+                    .then(() => res.redirect('/'));
+                }
+                else
+                    res.redirect('/');
             })
-            .then(() => {
-                req.app.locals.user = req.oidc.user;
-                req.app.locals.authenticated = req.oidc.isAuthenticated();
-            })
-            .catch(next);
+            
         
         
-        res.redirect('/');
+        
     }
     // [GET] /logout_setting
     logout_setting(req, res) {
@@ -72,7 +70,7 @@ class SiteController {
     // [GET] /*
     not_found(req, res, next) {
         res.status = 404;
-        res.send('Sorry we can find your page');
+        res.send('Sorry we can\'t find your page');
     }
 }
 

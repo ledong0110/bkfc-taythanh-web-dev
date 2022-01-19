@@ -9,16 +9,16 @@ class PostController {
         Post.find().sort({createdAt: -1})
             .then((result) => {
                 console.log("All blog:", result);
-                res.render("post-all", {all_post: multipleMongooseToObject(result)});    
+                res.render("posts/post-all", {all_post: multipleMongooseToObject(result)});    
             })
             .catch(err=>{
-                res.render("post-all", {all_post: null});    
+                res.render("posts/post-all", {all_post: null});    
             })
     }
 
     create(req, res, next){
         console.log("In get create")
-        res.render("post-create");
+        res.render("posts/post-create");
     };
 
     create_post(req, res, next){
