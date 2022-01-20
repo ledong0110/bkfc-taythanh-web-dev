@@ -1,16 +1,16 @@
 <div class="row all-post-area p-0 m-0">
     <div class = "d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
-        <h3 class="mb-3 mt-3">
+        <h4 class="mb-3 mt-3">
             Tất cả bài viết
-        </h3>
+        </h4>
     </div>
 
     <div class = "post-area d-block ps-5 pe-5">
         {{#each all_post}}
             <a href = "/post/{{this._id}}" class = "row pt-0 pb-2">
-                <h4>
+                <h5>
                     {{this.title}}
-                </h4>
+                </h5>
                 <p class = "post-des">
                     {{this.description}}
                 </p>

@@ -8,5 +8,8 @@ const postController = require('../app/controllers/PostController');
 router.get('/create', postController.create);
 router.post('/create', postController.create_post);
 router.get('/all', postController.all_post);
+router.get('/manage', postController.manage_post);
+router.post('/manage/top-post', postController.manage_top_post);
+router.post('/manage/popular-post', postController.manage_popular_post);
 
 module.exports = router;

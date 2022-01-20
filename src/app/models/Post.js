@@ -13,6 +13,8 @@ const Post = new Schema(
         description: { type: String, required: true},
         content: { type: Object, required: true},
         image_url: { type: String },
+        // top:{type: Boolean, default: false},
+        // popular:{type: Boolean, default: false},
         slug: { type: String, slug: 'title', unique: true },
         idV: { type: String},
 

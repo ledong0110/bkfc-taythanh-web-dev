@@ -30,26 +30,26 @@ const editor = new EditorJS({
 });
 
 // AJAX POST REQUEST
-function formPostpromise(){
-    return new Promise((resolve, reject) => {
-        editor.save().then(outputData => {
-            console.log("data:", outputData);
-            dataStr.push({name: "content", value: dataStr});
-            console.log("submited content", dataStr["content"])
-            console.log("Data submitted: ", dataStr);
-        });
-    })
-}
+// function formPostpromise(){
+//     return new Promise((resolve, reject) => {
+//         editor.save().then(outputData => {
+//             console.log("data:", outputData);
+//             dataStr.push({name: "content", value: dataStr});
+//             console.log("submited content", dataStr["content"])
+//             console.log("Data submitted: ", dataStr);
+//         });
+//     })
+// }
 
-async function formPostasync(){
-    try{
-        let formPromise = formPostpromise();
-        let responseBody = await formPromise;
-    }
-    catch(e){
-        console.log(e);
-    }
-}
+// async function formPostasync(){
+//     try{
+//         let formPromise = formPostpromise();
+//         let responseBody = await formPromise;
+//     }
+//     catch(e){
+//         console.log(e);
+//     }
+// }
 
 $(function(){
     $("form.post-submit-form").on("submit", function(e){
