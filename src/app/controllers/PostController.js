@@ -49,14 +49,18 @@ class PostController {
         // console.log(Object.values(req.body.title));
         // console.log(Object.values(req.body.content));
     }
-
+    
+    //[GET] /post/show
     show(req, res, next)
     {
         Post.findOne({ slug: req.params.slug })
             .then((post) => {
-                res.render('posts/show', {
-                    post: mongooseToObject(post),
-                });
+                if (post)
+                    res.render('posts/show', {
+                        post: mongooseToObject(post),
+                    });
+                else
+                    res.send('Sorry, We can\'t find your page');
             })
             .catch(next);
     }

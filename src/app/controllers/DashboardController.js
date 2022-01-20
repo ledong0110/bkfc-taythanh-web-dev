@@ -23,6 +23,12 @@ class DashboardController {
             .catch(next);
     }
 
+    user_edit(req,res,next) {
+        User.updateOne({ _id: req.params.id }, req.body)
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+    }
+
     
     
 }

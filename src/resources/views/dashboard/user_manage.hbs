@@ -1,30 +1,32 @@
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
 <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                <h6 class="text-dark text-capitalize ps-3">Authors table</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table table-hover align-items-center mb-0" id="my-table">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên người dùng</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vai trò</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Vai trò</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tham gia</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
                       {{#each users}}
-                    <tr>
+                    <tr id = "{{this._id}}" data-id="{{this._id}}"> 
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="{{this.picture}}" class="avatar avatar-sm me-3 border-radius-lg" alt="{{this.name}}">
+                            <img src="{{this.picture}}" class="avatar  me-3 border border-primary border-2 rounded-circle" alt="{{this.name}}">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">{{this.name}}</h6>
@@ -32,16 +34,22 @@
                           </div>
                         </div>
                       </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{this.admin}}</p>
+                      <td class="align-middle edit-role form-group">
+                        <p class="text-secondary text-xs font-weight-bold">{{this.admin}}</p>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold">{{this.createdAt}}</span>
                       </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                      <td class="align-middle float-right">
+                        <button class="btn btn-edit btn-dark edit">
                           Edit
-                        </a>
+                        </button>
+                        <button class="btn btn-save btn-danger d-none">
+                          Save
+                        </button>
+                        <button class="btn btn-cancle btn-primary d-none">
+                          Cancle
+                        </button>
                       </td>
                     </tr>
                     {{/each}}
@@ -54,3 +62,79 @@
           </div>
         </div>
       </div>
+</div>
+<form class="mt-4" name="save-form" method="POST"></form>
+<script>
+  
+  $(document).ready(function() {
+    $(".btn.btn-edit").on("click", function(event) {
+      let rowId = event.target.parentNode.parentNode.id;
+      document.getElementById(rowId).querySelector('.btn.btn-edit').classList.add('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-save').classList.remove('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-cancle').classList.remove('d-none');
+
+      var target_cell = document.getElementById(rowId).querySelector('.edit-role');
+      var role_now = target_cell.innerText;
+      var att = document.createAttribute("current-value");
+      att.value = role_now;
+      target_cell.setAttributeNode(att)
+      var ref = ['User', 'Content Creator', 'Knownledge Provider', 'Moderator'];
+      var roles = [...ref];
+      
+      roles.splice(roles.indexOf(role_now), 1)
+      roles = [role_now,...roles];
+      
+      var opts = roles.map(function(role){
+        return `<option class="text-center" value="${ref.indexOf(role)}">${role}</option>`
+      })
+      
+      var list2 = '<select id="user-tab">';
+      for (var i = 0; i < opts.length; i++)
+      {
+        list2+=opts[i];
+      }
+      list2+="</select";
+      target_cell.innerHTML = list2;
+    })
+  })
+  $(document).ready(function() {
+    $(".btn.btn-cancle").on("click", function(event) {
+      let rowId = event.target.parentNode.parentNode.id;
+      document.getElementById(rowId).querySelector('.btn.btn-edit').classList.remove('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-save').classList.add('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-cancle').classList.add('d-none');
+      var target_cell = document.getElementById(rowId).querySelector('.edit-role');
+      currentValue = target_cell.getAttribute("current-value");
+      target_cell.removeAttribute("current-value");
+      target_cell.innerHTML = `<p class="text-secondary text-xs font-weight-bold">${currentValue}</p>`;
+    })
+    
+  })
+  
+  $(document).ready(function() {
+    $(".btn.btn-save").on("click", function(event) {
+      let rowId = event.target.parentNode.parentNode.id;
+      document.getElementById(rowId).querySelector('.btn.btn-edit').classList.remove('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-save').classList.add('d-none');
+      document.getElementById(rowId).querySelector('.btn.btn-cancle').classList.add('d-none');
+      var target_cell = document.getElementById(rowId).querySelector('.edit-role');
+      var currentValue = $('#user-tab :selected').text();
+      var idValue = $('#user-tab :selected').val();
+      target_cell.removeAttribute("current-value");
+      target_cell.innerHTML = `<p class="text-secondary text-xs font-weight-bold">${currentValue}</p>`;
+      
+      
+      var userId = jQuery('#'+rowId).data('id');
+      var saveForm = document.forms['save-form'];
+      saveForm.action = '/dashboard/users/' + userId + '?_method=PATCH';
+      $(saveForm).append(`<input type="hidden" name="admin" value="${idValue}" /> `);
+      saveForm.submit()
+
+
+      
+    })
+    
+  })
+
+
+</script>

@@ -6,6 +6,6 @@ const dashboardController = require('../app/controllers/DashboardController');
 
 // newsController.index();
 router.get('/users', isModerator, dashboardController.user_management);
-
+router.patch('/users/:id', isModerator, dashboardController.user_edit);
 
 module.exports = router;
