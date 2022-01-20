@@ -6,7 +6,7 @@ const { multipleMongooseToObject } = require('../../utility/mongoose');
 class DashboardController {
     //[GET] /
     user_management(req,res,next){
-        User.find({})
+        User.find({}).sort({ admin: -1 })
             .then((users) =>{
                 users = multipleMongooseToObject(users);
                 users.forEach((user) => user.admin = convertRole(user.admin));

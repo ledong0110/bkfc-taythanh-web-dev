@@ -9,7 +9,8 @@ const User = new Schema(
         name: { type: String, required: true },
         email: { type: String, required: true },
         admin: { type: Number, default: 0 },
-        picture: {type: String }
+        picture: {type: String },
+        default_user: {type: Boolean, default: 0}
     },
     {
         _id: false,
