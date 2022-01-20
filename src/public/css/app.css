@@ -1799,4 +1799,19 @@ img {
   border-radius: 50%;
   margin-right: 4px; }
 
+.avatar {
+  max-width: 45x;
+  max-height: 45px;
+  min-width: 10px;
+  min-height: 10px; }
+
+.btn.btn-edit:hover {
+  opacity: 0.6; }
+
+.btn.btn-save:hover {
+  opacity: 0.6; }
+
+.btn.btn-cancle:hover {
+  opacity: 0.6; }
+
 /*# sourceMappingURL=style.css.map */

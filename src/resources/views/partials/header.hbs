@@ -28,13 +28,15 @@
                         <a class="nav-link text-center" href="#">Liên hệ</a>
                     </li>
                     {{#if authenticated}}
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar" src ="{{users.picture}}">
-                        <span id="user-name">{{users.name}}</span> 
+                        <img class="user-avatar" src ="{{user.picture}}">
+                        <span id="user-name">{{user.name}}</span> 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/profile">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/dashboard/users">Quản lý người dùng</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item"  href="/logout">Log Out</a>
                         </div>

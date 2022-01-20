@@ -1625,9 +1625,36 @@ img {
 /* ====== The End ====== */
 //Self-config
 .user-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-right: 4px;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	margin-right: 4px;
+  }
+.avatar {
+  max-width: 45x;
+  max-height: 45px;
+  min-width: 10px;
+  min-height: 10px;
 }
+//Button in userpage
+.btn{
+  &.btn-edit{
+    &:hover{
+      opacity: 0.6;
+    }
+  }
+  &.btn-save{
+    &:hover{
+      opacity: 0.6;
+    }
+    
+
+  }
+  &.btn-cancle{
+    &:hover{
+      opacity: 0.6;
+    }
+   
+  }
+} 
 /*# sourceMappingURL=style.css.map */
