@@ -1,0 +1,85 @@
+<div class="row post-manage-area bg-gray">
+    <div class="d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+        <h5 class="mb-3 mt-3">
+            Quản lý bài viết
+        </h5>
+    </div>
+    <script>
+        var postTime = [];
+    </script>
+    <div class="container pt-0">
+        <div class="container p-0 ">
+            <div class="row row-cols-2 gx-4">
+                <div class="container-fluid d-inline-block">
+                    <div class="col p-3 border border-2 bg-light">
+                        <h5 class="">Bài viết lên trang đầu</h5>
+                        <span class="d-block pb-3">(tối đa 3 bài viết)</span>
+
+                        <form class="top-post-submit-form form-check col">
+                            {{#each topList.posts_all}}
+                                <div class="form-check-inline pt-3 d-block pb-3">
+                                    <input type="hidden" name="{{this._id}}" value="0" />
+
+                                    {{#if (equal (lookup @root.topList.posts_checked this._id) 1)}}
+                                        <input class="form-check-input" type="checkbox" name="{{this._id}}" id="inlineCheckbox1" value="1" checked>
+                                    {{else}}
+                                        <input class="form-check-input" type="checkbox" name="{{this._id}}" id="inlineCheckbox1" value="1">
+                                    {{/if}}
+                                    
+                                    <h6 class="d-block dashboard-post-title">{{this.title}}</h6>
+                                    <span class="time-post"></span>
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                </div>
+                            {{/each}}
+                            <div class="pt-5 d-inline-block">
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                                <button class="clear-all-btn btn btn-outline-danger" type = "button" >Clear all</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="container-fluid d-inline-block">
+                    <div class="col p-3 border border-2 bg-light">
+                        <h5 class="">Bài viết lên mục phổ biến</h5>
+                        <span class="d-block pb-3">(tối đa 6 bài viết)</span>
+
+                       <form class="popular-post-submit-form form-check col">
+                            {{#each popList.posts_all}}
+                                <div class="form-check-inline pt-3 d-block pb-3">
+                                    <input type="hidden" name="{{this._id}}" value="0" />
+                                    {{#if (equal (lookup @root.popList.posts_checked this._id) 1)}}
+                                        <input class="form-check-input" type="checkbox" name="{{this._id}}" id="inlineCheckbox1" value="1" checked>
+                                    {{else}}
+                                        <input class="form-check-input" type="checkbox" name="{{this._id}}" id="inlineCheckbox1" value="1">
+                                    {{/if}}
+                                    <h6 class="d-block dashboard-post-title">{{this.title}}</h6>
+                                    <span class="time-post"></span>
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                </div>
+                            {{/each}}
+                            <div class="pt-5 d-inline-block">
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                                <button type = "button" class="clear-all-btn btn btn-outline-danger">Clear all</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="/js/post-manage.js"></script>
+<script>
+    for (element in postTime){
+        displayTime("time-post", postTime);
+    }
+</script>

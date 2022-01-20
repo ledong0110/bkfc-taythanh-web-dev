@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Post_special_list = require('../models/Post-special-list');
 const multer = require('multer');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
@@ -48,6 +49,112 @@ class PostController {
         res.redirect("/");
         // console.log(Object.values(req.body.title));
         // console.log(Object.values(req.body.content));
+    }
+   
+    manage_post(req,res,next){
+        console.log("in post manage");
+        Post_special_list
+            .find()
+            .sort({name: -1})
+            .populate("posts_all")
+            .then(result => {
+                console.log("result", result);
+                var top_list;
+                var pop_list;
+                var ele;
+                for (ele in result){
+                    switch(result[ele].name){
+                        case "top":
+                            top_list = mongooseToObject(result[ele]);
+                            break;
+
+                        case "popular":
+                            pop_list = mongooseToObject(result[ele]);
+                            // break;
+                    }
+                }
+                res.render("dashboard/post-manage", {topList: top_list, popList: pop_list});    
+            })
+            .catch(err=>{
+                console.log("error:");
+                console.log(err);
+                // res.render("dashboard/post-manage", {specialList: {}});    
+            })
+    }
+
+    manage_top_post(req, res, next){
+        console.log("Updating top post...")
+        console.log(req.body);
+
+        let updateOptions = { upsert: true };
+        let newPost_all = [];
+        let newPost_top = {};
+        var ele;
+        for (ele in req.body){
+            newPost_top[ele] = req.body[ele];
+            newPost_all.push(Number(ele));
+        }
+
+        console.log(newPost_all);
+
+        let topList = {
+            posts_all: newPost_all,
+            posts_checked: newPost_top
+        }
+
+        Post_special_list
+            .findOneAndUpdate({name: "top"}, topList, updateOptions)
+            .then(result => {
+                console.log("List updated");
+                res.append('Signal', 1);
+                res.send("done");
+
+            })
+            .catch(err => {
+                console.log("Failed to update top list");
+                console.log(err);
+                res.append('Signal', 0);
+                res.send("Failed")
+            })
+
+        
+    }
+
+    manage_popular_post(req, res, next){
+        
+        console.log("Updating pop post...")
+        console.log(req.body);
+
+        let updateOptions = { upsert: true };
+        let newPost_all = [];
+        let newPost_pop = {};
+        var ele;
+        for (ele in req.body){
+            newPost_pop[ele] = req.body[ele];
+            newPost_all.push(Number(ele));
+        }
+
+        console.log(newPost_all);
+
+        let popList = {
+            posts_all: newPost_all,
+            posts_checked: newPost_pop
+        }
+
+        Post_special_list
+            .findOneAndUpdate({name: "popular"}, popList, updateOptions)
+            .then(result => {
+                console.log("List updated");
+                res.append('Signal', 1);
+                res.send("done");
+
+            })
+            .catch(err => {
+                console.log("Failed to update popular list");
+                console.log(err);
+                res.append('Signal', 0);
+                res.send("Failed")
+            })
     }
     
     //[GET] /post/show

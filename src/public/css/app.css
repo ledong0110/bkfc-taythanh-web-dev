@@ -20,6 +20,12 @@ body {
   font-weight: 400;
   color: black; }
 
+.dashboard-post-title {
+  font-weight: 500; }
+
+.time-post {
+  color: gray; }
+
 /* :: 3.0 Base CSS */
 * {
   margin: 0;

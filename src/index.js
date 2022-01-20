@@ -53,12 +53,23 @@ app.engine(
     engine({
         extname: '.hbs',
         defaultLayout: "main",
-        layoutsDir: "./src/resources/views/layouts"
-        // helpers: {
-        //     sum: (a, b) => a + b,
-        // },
+        layoutsDir: "./src/resources/views/layouts",
+        helpers: {
+            // sum: (a, b) => a + b,
+            equal: (a, b) => (a == b)
+        },
     }),
 );
+// engine.registerHelper('equal', function(lvalue, rvalue, options) {
+//     if (arguments.length < 3)
+//         throw new Error("Handlebars Helper equal needs 2 parameters");
+//     if( lvalue!=rvalue ) {
+//         return options.inverse(this);
+//     } else {
+//         return options.fn(this);
+//     }
+// });
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 console.log(__dirname);
