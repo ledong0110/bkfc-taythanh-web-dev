@@ -14,7 +14,8 @@ function isAuthenticated(req, res, next)
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
                 // console.log(req.app.locals.user);
             })
-            .then(() => next());
+            .then(() => next())
+            .catch(() => res.redirect('/logout'));
         
     }
     else
@@ -45,6 +46,9 @@ function isContentCreator(req, res, next)
                     res.send('You are not permitted to access this page !');
                 }
             })
+            .catch(() => {
+                res.redirect('/logout');
+            })
     }
     else
         res.send('You haven\'t logged in yet !');
@@ -73,6 +77,7 @@ function isKnownLedgeProvider(req, res, next)
                     res.send('You are not permitted to access this page !');
                 }
             })
+            .catch(() => res.redirect('/logout'));
     }
     else
         res.send('You haven\'t logged in yet !');
@@ -100,6 +105,9 @@ function isModerator(req, res, next)
                 {
                     res.send('You are not permitted to access this page !');
                 }
+            })
+            .catch(() => {
+                res.redirect('/logout');
             })
     }
     else
