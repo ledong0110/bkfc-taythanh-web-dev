@@ -95,7 +95,15 @@ body{
 
 .post-des{
   font-weight: 400;
-  color:black;
+  color:white;
+}
+
+.post-title{
+  font-weight: 500;
+}
+
+.blog-thumbnail-image{
+  object-fit: cover;
 }
 
 .dashboard-post-title{
@@ -104,6 +112,20 @@ body{
 
 .time-post{
   color:gray;
+}
+
+.all-single-title{
+  font-weight: 600;
+  color:white;
+}
+
+.all-single-post{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+} 
+
+.post-manage-post-area{
+  max-height: 400px;
 }
 /* :: 3.0 Base CSS */
 * {
@@ -718,8 +740,29 @@ img {
       display: block;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }
+
+.single-blog-post.style-1 .blog-content .post-des {
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 0;
+  color: #ffffff;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms; }
+  @media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .single-blog-post.style-1 .blog-content .post-des {
+      font-size: 14px; } }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .single-blog-post.style-1 .blog-content .post-des {
+      font-size: 12px; } }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .single-blog-post.style-1 .blog-content .post-des {
+      font-size: 12px; } }
+  @media only screen and (max-width: 767px) {
+    .single-blog-post.style-1 .blog-content .post-des {
+      font-size: 12px; } }  
+
     .single-blog-post.style-1 .blog-content .post-title {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 30px;
       margin-bottom: 0;
       color: #ffffff;
