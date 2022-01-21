@@ -41,20 +41,27 @@ class SiteController {
 
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
-                req.app.locals.user = req.oidc.user;
                 req.app.locals.authenticated = req.oidc.isAuthenticated();
                 if (!user) {
                     const add_user = new User({
                         name: req.oidc.user.name,
                         email: req.oidc.user.email,
                         picture: req.oidc.user.picture,
-                        admin: 0
                     });
                     add_user.save()
+                    req.app.locals.user = {
+                        name: req.oidc.user.name,
+                        email: req.oidc.user.email,
+                        picture: req.oidc.user.picture,
+                        admin: 0
+                    }
                     .then(() => res.redirect('/'));
                 }
                 else
+                {
+                    req.app.locals.user = user;
                     res.redirect('/');
+                }
             })
             
         

@@ -31,7 +31,8 @@ class PostController {
             title: req.body.title,
             description: req.body.description,
             content: req.body.content,
-            image_url: req.body.image_url
+            image_url: req.body.image_url,
+            author: req.app.locals.user._id
         });
 
         if (newPost){
@@ -248,15 +249,20 @@ class PostController {
             })
     }
     
+    
     //[GET] /post/show
     show(req, res, next)
     {
-        Post.findOne({ slug: req.params.slug })
+        Post.findOne({ slug: req.params.slug }).populate('author', 'name')
             .then((post) => {
                 if (post)
+                {
+                    post = mongooseToObject(post);
+                    post.createdAt = post.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                     res.render('posts/show', {
-                        post: mongooseToObject(post),
+                        post: post,
                     });
+                }
                 else
                     res.send('Sorry, We can\'t find your page');
             })

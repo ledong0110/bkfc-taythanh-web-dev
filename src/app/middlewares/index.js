@@ -9,8 +9,7 @@ function isAuthenticated(req, res, next)
             .then((user) => {
                 user = mongooseToObject(user);
                 req.app.locals.authenticated = true;
-                req.app.locals.user = req.oidc.user;
-                req.app.locals.user.admin = user.admin;
+                req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
                 // console.log(req.app.locals.user);
             })
@@ -30,10 +29,8 @@ function isContentCreator(req, res, next)
             .then((user) => {
                 user = mongooseToObject(user);
                 req.app.locals.authenticated = true;
-                req.app.locals.user = req.oidc.user;
-                req.app.locals.user.admin = user.admin;
+                req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
-                
             })
         
             .then(() => {
@@ -62,8 +59,7 @@ function isKnownLedgeProvider(req, res, next)
             .then((user) => {
                 user = mongooseToObject(user);
                 req.app.locals.authenticated = true;
-                req.app.locals.user = req.oidc.user;
-                req.app.locals.user.admin = user.admin;
+                req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
 
@@ -91,8 +87,7 @@ function isModerator(req, res, next)
             .then((user) => {
                 user = mongooseToObject(user);
                 req.app.locals.authenticated = true;
-                req.app.locals.user = req.oidc.user;
-                req.app.locals.user.admin = user.admin;
+                req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
         

@@ -11,5 +11,4 @@ router.get('/all', postController.all_post);
 router.post('/manage/top-post', postController.manage_top_post);
 router.post('/manage/popular-post', postController.manage_popular_post);
 router.get('/:slug', postController.show);
-
 module.exports = router;
