@@ -29,6 +29,7 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.22.2",
     "body-parser": "^1.19.1",
+    "editorjs-html": "^3.4.2",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-openid-connect": "^2.5.2",

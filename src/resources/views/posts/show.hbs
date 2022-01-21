@@ -47,17 +47,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Post Details Content Area -->
-                <div class="col-12 col-lg-8">
-                    <div class="post-details-content mb-100">
-                        <p>Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum. Etiam pretium turpis eget nibh laoreet iaculis. Proin ac urna at lectus volutpat lobortis. Vestibulum venenatis iaculis diam vitae lobortis. Donec tincidunt viverra elit, sed consectetur est pr etium ac.</p>
-                        <p>Mauris nec mauris tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit nisl, faucibus eu tempus vel, imperdiet at felis. Sed sed nibh et augue feugiat pharetra. Praesent ultrices nec tortor et gravida. Sed id rhoncus est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur vitae luctus turpis. Maecenas diam ex, mattis vel dolor ut, fermentum consectetur ex.</p>
-                        <img class="mb-30" src="/img/bg-img/31.jpg" alt="">
-                        <p>Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum. Etiam pretium turpis eget nibh laoreet iaculis. Proin ac urna at lectus volutpat lobortis. Vestibulum venenatis iaculis diam vitae lobortis. Donec tincidunt viverra elit, sed consectetur est pr etium ac.</p>
-                        <p>Mauris nec mauris tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit nisl, faucibus eu tempus vel, imperdiet at felis. Sed sed nibh et augue feugiat pharetra. Praesent ultrices nec tortor et gravida. Sed id rhoncus est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur vitae luctus turpis. Maecenas diam ex, mattis vel dolor ut, fermentum consectetur ex. </p>
-                        <h5 class="mb-30">A good news after all</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit nisl, faucibus eu tempus vel, imperdiet at felis. Sed sed nibh et augue feugiat pharetra. Praesent ultrices nec tortor et gravida. Sed id rhoncus est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur vitae luctus turpis. Maecenas diam ex, mattis vel dolor ut, fermentum consectetur ex.</p>
-                    </div>
-
+                    <div class="col-12 col-lg-8">
+                        <div id="editorjs" class="post-details-content mb-100"></div>
                     <!-- Comment Area Start -->
                     <div class="comment_area clearfix mb-100">
                         <h4 class="mb-50">Comments</h4>
@@ -295,7 +286,63 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1" nonce="nnUvxyJ6"></script>
     <div class="fb-comments" data-href="http://localhost:3000/post/{{post.slug}}" data-width="500" data-numposts="5"></div>
     
-    
+
+<!--##########################################-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist --> --}}
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote --> --}}
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning --> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
+<script>
+    const editor = new EditorJS({ 
+        autofocus: true,
+        holder: 'editorjs',
+        readOnly: true,
+        tools: {
+            // HEADER TOOL
+            header: {
+                class: Header,
+                inlineToolbar: true,
+                config: {
+                    placeholder: 'Header',
+                    defaultLevel: 5
+                }
+            },
+
+            // IMAGE TOOL
+            image: SimpleImage,
+            image: {
+                class: SimpleImage,
+                inlineToolbar: true,
+            },
+
+            // LIST TOOL
+            list: {
+                class: List,
+                inlineToolbar: true,
+            }
+        }
+    });
+    editor.isReady
+           .then(() => {
+               console.log('Editor.js is ready to work!')
+               editor.render({{{json post.content}}})
+           })
+           .catch((reason) => {
+               console.log(`Editor.js initialization failed because of ${reason}`)
+           });
+</script>
 <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
