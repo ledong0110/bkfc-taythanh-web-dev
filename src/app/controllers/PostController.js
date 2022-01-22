@@ -1,6 +1,4 @@
 const Post = require('../models/Post');
-const edjsHTML = require("editorjs-html");
-const edjsParser = edjsHTML();
 const multer = require('multer');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
@@ -63,12 +61,10 @@ class PostController {
                 if (post)
                 {
                     post = mongooseToObject(post);
-                    const html = edjsParser.parse(post.content);
                     
                     post.createdAt = post.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                     res.render('posts/show', {
                         post: post,
-                        content: html,
                     });
                 }
                 else
