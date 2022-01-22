@@ -21,7 +21,7 @@ $(function(){
             // console.log(dataStr);
             var callback = $.ajax({
                 type: "POST",
-                url: "/dashboard/manage/top-post",
+                url: "/dashboard/post-manage/top-post",
                 data: dataStr,
                 success: ()=>{
                     // console.log("Update top:", dataStr);
@@ -77,7 +77,7 @@ $(function(){
             // console.log(dataStr);
             var callback = $.ajax({
                 type: "POST",
-                url: "/dashboard/manage/popular-post",
+                url: "/dashboard/post-manage/popular-post",
                 data: dataStr,
                 success: ()=>{
                     // console.log("Update pop:", dataStr);

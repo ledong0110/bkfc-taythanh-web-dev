@@ -72,6 +72,55 @@ class PostController {
             })
             .catch(next);
     }
+
+    post_edit(req, res, next){
+        console.log("in edit page");
+        const postSlug = req.params.slug;
+
+        Post
+            .findOne({slug: postSlug})
+            .then(foundPost => {
+                console.log("Found post");
+                var returnPost = mongooseToObject(foundPost);
+                returnPost["content_json"] = returnPost.content;
+                res.render("posts/post-edit", {post: returnPost});
+            })
+            .catch(err=>{
+                console.log("Can not find post:");
+                console.log(err);
+                res.send("Some error occured, please try again");
+            })
+    }
+
+    post_edit_save(req, res, next){
+        console.log("updating post...");
+        req.body.content = JSON.parse(req.body.content);
+
+        let newQuery = {
+            title: req.body.title,
+            description: req.body.description,
+            content: req.body.content,
+            image_url: req.body.image_url,
+            author: req.app.locals.user._id
+        };
+
+        if (newQuery){
+            console.log(newQuery);
+            // newBlog.body = newBlog.body.replace(/\r\n/g, "\n");
+        }
+
+        Post.findOneAndUpdate({slug: req.body.slug}, newQuery)
+            .then((result) => {
+                    console.log("Success updating post");
+                    console.log(result);
+                    res.send("Done");
+            })
+            .catch((err)=>{
+                console.log("Failed to update post:", err);
+                res.send("Failed")
+            });
+        
+    }
     
 }
 
