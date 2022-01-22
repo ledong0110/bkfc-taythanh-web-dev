@@ -2,12 +2,14 @@
 const editor = new EditorJS({ 
     autofocus: true,
     holder: 'content',
+    placeholder: "Let's write something >> Click the '+' sign to add header, list or paste image link to insert image", 
     tools: {
         // HEADER TOOL
         header: {
             class: Header,
             inlineToolbar: true,
             config: {
+                placeholder: 'Header',
                 defaultLevel: 5
             }
         },
@@ -24,11 +26,30 @@ const editor = new EditorJS({
             class: List,
             inlineToolbar: true,
         }
-    },
-    data: postContent
+    }
 });
 
-console.log(postContent);
+// AJAX POST REQUEST
+// function formPostpromise(){
+//     return new Promise((resolve, reject) => {
+//         editor.save().then(outputData => {
+//             console.log("data:", outputData);
+//             dataStr.push({name: "content", value: dataStr});
+//             console.log("submited content", dataStr["content"])
+//             console.log("Data submitted: ", dataStr);
+//         });
+//     })
+// }
+
+// async function formPostasync(){
+//     try{
+//         let formPromise = formPostpromise();
+//         let responseBody = await formPromise;
+//     }
+//     catch(e){
+//         console.log(e);
+//     }
+// }
 
 $(function(){
     $("form.post-submit-form").on("submit", function(e){
@@ -42,16 +63,18 @@ $(function(){
             console.log("Data submitted: ", dataStr);
             $.ajax({
                 type: "POST",
-                url: "/post/edit",
+                url: "/post/create",
+                // type: $(this).attr("method"),
+                // url: $(this).attr("action"),
                 data: dataStr,
                 success: ()=>{
-                    console.log("sent post to server:", dataStr);
+                    console.log("Uploaded post:", dataStr);
                     Swal.fire(
-                        'Đã lưu !',
-                        'Update rồi nha, kiểm tra ik',
+                        'Uploaded !',
+                        'Your post is now online',
                         'success'
                     ).then(()=>{
-                        window.location="/dashboard/post-manage";
+                        window.location.reload();
                     })
                     
                 }

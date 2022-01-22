@@ -5,19 +5,20 @@
         </h3>
     </div>
     <form class="post-submit-form d-block ps-5 pe-5">
+        <input type="hidden" value="{{post.slug}}" name="slug" id="slug" required>
         <div class="mb-3">
             <label for="title" class="form-label">Tiêu đề</label>
-            <input type="text" class="form-control" name="title" id="title" aria-describedby="title-help" required>
+            <input type="text" class="form-control editor-title" name="title" id="title" aria-describedby="title-help" value="{{post.title}}" required>
             <div id="title-help" class="form-text">Tiêu đề của bài viết</div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Miêu tả bài viết</label> <span class="des-max">(tối đa 300 ký tự)</span>
-            <textarea type="text" class="form-control" name="description" id="description" aria-describedby="description-help" required rows=3 maxlength="300"></textarea>
+            <textarea type="text" class="form-control editor-des" name="description" id="description" aria-describedby="description-help" required rows=3 maxlength="300">{{post.description}}</textarea>
             <div id="description-help" class="form-text">Phần miêu tả của bài viết sẽ được ghi dưới tiêu đề trên trang chọn bài viết</div>
         </div>
         <div class="mb-3">
             <label for="image_url" class="form-label">Ảnh bìa bài viết</label> <span class="des-max">(không bắt buộc, nên chọn hình có tỉ lệ 21:9)</span>
-            <input type="url" class="form-control" name="image_url" id="image_url" aria-describedby="image_url-help">
+            <input type="url" class="form-control" name="image_url" id="image_url" aria-describedby="image_url-help" value={{{post.image_url}}}>
             <div id="image_url-help" class="form-text">Ảnh bìa sẽ được hiển thị khi chọn bài viết</div>
         </div>
         <div class="mb-3">
@@ -26,7 +27,7 @@
                 <div class="pt-3" name="content" id="content"></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <button type="submit" class="btn btn-outline-primary">Save</button>
     </form>
 </div>
 
@@ -48,4 +49,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 {{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
-<script type="module" src="/js/post-creator.js"></script>
+<script>
+    console.log({{{json post.content_json}}})
+    var postContent = {{{ json post.content_json }}};
+</script>
+<script type="module" src="/js/post-editor.js"></script>

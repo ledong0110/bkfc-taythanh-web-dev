@@ -37,11 +37,15 @@ class DashboardController {
     manage_post(req,res,next){
         console.log("in post manage");
         Post_special_list
-            .find()
-            .populate("posts_all")
-            .sort({name: -1})
+            .find().sort({name: -1})
+            .populate({
+                path: "posts_all",
+                options:{
+                    sort:{createdAt: -1}
+                }
+            })
             .then(result => {
-                // console.log("result", result);
+                // console.log("result", result[0].posts_all);
                 Post
                 .count({})
                 .then(result_2 => {
@@ -214,6 +218,8 @@ class DashboardController {
                 res.send("Failed")
             })
     }
+
+    
         
 }
 
