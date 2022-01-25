@@ -2,7 +2,7 @@
   "name": "bkfcwebdev",
   "version": "1.0.0",
   "description": "Here is a project built for educational purpose. It aims to provide the information of University entrance in Ho Chi Minh city University of Technology. Copyright is owned by BKFC Tây Thạnh",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon --inspect src/index.js",
@@ -34,7 +34,6 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.22.2",
     "body-parser": "^1.19.1",
-    "editorjs-html": "^3.4.2",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-openid-connect": "^2.5.2",
