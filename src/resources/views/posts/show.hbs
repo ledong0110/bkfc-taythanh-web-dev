@@ -61,104 +61,15 @@
                 <div class="comment_area clearfix mb-100">
                     <h4 class="mb-50">Comments</h4>
 
-                    <ol>
-                        <!-- Single Comment Area -->
-                        <li class="single_comment_area">
-                            <!-- Comment Content -->
-                            <div class="comment-content d-flex">
-                                <!-- Comment Author -->
-                                <div class="comment-author">
-                                    <img src="/img/bg-img/32.jpg" alt="author">
-                                </div>
-                                <!-- Comment Meta -->
-                                <div class="comment-meta">
-                                    <div class="d-flex">
-                                        <a href="#" class="post-author">Maria Williams</a>
-                                        <a href="#" class="post-date">June 23, 2018 </a>
-                                        <a href="#" class="reply">Reply</a>
-
-                                    </div>
-                                    <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla
-                                        placerat, tinci dunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet
-                                        neque. Fusce sagittis sus cipit sem a consequat.</p>
-                                </div>
-                            </div>
-                            <ol class="children">
-                                <li class="single_comment_area">
-                                    <!-- Comment Content -->
-                                    <div class="comment-content d-flex">
-                                        <!-- Comment Author -->
-                                        <div class="comment-author">
-                                            <img src="/img/bg-img/33.jpg" alt="author">
-                                        </div>
-                                        <!-- Comment Meta -->
-                                        <div class="comment-meta">
-                                            <div class="d-flex">
-                                                <a href="#" class="post-author">Christian Williams</a>
-                                                <a href="#" class="post-date">April 15, 2018</a>
-                                                <a href="#" class="reply">Reply</a>
-                                            </div>
-                                            <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, Nullam vel
-                                                orci dui. Su spendisse sit amet laoreet neque.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ol>
-                        </li>
-
-                        <!-- Single Comment Area -->
-                        <li class="single_comment_area">
-                            <!-- Comment Content -->
-                            <div class="comment-content d-flex">
-                                <!-- Comment Author -->
-                                <div class="comment-author">
-                                    <img src="/img/bg-img/32.jpg" alt="author">
-                                </div>
-                                <!-- Comment Meta -->
-                                <div class="comment-meta">
-                                    <div class="d-flex">
-                                        <a href="#" class="post-author">Lisa Moore</a>
-                                        <a href="#" class="post-date">June 23, 2018</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor
-                                        facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Su
-                                        spendisse sit amet laoreet neque. Fusce sagittis suscipit.</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ol>
+                    <!-- FACEBOOK Plugin comment -->
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous"
+                        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1"
+                        nonce="nnUvxyJ6"></script>
+                    <div class="fb-comments" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-width="500" data-numposts="5"></div>
                 </div>
 
-                <div class="post-a-comment-area mb-30 clearfix">
-                    <h4 class="mb-50">Leave a reply</h4>
-
-                    <!-- Reply Form -->
-                    <div class="contact-form-area">
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <input type="text" class="form-control" id="name" placeholder="Name*">
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <input type="email" class="form-control" id="email" placeholder="Email*">
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="subject" placeholder="Website">
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10"
-                                        placeholder="Message"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn newsbox-btn mt-30" type="submit">Submit Comment</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+                
             <!-- Sidebar Widget -->
             <div class="col-12 col-sm-9 col-md-6 col-lg-4">
                 <div class="sidebar-area">
@@ -298,12 +209,7 @@
 </section>
 <!-- ##### Post Details Area End ##### -->
 
-<!-- FACEBOOK Plugin comment -->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1"
-    nonce="nnUvxyJ6"></script>
-<div class="fb-comments" data-href="http://localhost:3000/post/{{post.slug}}" data-width="500" data-numposts="5"></div>
+
 
 <!-- ##### All Javascript Script ##### -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
