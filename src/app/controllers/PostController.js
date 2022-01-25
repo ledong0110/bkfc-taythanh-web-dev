@@ -1,6 +1,4 @@
 const Post = require('../models/Post');
-const edjsHTML = require("editorjs-html");
-const edjsParser = edjsHTML();
 const multer = require('multer');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
@@ -63,12 +61,10 @@ class PostController {
                 if (post)
                 {
                     post = mongooseToObject(post);
-                    const html = edjsParser.parse(post.content);
                     
                     post.createdAt = post.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                     res.render('posts/show', {
                         post: post,
-                        content: html,
                     });
                 }
                 else
@@ -77,10 +73,10 @@ class PostController {
             .catch(next);
     }
 
+
     post_edit(req, res, next){
         console.log("in edit page");
         const postSlug = req.params.slug;
-
         Post
             .findOne({slug: postSlug})
             .then(foundPost => {
@@ -95,6 +91,7 @@ class PostController {
                 res.send("Some error occured, please try again");
             })
     }
+
 
     post_edit_save(req, res, next){
         console.log("updating post...");
@@ -123,9 +120,36 @@ class PostController {
                 console.log("Failed to update post:", err);
                 res.send("Failed")
             });
-        
     }
     
+
+    post_delete(req, res, next){
+        console.log("In delete post");
+        var postSlug = req.body.slug;
+        console.log(req.body);
+        console.log("Deleting post...")
+
+        Post
+            .findOne({slug: postSlug})
+            .then(result => {
+                result.delete()
+                    .then(result_2 =>{
+                        console.log("Deleted post");
+                        res.append('Signal', 1);
+                        res.send("Done");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.append('Signal', 0);
+                        res.send("Failed");
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+                res.append('Signal', 0);
+                res.send("Failed");
+            })
+    }
 }
 
 module.exports = new PostController();
