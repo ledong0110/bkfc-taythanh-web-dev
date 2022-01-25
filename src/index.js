@@ -13,12 +13,12 @@ db.connect();
 //Static file
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(express.static(__dirname + "/public"));
-console.log(process.env.BASE_URL);
+
 //Connect auth0
 const config = {
     authRequired: false,
     auth0Logout: true,
-    baseURL: 'http://localhost:3000' || process.env.BASE_URL,
+    baseURL: 'http://localhost:3000' || 'https://bkfc-taythanh.herokuapp.com',
     clientID: 'yfaaZnedjIAkRN3Pnj8yccdsw6dLDUuq',
     issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
     secret: '-5YfLejfmuK2TuaaOdElTUn5z6GmKrWrjRBcM5BqP51wKTTWtQBBgmRHtkus1axK',
