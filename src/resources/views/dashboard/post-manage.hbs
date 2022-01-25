@@ -19,36 +19,37 @@
                             
                             <div class="post-manage-post-area overflow-auto container d-block">
                                 {{#each popList.posts_all}}
-                                    <div class="single-blog-post d-flex style-4 mb-30">   
-                                        <!-- Blog Thumbnail -->
-                                        <div class="blog-thumbnail">
-                                            {{#if (equal this.image_url '')}}
-                                            <a>
-                                                <img class="" src="/img/default/thumbnail.png" alt="">
-                                            </a>
-                                            {{else}}
-                                            <a>
-                                                <img class="" src="{{this.image_url}}" alt="">
-                                            </a>
-                                            {{/if}}
+                                    <form class="delete-form form-check col">
+                                        <div class="single-blog-post d-flex style-4 mb-30">   
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                {{#if (equal this.image_url '')}}
+                                                <a>
+                                                    <img class="" src="/img/default/thumbnail.png" alt="">
+                                                </a>
+                                                {{else}}
+                                                <a>
+                                                    <img class="" src="{{this.image_url}}" alt="">
+                                                </a>
+                                                {{/if}}
+                                            </div>
+                                            <!-- Blog Content -->  
+                                            <div class="blog-content">
+                                                <script>
+                                                    postTime.push("{{this.createdAt}}");
+                                                </script>
+                                                <a class="post-title">{{this.title}}</a>
+                                                <span class="time-post"></span>
+                                            </div>
+                                            <input type="hidden" name="slug" id = "slug" value="{{this.slug}}" />
+                                            <div class="pt-5 d-inline-block ms-auto">
+                                                <a href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
+                                                <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>                                                
+                                            </div>
                                         </div>
-                                        <!-- Blog Content -->  
-                                        <div class="blog-content">
-                                            <script>
-                                                postTime.push("{{this.createdAt}}");
-                                            </script>
-                                            <a class="post-title">{{this.title}}</a>
-                                            <span class="time-post"></span>
-                                        </div>
-
-                                        <div class="pt-5 d-inline-block ms-auto">
-                                            <a href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
-                                            <a class="delete-btn btn btn-outline-danger">Delete</a>
-                                        </div>
-                                    </div>
+                                    </form>
                                 {{/each}}
-                            </div>
-                            
+                            </div>                            
                         </div>
                     </div>
                 </div>

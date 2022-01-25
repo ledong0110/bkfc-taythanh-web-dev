@@ -122,3 +122,38 @@ $(function(){
         $("form.popular-post-submit-form")[0].reset();
     })
 })
+
+//DELETE POST
+$(function(){
+    $("form.delete-form").click("submit", function(e){
+        e.preventDefault();
+        var dataStr = $(this).serialize();
+        // console.log(dataStr_arr);
+        
+        // console.log(dataStr);
+            // console.log(dataStr);
+        var callback = $.ajax({
+            type: "DELETE",
+            url: "/post",
+            data: dataStr,
+            success: ()=>{
+                // console.log("Update pop:", dataStr);
+                var headerdata = callback.getResponseHeader('signal');
+                if (headerdata == 1){
+                    Swal.fire(
+                        'Đã xóa',
+                        'Qua trang chủ kiểm tra được chưa mate',
+                        'success'
+                    )
+                }
+                else{
+                    Swal.fire(
+                        'Chưa xóa',
+                        'Lỗi gì gòi, hỏi thằng làm web xem',
+                        'error'
+                    )
+                }
+            }
+        })   
+    })
+});
