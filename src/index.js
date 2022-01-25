@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const morgan = require('morgan');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const { auth } = require('express-openid-connect');
@@ -52,11 +51,11 @@ app.engine(
     'hbs',
     engine({
         extname: '.hbs',
-        defaultLayout: "main",
-        layoutsDir: "./src/resources/views/layouts",
+        defaultLayout: 'main',
+        layoutsDir: './src/resources/views/layouts',
         helpers: {
             // sum: (a, b) => a + b,
-            equal: (a, b) => (a == b),
+            equal: (a, b) => a == b,
             json: (ob) => JSON.stringify(ob),
         },
     }),
