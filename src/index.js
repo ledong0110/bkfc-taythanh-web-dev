@@ -1,4 +1,5 @@
 const path = require('path');
+
 const express = require('express');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
@@ -18,7 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const config = {
     authRequired: false,
     auth0Logout: true,
-    baseURL: 'http://localhost:3000' || 'https://bkfc-taythanh.herokuapp.com',
+    baseURL: process.env.PORT
+        ? 'https://bkfc-taythanh.herokuapp.com'
+        : 'http://localhost:3000',
     clientID: 'yfaaZnedjIAkRN3Pnj8yccdsw6dLDUuq',
     issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
     secret: '-5YfLejfmuK2TuaaOdElTUn5z6GmKrWrjRBcM5BqP51wKTTWtQBBgmRHtkus1axK',
