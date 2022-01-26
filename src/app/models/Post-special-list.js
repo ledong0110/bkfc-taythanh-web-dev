@@ -18,7 +18,12 @@ const Post_special_list = new Schema(
         posts_checked:{
             type: Object,
             required: true
-        }
+        },
+        posts_checked_load:[{
+            type: Number,
+            ref: 'Post',
+            require: true
+        }]
     },
     {
         // _id: false,

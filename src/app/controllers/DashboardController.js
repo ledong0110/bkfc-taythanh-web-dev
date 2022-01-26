@@ -150,10 +150,14 @@ class DashboardController {
         let updateOptions = { upsert: true };
         let newPost_all = [];
         let newPost_top = {};
+        let newPost_top_load = []
         var ele;
         
         for (ele in req.body){
-            newPost_top[ele] = req.body[ele];
+            if (req.body[ele] == "1"){
+                newPost_top[ele] = req.body[ele];
+                newPost_top_load.push(Number(ele));
+            }
             newPost_all.push(Number(ele));
         }
 
@@ -161,7 +165,8 @@ class DashboardController {
 
         let topList = {
             posts_all: newPost_all,
-            posts_checked: newPost_top
+            posts_checked: newPost_top,
+            posts_checked_load: newPost_top_load
         }
 
         Post_special_list
@@ -190,9 +195,13 @@ class DashboardController {
         let updateOptions = { upsert: true };
         let newPost_all = [];
         let newPost_pop = {};
+        let newPost_pop_load = [];
         var ele;
         for (ele in req.body){
-            newPost_pop[ele] = req.body[ele];
+            if (req.body[ele] == "1"){
+                newPost_pop[ele] = req.body[ele];
+                newPost_pop_load.push(Number(ele));
+            }
             newPost_all.push(Number(ele));
         }
 
@@ -200,7 +209,8 @@ class DashboardController {
 
         let popList = {
             posts_all: newPost_all,
-            posts_checked: newPost_pop
+            posts_checked: newPost_pop,
+            posts_checked_load: newPost_pop_load
         }
 
         Post_special_list
