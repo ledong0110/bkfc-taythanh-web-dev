@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Post_special_list = require('../models/Post-special-list');
 const multer = require('multer');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
@@ -13,7 +14,7 @@ class PostController {
                 }
             })
             .then(post_list_arr => {
-                
+                res.render("posts/post", {breaking_post: multipleMongooseToObject(post_list_arr)});
             })
         // Post.find().sort({createdAt: -1}).limit(3)
         //     .then(result => {

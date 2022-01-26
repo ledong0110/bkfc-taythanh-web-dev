@@ -5,13 +5,13 @@ const { isContentCreator } = require('../app/middlewares')
 const postController = require('../app/controllers/PostController');
 
 // newsController.index();
+router.delete('/', isContentCreator, postController.post_delete);
+router.get('/', postController.post_home);
 router.get('/create', isContentCreator,postController.create);
 router.post('/create', postController.create_post);
 router.get('/all', postController.all_post);
 router.get('/:slug', postController.show);
 router.get('/edit/:slug', isContentCreator, postController.post_edit);
 router.post('/edit', isContentCreator, postController.post_edit_save);
-router.delete('/', isContentCreator, postController.post_delete);
-router.get('/', postController.post_home);
 
 module.exports = router;
