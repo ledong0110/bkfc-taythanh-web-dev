@@ -172,6 +172,14 @@ class PostController {
                 res.send("Failed");
             })
     }
+
+    //[PATCH] /post/:id/restore
+    post_restore(req, res, next)
+    {
+        Post.restore({ _id: req.params.id })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+    }
 }
 
 module.exports = new PostController();

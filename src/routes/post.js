@@ -10,8 +10,10 @@ router.get('/', postController.post_home);
 router.get('/create', isContentCreator,postController.create);
 router.post('/create', postController.create_post);
 router.get('/all', postController.all_post);
-router.get('/:slug', postController.show);
 router.get('/edit/:slug', isContentCreator, postController.post_edit);
 router.post('/edit', isContentCreator, postController.post_edit_save);
+router.patch('/:id/restore', isContentCreator, postController.post_restore);
+router.get('/:slug', postController.show);
+
 
 module.exports = router;

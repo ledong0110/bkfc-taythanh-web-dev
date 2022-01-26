@@ -36,15 +36,18 @@ class DashboardController {
 
     manage_post(req,res,next){
         console.log("in post manage");
-        Post_special_list
-            .find().sort({name: -1})
-            .populate({
-                path: "posts_all",
-                options:{
-                    sort:{createdAt: -1}
-                }
-            })
-            .then(result => {
+        Promise.all([
+            Post_special_list
+                .find().sort({name: -1})
+                .populate({
+                    path: "posts_all",
+                    options:{
+                        sort:{createdAt: -1}
+                    }
+                }),
+            Post.countDocumentsDeleted()
+        ])
+            .then(([result, deletedPost]) => {
                 // console.log("result", result[0].posts_all);
                 Post
                 .count({})
@@ -126,7 +129,7 @@ class DashboardController {
                                     // break;
                             }
                         }
-                        res.render("dashboard/post-manage", {topList: top_list, popList: pop_list});
+                        res.render("dashboard/post-manage", {topList: top_list, popList: pop_list, deletedPost});
                     }
                     })
                     .catch(err => {
@@ -229,6 +232,16 @@ class DashboardController {
             })
     }
 
+    trash_bin(req, res, next){
+        Post.findDeleted()
+                    .then((posts) =>
+                    res.render('dashboard/trash-bin',{
+                        deletedPosts: multipleMongooseToObject(posts)
+                    })
+                    )
+                    .catch(next);
+        
+    }
     
         
 }

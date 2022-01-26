@@ -73,12 +73,12 @@ app.engine(
 //     }
 // });
 
-app.use((req,res,next) => {
-    console.log("New request:");
-    console.log(req.url);
-    console.log(req.originalMethod);
-    next();
-})
+// app.use((req,res,next) => {
+//     console.log("New request:");
+//     console.log(req.url);
+//     console.log(req.originalMethod);
+//     next();
+// })
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
