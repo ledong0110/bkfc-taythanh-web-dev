@@ -45,7 +45,7 @@
                                                 <script>
                                                     postTime.push("{{this.createdAt}}");
                                                 </script>
-                                                <a class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" target="_blank" class="post-title">{{this.title}}</a>
                                                 <span class="time-post"></span>
                                             </div>
                                             <input type="hidden" name="slug" id = "slug" value="{{this.slug}}" />
@@ -55,6 +55,8 @@
                                             </div>
                                         </div>
                                     </form>
+                                    {{else}}
+                                <div class="text-center"><h4>Chưa có bài viết được đăng lên</h4></div>
                                 {{/each}}
                             </div>                            
                         </div>

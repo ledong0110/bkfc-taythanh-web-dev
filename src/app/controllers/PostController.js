@@ -100,7 +100,7 @@ class PostController {
         console.log("in edit page");
         const postSlug = req.params.slug;
         Post
-            .findOne({slug: postSlug})
+            .findOneWithDeleted({slug: postSlug})
             .then(foundPost => {
                 console.log("Found post");
                 var returnPost = mongooseToObject(foundPost);
@@ -132,7 +132,7 @@ class PostController {
             // newBlog.body = newBlog.body.replace(/\r\n/g, "\n");
         }
 
-        Post.findOneAndUpdate({slug: req.body.slug}, newQuery)
+        Post.findOneAndUpdateWithDeleted({slug: req.body.slug}, newQuery)
             .then((result) => {
                     console.log("Success updating post");
                     console.log(result);
@@ -179,6 +179,46 @@ class PostController {
         Post.restore({ _id: req.params.id })
                     .then(() => res.redirect('back'))
                     .catch(next);
+    }
+
+    //[GET] /post/my-post
+    my_post(req, res, next)
+    {
+        Promise.all([Post.find({author: req.app.locals.user._id}).sort({createdAt: -1}), Post.countDocumentsDeleted({author: req.app.locals.user._id})])
+        .then(([result, deletedPost]) => {
+            // console.log(deletedPost);
+            // res.send(result);
+            res.render("posts/my-post", {my_post: multipleMongooseToObject(result), deletedPost});
+        })
+        
+    }
+
+    //[GET] /post/my-post-bin
+    my_post_bin(req, res, next)
+    {
+        Post.findDeleted({author: req.app.locals.user._id})
+                    .then((posts) =>
+                    res.render('posts/my-post-bin',{
+                        deletedPosts: multipleMongooseToObject(posts)
+                    })
+                    )
+                    .catch(next);
+    }
+
+    //[DELETE] /post/force-delete
+    post_force_delete(req, res, next){
+        var pid = req.body.id;
+        Post.deleteOne({_id: pid})
+            .then(() => {
+                res.append('Signal', 1);
+                res.send("Done");
+            })
+            .catch(err => {
+                console.log(err);
+                res.append('Signal', 0);
+                res.send("Failed");
+            });
+        
     }
 }
 

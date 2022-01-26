@@ -130,7 +130,7 @@ $(function(){
 
         Swal.fire({
             title: 'Bạn có chắc muốn xóa bài này?',
-            text: "Sau khi xóa, bài viết không thể khôi phục lại",
+            text: "Bài viết sau khi xóa sẽ đươc lưu trữ thùng rác",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

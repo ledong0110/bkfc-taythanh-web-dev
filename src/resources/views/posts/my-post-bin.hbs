@@ -17,7 +17,7 @@
                             <h5 class="d-block">Bài viết đã xóa</h5>
                             <div class="post-manage-post-area overflow-auto container d-block">
                                 {{#each deletedPosts}}
-                                    <form class="delete-form form-check col">
+                                    <form class="form-check col">
                                         <div class="single-blog-post d-flex style-4 mb-30">   
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
@@ -39,16 +39,14 @@
                                                 <a class="post-title">{{this.title}}</a>
                                                 <span class="time-post"></span>
                                             </div>
-                                            <input type="hidden" name="id" id = "slug" value="{{this._id}}" />
                                             <div class="pt-5 d-inline-block ms-auto">
                                                 <a type="button" href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
-                                                <button type="submit" data-id="{{this._id}}" class="restore-btn btn btn-outline-danger">Khôi phục</button>
-                                                <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button> 
+                                                <button type="submit" data-id="{{this._id}}" class="restore-btn btn btn-outline-danger">Khôi phục</button>                                                
                                             </div>
                                         </div>
                                     </form>
                                     {{else}}
-                                    <div class="text-center"><h4>Thùng rác trống</h4><a class="btn btn-link" href="/dashboard/post-manage">Quay lại</a></div>
+                                    <div class="text-center"><h4>Thùng rác trống</h4><a class="btn btn-link" href="/post/my-post">Quay lại</a></div>
                                 {{/each}}
                             </div>                            
                         </div>
@@ -67,8 +65,9 @@
     }
 </script>
 <script>
-    $(function (){
+    document.addEventListener('DOMContentLoaded', function (){
       //When diaglog confirm click
+      var postId;
       var restoreForm = document.forms['restore-form'];
       var restoreBtn = $('.restore-btn');
 
@@ -76,57 +75,9 @@
         //When restore btn clicked
         restoreBtn.click(function (event) {
         event.preventDefault();
-        var pId = $(this).data('id');
+        var pId = jQuery(this).data('id');
         restoreForm.action = '/post/' + pId + '/restore?_method=PATCH';
         restoreForm.submit();
-        })
-    });
-
-    //FORCE DELETE POST
-    $(function(){
-        $("form.delete-form").on("submit", function(e){
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Bạn có chắc muốn xóa bài này?',
-                text: "Sau khi xóa, bài viết không thể khôi phục lại",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Xóa luôn!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var dataStr = $(this).serialize();
-                        var callback = $.ajax({
-                            type: "DELETE",
-                            url: "/post/force-delete",
-                            data: dataStr,
-                            success: ()=>{
-                                // console.log("Update pop:", dataStr);
-                                var headerdata = callback.getResponseHeader('signal');
-                                if (headerdata == 1){
-                                    Swal.fire(
-                                        'Đã xóa',
-                                        'Qua trang chủ kiểm tra được chưa mate',
-                                        'success'
-                                    ).then(()=>{
-                                        window.location.reload();
-                                    })
-                                }
-                                else{
-                                    Swal.fire(
-                                        'Chưa xóa',
-                                        'Lỗi gì gòi, hỏi thằng làm web xem',
-                                        'error'
-                                    )
-                                }
-                            }
-                        })   
-                    }
-                })
-                
-            
         })
     });
 </script>
