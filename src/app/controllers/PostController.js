@@ -3,7 +3,28 @@ const multer = require('multer');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
 class PostController {
-    //[GET] /
+    post_home(req, res, next){
+        Post_special_list
+            .find().sort({name: -1})
+            .populate({
+                path: "posts_checked_load",
+                options:{
+                    sort:{createdAt: -1}
+                }
+            })
+            .then(post_list_arr => {
+                
+            })
+        // Post.find().sort({createdAt: -1}).limit(3)
+        //     .then(result => {
+        //         console.log(result);
+        //         res.render("posts/post", {breaking_post: multipleMongooseToObject(result)});
+        //     })
+        //     .catch(err=>{
+        //         res.render("posts/post", {breaking_post: []});    
+        //     })
+    }
+
     all_post(req,res,next){
         console.log("All post");
         Post.find().sort({createdAt: -1})

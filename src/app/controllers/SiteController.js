@@ -5,13 +5,7 @@ const { convertRole } = require('../../utility/convertRole');
 class SiteController {
     //[GET] /
     home(req, res, next) {
-        Post.find().sort({createdAt: -1}).limit(3)
-            .then((result) => {
-                res.render("home", {breaking_post: multipleMongooseToObject(result)});    
-            })
-            .catch(err=>{
-                res.render("home", {breaking_post: []});    
-            })
+        res.render("home", {breaking_post: []});    
     }
 
     // [GET] /profile
