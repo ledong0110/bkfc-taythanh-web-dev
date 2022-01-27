@@ -41,13 +41,15 @@
                                                 {{/if}}
                                             </div>
                                             <!-- Blog Content -->  
-                                            <div class="blog-content">
+                                            <div class="blog-content col col-2">
                                                 <script>
                                                     postTime.push("{{this.createdAt}}");
                                                 </script>
                                                 <a href="/post/{{this.slug}}" target="_blank" class="post-title">{{this.title}}</a>
                                                 <span class="time-post"></span>
                                             </div>
+                                            <div class="col col-2 text-center">{{this.views}} lượt xem</div>
+                                            <div class="col col-2 text-center">{{this.author.name}}</div>
                                             <input type="hidden" name="slug" id = "slug" value="{{this.slug}}" />
                                             <div class="pt-5 d-inline-block ms-auto">
                                                 <a type="button" href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>

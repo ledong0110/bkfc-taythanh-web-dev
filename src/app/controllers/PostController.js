@@ -78,7 +78,7 @@ class PostController {
     //[GET] /post/show
     show(req, res, next)
     {
-        Post.findOne({ slug: req.params.slug }).populate('author', 'name')
+        Post.findOneAndUpdate({ slug: req.params.slug }, { $inc: { views: 1} }).populate('author', 'name')
             .then((post) => {
                 if (post)
                 {

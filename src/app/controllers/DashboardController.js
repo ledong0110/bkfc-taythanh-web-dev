@@ -41,9 +41,10 @@ class DashboardController {
                 .find().sort({name: -1})
                 .populate({
                     path: "posts_all",
+                    populate: { path: 'author', select: 'name' },
                     options:{
                         sort:{createdAt: -1}
-                    }
+                    },
                 }),
             Post.countDocumentsDeleted()
         ])

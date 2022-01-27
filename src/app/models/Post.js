@@ -16,7 +16,8 @@ const Post = new Schema(
         // top:{type: Boolean, default: false},
         // popular:{type: Boolean, default: false},
         slug: { type: String, slug: 'title', unique: true },
-        author: { type: Number, ref: 'User'}
+        author: { type: Number, ref: 'User'},
+        views: {type: Number, default: 0},
     },
     {
         _id: false,
