@@ -15,9 +15,16 @@
                     <div class="col p-3 border border-2 bg-light">
                         <div class="col-12">
                             <h5 class="d-block">Chỉnh sửa bài viết</h5>
+                            <a href="/dashboard/trash-bin" class="btn btn-primary position-relative float-end p-2">
+                            <span><i class="fa fa-trash" aria-hidden="true" style="margin-right:.5rem;"></i>Thùng rác</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{deletedPost}}
+                                <span class="visually-hidden">bài viết đã xóa</span>
+                            </span>
+                            </a>
                             <span class="d-block pb-3">(chọn bài viết để chỉnh sửa)</span>
                             
-                            <div class="post-manage-post-area overflow-auto container d-block">
+                            <div class="post-manage-post-area overflow-auto container d-block mt-5">
                                 {{#each popList.posts_all}}
                                     <form class="delete-form form-check col">
                                         <div class="single-blog-post d-flex style-4 mb-30">   
@@ -34,13 +41,15 @@
                                                 {{/if}}
                                             </div>
                                             <!-- Blog Content -->  
-                                            <div class="blog-content">
+                                            <div class="blog-content col col-2">
                                                 <script>
                                                     postTime.push("{{this.createdAt}}");
                                                 </script>
-                                                <a class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" target="_blank" class="post-title">{{this.title}}</a>
                                                 <span class="time-post"></span>
                                             </div>
+                                            <div class="col col-2 text-center">{{this.views}} lượt xem</div>
+                                            <div class="col col-2 text-center">{{this.author.name}}</div>
                                             <input type="hidden" name="slug" id = "slug" value="{{this.slug}}" />
                                             <div class="pt-5 d-inline-block ms-auto">
                                                 <a type="button" href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
@@ -48,6 +57,8 @@
                                             </div>
                                         </div>
                                     </form>
+                                    {{else}}
+                                <div class="text-center"><h4>Chưa có bài viết được đăng lên</h4></div>
                                 {{/each}}
                             </div>                            
                         </div>

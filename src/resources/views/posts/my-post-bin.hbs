@@ -1,0 +1,83 @@
+<div class="row post-manage-area bg-gray">
+    <div class="d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+        <h5 class="mb-3 mt-3">
+            Thùng rác
+        </h5>
+    </div>
+    <script>
+        var postTime = [];
+    </script>
+    <div class="container pt-0">
+        <div class="container p-0">
+            <div class="row row-cols-2 gx-4">
+
+                <div class="container-fluid d-inline-block col-12 col-md-12 p-3">
+                    <div class="col p-3 border border-2 bg-light">
+                        <div class="col-12">
+                            <h5 class="d-block">Bài viết đã xóa</h5>
+                            <div class="post-manage-post-area overflow-auto container d-block">
+                                {{#each deletedPosts}}
+                                    <form class="form-check col">
+                                        <div class="single-blog-post d-flex style-4 mb-30">   
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                {{#if (equal this.image_url '')}}
+                                                <a>
+                                                    <img class="" src="/img/default/thumbnail.png" alt="">
+                                                </a>
+                                                {{else}}
+                                                <a>
+                                                    <img class="" src="{{this.image_url}}" alt="">
+                                                </a>
+                                                {{/if}}
+                                            </div>
+                                            <!-- Blog Content -->  
+                                            <div class="blog-content">
+                                                <script>
+                                                    postTime.push("{{this.createdAt}}");
+                                                </script>
+                                                <a class="post-title">{{this.title}}</a>
+                                                <span class="time-post"></span>
+                                            </div>
+                                            <div class="pt-5 d-inline-block ms-auto">
+                                                <a type="button" href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
+                                                <button type="submit" data-id="{{this._id}}" class="restore-btn btn btn-outline-danger">Khôi phục</button>                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {{else}}
+                                    <div class="text-center"><h4>Thùng rác trống</h4><a class="btn btn-link" href="/post/my-post">Quay lại</a></div>
+                                {{/each}}
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<form name="restore-form" method="POST"></form>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script>
+    for (element in postTime) {
+        displayTime("time-post", postTime);
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+      //When diaglog confirm click
+      var postId;
+      var restoreForm = document.forms['restore-form'];
+      var restoreBtn = $('.restore-btn');
+
+
+        //When restore btn clicked
+        restoreBtn.click(function (event) {
+        event.preventDefault();
+        var pId = jQuery(this).data('id');
+        restoreForm.action = '/post/' + pId + '/restore?_method=PATCH';
+        restoreForm.submit();
+        })
+    });
+</script>

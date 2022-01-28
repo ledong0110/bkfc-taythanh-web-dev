@@ -3,12 +3,12 @@ const { mongooseToObject } = require('../../utility/mongoose.js')
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 function isAuthenticated(req, res, next)
 {
+    req.app.locals.authenticated = req.oidc.isAuthenticated();
     if (req.oidc.isAuthenticated())
     {
         return User.findOne({ email: req.oidc.user.email })
             .then((user) => {
                 user = mongooseToObject(user);
-                req.app.locals.authenticated = true;
                 req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
                 // console.log(req.app.locals.user);
@@ -23,12 +23,12 @@ function isAuthenticated(req, res, next)
 
 function isContentCreator(req, res, next)
 {
+    req.app.locals.authenticated = req.oidc.isAuthenticated();
     if (req.oidc.isAuthenticated())
     {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
                 user = mongooseToObject(user);
-                req.app.locals.authenticated = true;
                 req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
@@ -53,12 +53,12 @@ function isContentCreator(req, res, next)
 
 function isKnownLedgeProvider(req, res, next)
 {
+    req.app.locals.authenticated = req.oidc.isAuthenticated();
     if (req.oidc.isAuthenticated())
     {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
                 user = mongooseToObject(user);
-                req.app.locals.authenticated = true;
                 req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })
@@ -81,12 +81,12 @@ function isKnownLedgeProvider(req, res, next)
 
 function isModerator(req, res, next)
 {
+    req.app.locals.authenticated = req.oidc.isAuthenticated();
     if (req.oidc.isAuthenticated())
     {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
                 user = mongooseToObject(user);
-                req.app.locals.authenticated = true;
                 req.app.locals.user = user;
                 req.app.locals.user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', options);
             })

@@ -1,0 +1,78 @@
+<div class="row post-manage-area bg-gray">
+    <div class="d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+        <h5 class="mb-3 mt-3">
+            Bài viết của tôi
+        </h5>
+    </div>
+    <script>
+        var postTime = [];
+    </script>
+    <div class="container pt-0">
+        <div class="container p-0">
+            <div class="row row-cols-2 gx-4">
+
+                <div class="container-fluid d-inline-block col-12 col-md-12 p-3">
+                    <div class="col p-3 border border-2 bg-light">
+                        <div class="col-12">
+                            <h5 class="d-block">Chỉnh sửa bài viết</h5>
+                            <a href="/post/my-post-bin" class="btn btn-primary position-relative float-end p-2">
+                            <span><i class="fa fa-trash" aria-hidden="true" style="margin-right:.5rem;"></i>Thùng rác</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{deletedPost}}
+                                <span class="visually-hidden">bài viết đã xóa</span>
+                            </span>
+                            </a>
+                            <span class="d-block pb-3">(chọn bài viết để chỉnh sửa)</span>
+                            
+                            <div class="post-manage-post-area overflow-auto container d-block mt-5">
+                                {{#each my_post}}
+                                    <form class="delete-form form-check col">
+                                        <div class="single-blog-post d-flex style-4 mb-30">   
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                {{#if (equal this.image_url '')}}
+                                                <a>
+                                                    <img class="" src="/img/default/thumbnail.png" alt="">
+                                                </a>
+                                                {{else}}
+                                                <a>
+                                                    <img class="" src="{{this.image_url}}" alt="">
+                                                </a>
+                                                {{/if}}
+                                            </div>
+                                            <!-- Blog Content -->  
+                                            <div class="blog-content col col-2">
+                                                <script>
+                                                    postTime.push("{{this.createdAt}}");
+                                                </script>
+                                                <a href="/post/{{this.slug}}" target="_blank" class="post-title">{{this.title}}</a>
+                                                <span class="time-post"></span>
+                                            </div>
+                                            <div class="col col-2 text-center">{{this.views}} lượt xem</div>
+                                            <input type="hidden" name="slug" id = "slug" value="{{this.slug}}" />
+                                            <div class="pt-5 d-inline-block ms-auto">
+                                                <a type="button" href="/post/edit/{{this.slug}}" class="btn btn-outline-primary">Edit</a>
+                                                <button type="submit" class="delete-btn btn btn-outline-danger">Delete</button>                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                {{else}}
+                                <div class="text-center"><h4>Chưa có bài viết, viết vài bài đi bro </h4><a class="btn btn-link" href="/post/create">Viết bài</a></div>
+                                {{/each}}
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="/js/post-manage.js"></script>
+<script>
+    for (element in postTime) {
+        displayTime("time-post", postTime);
+    }
+</script>
