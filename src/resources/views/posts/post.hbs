@@ -1,145 +1,153 @@
 <section class="breaking-news-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Breaking News Widget -->
-                    <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
-                        <div class="title pe-auto ps-auto">
-                            <h6>Bài viết mới</h6>
-                        </div>
-                        <div id="breakingNewsTicker" class="ticker">
-                            <ul>
-                                {{#each breaking_post}}
-                                    <li>
-        
-                                        <a href = "/post/{{this.slug}}">
-                                            {{this.title}}
-                                        </a>
-                                    </li>
-                                {{/each}}
-                            </ul>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Breaking News Widget -->
+                <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
+                    <div class="title pe-auto ps-auto">
+                        <h6>Bài viết mới</h6>
+                    </div>
+                    <div id="breakingNewsTicker" class="ticker">
+                        <ul>
+                            {{log breaking_post}}
+                            {{#each breaking_post}}
+                            <li>
+                                <a href="/post/{{this.slug}}">
+                                    {{this.title}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-</section>
-
-<!-- ##### Hero Area Start ##### -->
-    <div class="hero-area">
-        <!-- Hero Post Slides -->
-        <div class="hero-post-slides owl-carousel">
-
-            <!-- Single Slide -->
-            <div class="single-slide">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="100ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/1.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">Traffic Problems in Tikkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkme Square</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-md-6">
-                            <!-- Single Blog Post Area -->
-                            <div class="single-blog-post style-1 mb-30" data-animation="fadeInUpBig" data-delay="300ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/2.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">The best way to spend your holliday</a>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post Area -->
-                            <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="500ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/3.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">Sport results for the weekend games</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Slide -->
-            <div class="single-slide">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Single Blog Post Area -->
-                        <div class="col-12 col-md-6">
-                            <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="100ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/1.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">Traffic Problems in Time Square</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-md-6">
-                            <!-- Single Blog Post Area -->
-                            <div class="single-blog-post style-1 mb-30" data-animation="fadeInUpBig" data-delay="300ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/2.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">The best way to spend your holliday</a>
-                                </div>
-                            </div>
-                            <!-- Single Blog Post Area -->
-                            <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="500ms" data-duration="1000ms">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail bg-overlay">
-                                    <a href="#"><img src="img/bg-img/3.jpg" alt=""></a>
-                                </div>
-
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <span class="post-date">June 20, 2018</span>
-                                    <a href="#" class="post-title">Sport results for the weekend games</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-    <!-- ##### Hero Area End ##### -->
+</section>
 
-<script src="/js/jquery/jquery-2.2.4.min.js"></script>
-<!-- All Plugins js -->
-<script src="/js/plugins/plugins.js"></script>
-<!-- Active js -->
-<script src="/js/active.js"></script>
+
+
+<!-- ##### Hero Area Start ##### -->
+    <!-- Hero Post Slides -->
+<script>
+    var postTime = [];
+</script>
+
+<div class="row all-post-area p-3 m-0">
+    {{!-- POPULAR-POST --}}
+    <div class = "col-md col-7 ps-3 pe-3 order-md-1 order-2"> 
+    {{#each all_list}}
+        {{#if (equal this.name "popular")}}
+
+        <div class="post-list-area border border-1 border-danger border-top-0 border-start-0 border-end-0 mb-5">
+            <div class="post-list-title bg-light border-dark border-bottom-5">
+                <h6 class="ms-auto me-auto mt-auto mb-auto p-2 text-center">Bài viết phổ biến</h6>      
+            </div> 
+        </div>
+        <div class="col-12 col-md-12 me-auto ms-auto">
+            {{#each this.posts_checked_load}}
+            <script>
+                postTime.push("{{this.createdAt}}");
+            </script>
+            <div class="single-blog-post animated fadeInUpBig style-3 border border-3 border-top-0 border-start-0 border-end-0 pb-1 mb-5">
+                <div class="blog-thumbnail pb-1">
+                    {{#if (equal this.image_url '')}}
+                        <a>
+                            <img class="thumbnail-img" src="/img/default/thumbnail.png" alt="">
+                        </a>
+                    {{else}}
+                        <a>
+                            <img class="thumbnail-img" src="{{this.image_url}}" alt="">
+                        </a>
+                    {{/if}}
+                </div>
+                
+                <div class="blog-content blog-content-small">
+                    <a href="/post/{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
+                    {{!-- <p class="post-des d-none d-sm-block">{{this.description}}</p> --}}
+                    <span class="post-date"></span>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+
+        {{/if}}
+    {{/each}}
+    </div>
+
+    {{!-- TOP POST --}}
+    <div class="col-md-6 ps-3 pe-3 g-0 order-md-2 order-1 pb-5">
+        <!-- Single Slide -->
+    {{#each all_list}}
+        {{#if (equal this.name "top")}}
+            <div class = "row post-area d-blockcontainer-fluid">
+            <script>
+                var postTime = [];
+            </script>
+            {{#each this.posts_checked_load}}
+                <div class="col-12 p-0 me-auto ms-auto">
+                    <div class="single-blog-post animated fadeInUpBig style-1 mb-4">
+                        <div class="blog-thumbnail bg-overlay">
+                            {{#if (equal this.image_url '')}}
+                                <a>
+                                    <img class="post-thumbnail-img" src="/img/default/thumbnail.png" alt="">
+                                </a>
+                            {{else}}
+                                <a>
+                                    <img class="post-thumbnail-img" src="{{this.image_url}}" alt="">
+                                </a>
+                            {{/if}}
+                        </div>
+                        
+                        <div class="blog-content">
+                            <a href="/post/{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
+                            <p class="post-des d-none d-sm-block">{{this.description}}</p>
+                            <span class="post-date"></span>
+                            <script>
+                                postTime.push("{{this.createdAt}}");
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    {{/each}}
+    </div>
+
+    {{!-- ADVERTISEMENT --}}
+    <div class = "col-md col-5 ps-3 pe-3 order-md-3 order-3"> 
+        <div class="post-list-area border">
+            <div class="post-list-title bg-light ">
+                <p class="p-0 text-center mb-0">Quảng cáo</p>      
+            </div> 
+        </div>
+        <a>
+            <img class="pb-3" src="/img/ads/ad_1.png" alt="">
+        </a>
+        <a>
+            <img class="pb-3" src="/img/ads/ad_2.png" alt="">
+        </a>
+        <a>
+            <img class="pb-3" src="/img/ads/ad_3.png" alt="">
+        </a>
+    </div>
+
+</div>
+
+<!-- ##### Hero Area End ##### -->
+
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/bootstrap/popper.min.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/plugins/plugins.js"></script>
+<script src="js/active.js"></script>
+
+<script>
+    for (element in postTime){
+        displayTime("post-date", postTime);
+    }
+</script>
+
+<!-- Blog Thumbnail -->

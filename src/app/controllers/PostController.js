@@ -14,16 +14,19 @@ class PostController {
                 }
             })
             .then(post_list_arr => {
-                res.render("posts/post", {breaking_post: multipleMongooseToObject(post_list_arr)});
+                console.log("rendering post page...");
+                var breaking_post = [];
+                for (let i = 0; i < 3; i++){
+                    if (post_list_arr[0].posts_checked_load[i] != undefined){
+                        breaking_post.push(mongooseToObject(post_list_arr[0].posts_checked_load[i]));
+                    }
+                }
+                // console.log(breaking_post);
+                res.render('posts/post', {
+                    all_list: multipleMongooseToObject(post_list_arr), 
+                    breaking_post: breaking_post
+                });
             })
-        // Post.find().sort({createdAt: -1}).limit(3)
-        //     .then(result => {
-        //         console.log(result);
-        //         res.render("posts/post", {breaking_post: multipleMongooseToObject(result)});
-        //     })
-        //     .catch(err=>{
-        //         res.render("posts/post", {breaking_post: []});    
-        //     })
     }
 
     all_post(req,res,next){
@@ -31,7 +34,16 @@ class PostController {
         Post.find().sort({createdAt: -1})
             .then((result) => {
                 console.log("All blog:", result);
-                res.render("posts/post-all", {all_post: multipleMongooseToObject(result)});    
+                var breaking_post = [];
+                for (let i = 0; i < 3; i++){
+                    if (result[i] != undefined){
+                        breaking_post.push(mongooseToObject(result[i]));
+                    }
+                }
+                res.render("posts/post-all", {
+                    all_post: multipleMongooseToObject(result),
+                    breaking_post: breaking_post
+                });    
             })
             .catch(err=>{
                 res.render("posts/post-all", {all_post: null});    
@@ -84,10 +96,30 @@ class PostController {
                 {
                     post = mongooseToObject(post);
                     
-                    post.createdAt = post.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                    res.render('posts/show', {
-                        post: post,
-                    });
+                    Post_special_list
+                        .find().sort({name: -1})
+                        .populate({
+                            path: "posts_checked_load",
+                            options:{
+                                sort:{createdAt: -1}
+                            }
+                        })
+                        .then(post_list_arr => {
+                            var breaking_post = [];
+                            for (let i = 0; i < 3; i++){
+                                if (post_list_arr[0].posts_checked_load[i] != undefined){
+                                    breaking_post.push(mongooseToObject(post_list_arr[0].posts_checked_load[i]));
+                                }
+                            }
+                            // post.createdAt = post.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+                            // console.log(breaking_post);
+                            res.render('posts/show', {
+                                post: post,
+                                all_list: multipleMongooseToObject(post_list_arr), 
+                                breaking_post: breaking_post
+                            });
+                        })  
                 }
                 else
                     res.send('Sorry, We can\'t find your page');

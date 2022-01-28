@@ -4,6 +4,12 @@ const editor = new EditorJS({
     holder: 'content',
     placeholder: "Let's write something >> Click the '+' sign to add header, list or paste image link to insert image", 
     tools: {
+        // PARAGRAPH TOOL
+        paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+        },
+
         // HEADER TOOL
         header: {
             class: Header,
