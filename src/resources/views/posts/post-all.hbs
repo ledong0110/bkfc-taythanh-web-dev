@@ -1,3 +1,30 @@
+<section class="breaking-news-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Breaking News Widget -->
+                <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
+                    <div class="title pe-auto ps-auto">
+                        <h6>Bài viết mới</h6>
+                    </div>
+                    <div id="breakingNewsTicker" class="ticker">
+                        <ul>
+                            {{log breaking_post}}
+                            {{#each breaking_post}}
+                            <li>
+                                <a href="/post/{{this.slug}}">
+                                    {{this.title}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="row all-post-area p-0 m-0">
     <div class = "d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
 
@@ -13,30 +40,21 @@
         </script>
         {{#each all_post}}
             <div class="col-12 col-md-6 p-0 me-auto ms-auto">
-                <div class="single-blog-post style-1 mb-30 animated fadeInUpBig">
-                    <div class="blog-thumbnail bg-overlay">
+                <div class="single-blog-post animated fadeInUpBig style-2 pt-3 pb-2 mb-5 border border-3 border-top-0 border-start-0 border-end-0">
+                    <div class="blog-thumbnail pb-3">
                         {{#if (equal this.image_url '')}}
                             <a>
-                                <img class="" src="/img/default/thumbnail.png" alt="">
+                                <img class="thumbnail-img" src="/img/default/thumbnail.png" alt="">
                             </a>
                         {{else}}
                             <a>
-                                <img class="" src="{{this.image_url}}" alt="">
+                                <img class="thumbnail-img" src="{{this.image_url}}" alt="">
                             </a>
                         {{/if}}
                     </div>
-                    
-                        {{!-- <a href = "/post/{{this.slug}}" > --}}
-                            {{!-- <h4 class="all-single-title"> --}}
-                                {{!-- {{this.title}} --}}
-                            {{!-- </h4> --}}
-                            {{!-- <p class = "post-des"> --}}
-                                {{!-- {{this.description}} --}}
-                            {{!-- </p> --}}
-                        {{!-- </a> --}}
                        
                     <div class="blog-content pe-3">
-                        <a href="{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
+                        <a href="{{this.slug}}" class="post-title d-block m-0" >{{this.title}}</a>
                         <p class="post-des d-none d-sm-block">{{this.description}}</p>
                         <span class="post-date"></span>
                         <script>
@@ -48,6 +66,13 @@
         {{/each}}
     </div>
 </div>
+
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/js/bootstrap/popper.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/plugins.js"></script>
+<script src="/js/active.js"></script>
+
 <script>
     for (element in postTime){
         displayTime("post-date", postTime);

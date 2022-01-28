@@ -3,6 +3,12 @@ const editor = new EditorJS({
     autofocus: true,
     holder: 'content',
     tools: {
+        // PARAGRAPH TOOL
+        paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+        },
+
         // HEADER TOOL
         header: {
             class: Header,
