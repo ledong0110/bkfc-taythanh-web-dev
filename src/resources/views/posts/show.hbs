@@ -1,30 +1,39 @@
 <!-- ##### Breaking News Area Start ##### -->
-{{!-- <section class="breaking-news-area clearfix">
+<section class="breaking-news-area">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <!-- Breaking News Widget -->
                 <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
-                    <div class="title">
-                        <h6>Trending</h6>
+                    <div class="title pe-auto ps-auto">
+                        <h6>Bài viết mới</h6>
                     </div>
                     <div id="breakingNewsTicker" class="ticker">
                         <ul>
-                            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada
-                                    lorem maximus mauris scelerisque, at rutrum nulla dictum.</a></li>
-                            <li><a href="#">Welcome to Colorlib Family.</a></li>
-                            <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada
-                                    lorem maximus mauris scelerisque</a></li>
+                            {{log breaking_post}}
+                            {{#each breaking_post}}
+                            <li>
+                                <a href="/post/{{this.slug}}">
+                                    {{this.title}}
+                                </a>
+                            </li>
+                            {{/each}}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section> --}}
+</section>
+
 <!-- ##### Breaking News Area End ##### -->
 
 <!-- ##### Post Details Title Area Start ##### -->
+<script>
+    var postTime = [];
+    postTime.push("{{post.createdAt}}")
+</script>
+
 {{#if (equal post.image_url '')}}
     <div class="post-details-title-area bg-overlay clearfix" style="background-image: url(/img/default/thumbnail.png)">
 {{else}}
@@ -39,8 +48,8 @@
                     <p class="tag"><span>Bài viết</span></p>
                     <p class="post-title">{{post.title}}</p>
                     <div class="d-flex align-items-center">
-                        <span class="post-date mr-30">{{post.createdAt}}</span>
-                        <span class="post-date">Được đăng bởi {{post.author.name}}</span>
+                        <span class="post-date mr-30"></span>
+                        <span class="author-detail">Được đăng bởi {{post.author.name}}</span>
                     </div>
                 </div>
             </div>
@@ -75,7 +84,7 @@
                 <div class="sidebar-area">
 
                     <!-- Newsletter Widget -->
-                    <div class="single-widget-area newsletter-widget mb-30">
+                    {{!-- <div class="single-widget-area newsletter-widget mb-30">
                         <h4>Subscribe to our newsletter</h4>
                         <form action="#" method="post">
                             <input type="email" name="nl-email" id="nlemail" placeholder="Your E-mail">
@@ -83,91 +92,67 @@
                         </form>
                         <p class="mt-30">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum.
                             Etiam pretium turpis eget nibh . volutpat lobortis.</p>
-                    </div>
+                    </div> --}}
 
                     <!-- Add Widget -->
-                    <div class="single-widget-area add-widget mb-30">
+                    {{!-- <div class="single-widget-area add-widget mb-30">
                         <a href="#">
                             <img src="/img/bg-img/add3.png" alt="">
                         </a>
+                    </div> --}}
+
+                    {{!-- ADVERTISEMENT --}}
+                    <div class = "col-md-12 col-12 ps-3 pe-3 pb-5 order-md-3 order-3"> 
+                        <div class="post-list-title bg-light pb-3">
+                            <p class="p-0 text-center mb-0">Quảng cáo</p>      
+                        </div> 
+                        <a>
+                            <img class="pb-3" src="/img/ads/ad_1.png" alt="">
+                        </a>
                     </div>
 
-                    <!-- Latest News Widget -->
-                    <div class="single-widget-area news-widget mb-30">
-                        <h4>Latest News</h4>
+                    <!-- POPULAR News Widget -->
+                    {{#each all_list}}
+                    {{#if (equal this.name "popular")}}
 
-                        <!-- Single News Area -->
-                        <div class="single-blog-post d-flex style-4 mb-30">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail">
-                                <a href="#"><img src="/img/bg-img/16.jpg" alt=""></a>
+                    <div class="post-list-area border border-1 border-danger border-top-0 border-start-0 border-end-0 mb-5">
+                        <div class="post-list-title bg-light">
+                            <h4 class="ms-auto me-auto mt-auto mb-auto p-2 text-center">Phổ biến</h4>      
+                        </div> 
+                    </div>
+                    <div class="col-12 col-md-12 me-auto ms-auto">
+                        {{#each this.posts_checked_load}}
+                        <script>
+                            postTime.push("{{this.createdAt}}");
+                        </script>
+
+                        <div class="single-blog-post d-flex style-4 mb-5">
+                            <div class="blog-thumbnail pb-1">
+                                {{#if (equal this.image_url '')}}
+                                    <a>
+                                        <img class="thumbnail-img" src="/img/default/thumbnail.png" alt="">
+                                    </a>
+                                {{else}}
+                                    <a>
+                                        <img class="thumbnail-img" src="{{this.image_url}}" alt="">
+                                    </a>
+                                {{/if}}
                             </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <span class="post-date">June 20, 2018</span>
-                                <a href="#" class="post-title">Nearly a quarter have no emergency savings</a>
-                            </div>
-                        </div>
-
-                        <!-- Single News Area -->
-                        <div class="single-blog-post d-flex style-4 mb-30">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail">
-                                <a href="#"><img src="/img/bg-img/17.jpg" alt=""></a>
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <span class="post-date">June 20, 2018</span>
-                                <a href="#" class="post-title">Nearly a quarter have no emergency savings</a>
-                            </div>
-                        </div>
-
-                        <!-- Single News Area -->
-                        <div class="single-blog-post d-flex style-4 mb-30">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail">
-                                <a href="#"><img src="/img/bg-img/18.jpg" alt=""></a>
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <span class="post-date">June 20, 2018</span>
-                                <a href="#" class="post-title">Top bitcoin exchange says over $30 million stolen</a>
+                            
+                            <div class="blog-content blog-content-small">
+                                <a href="/post/{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
+                                {{!-- <p class="post-des d-none d-sm-block">{{this.description}}</p> --}}
+                                <span class="post-date"></span>
                             </div>
                         </div>
+                        {{/each}}
 
-                        <!-- Single News Area -->
-                        <div class="single-blog-post d-flex style-4 mb-30">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail">
-                                <a href="#"><img src="/img/bg-img/19.jpg" alt=""></a>
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <span class="post-date">June 20, 2018</span>
-                                <a href="#" class="post-title">Top bitcoin exchange says over $30 million stolen</a>
-                            </div>
-                        </div>
-
-                        <!-- Single News Area -->
-                        <div class="single-blog-post d-flex style-4 mb-30">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail">
-                                <a href="#"><img src="public/img/bg-img/20.jpg" alt=""></a>
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <span class="post-date">June 20, 2018</span>
-                                <a href="#" class="post-title">Dow falls 287 points as trade war fears escalate</a>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Single Widget Area -->
+                    {{/if}}
+                    {{/each}}
+
+                    {{!-- <!-- Single Widget Area -->
                     <div class="single-widget-area">
 
                         <!-- Single News Area -->
@@ -200,7 +185,7 @@
                                 <a href="#" class="post-author">By Michael Smith</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -211,6 +196,12 @@
 
 
 <!-- ##### All Javascript Script ##### -->
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/js/bootstrap/popper.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/plugins.js"></script>
+<script src="/js/active.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
@@ -234,41 +225,23 @@
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 {{!--
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
+<script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
+
+<script src="/js/post-show.js"></script>
 
 <script>
-    const editor = new EditorJS({
-        autofocus: true,
-        holder: 'editorjs',
-        readOnly: true,
-        tools: {
-            // HEADER TOOL
-            header: {
-                class: Header,
-                inlineToolbar: true,
-                config: {
-                    placeholder: 'Header',
-                    defaultLevel: 5
-                }
-            },
-            // IMAGE TOOL
-            image: SimpleImage,
-            image: {
-                class: SimpleImage,
-                inlineToolbar: true,
-            },
-            // LIST TOOL
-            list: {
-                class: List,
-                inlineToolbar: true,
-            }
-        }
-    });
     editor.isReady
-        .then(() => {
-            console.log('Editor.js is ready to work!')
-            editor.render({{{ json post.content }}})
-           })
-           .catch ((reason) => {
-        console.log(`Editor.js initialization failed because of ${reason}`)
-    });
+    .then(() => {
+        console.log('Editor.js is ready to work!')
+        editor.render({{{ json post.content }}})
+       })
+       .catch ((reason) => {
+    console.log(`Editor.js initialization failed because of ${reason}`)
+});
+</script>
+
+<script>
+    for (element in postTime){
+        displayTime("post-date", postTime);
+    }
 </script>
