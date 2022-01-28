@@ -26,6 +26,8 @@ class PostController {
                     all_list: multipleMongooseToObject(post_list_arr), 
                     breaking_post: breaking_post
                 });
+            })
+    }
 
     all_post(req,res,next){
         console.log("All post");
