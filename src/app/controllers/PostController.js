@@ -124,7 +124,6 @@ class PostController {
             description: req.body.description,
             content: req.body.content,
             image_url: req.body.image_url,
-            author: req.app.locals.user._id
         };
 
         if (newQuery){
