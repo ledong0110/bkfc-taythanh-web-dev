@@ -12,6 +12,7 @@ router.patch(
     isAuthenticated,
     siteController.update_profile,
 );
+router.get('/contact', isAuthenticated, siteController.contact);
 router.get('/login', siteController.login);
 router.get('/login_setting', siteController.login_setting);
 router.get('/logout_setting', siteController.logout_setting);

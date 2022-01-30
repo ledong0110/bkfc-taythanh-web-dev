@@ -33,6 +33,12 @@ class SiteController {
             res.send('Done');
         });
     }
+
+    // [GET] /contact
+    contact(req, res) {
+        res.render('contact');
+    }
+
     // [GET] /login
     login(req, res) {
         req.app.locals.users = null;
