@@ -3913,3 +3913,26 @@ img {
 .modal-lg {
     max-width: 1000px !important;
 }
+
+.drop-down02 .sub-menu02 {
+    position: absolute !important;
+    left: 100%;
+    top: 0;
+}
+
+.drop-down02 .dropdown-toggle {
+    padding: 0.5rem 1.1rem !important;
+}
+
+.dropdown-item {
+    transition-duration: 10ms;
+    &:hover {
+        transition-duration: 10ms;
+    }
+}
+
+@media screen and (max-width: 991.5px) {
+    .drop-down02 .sub-menu02 {
+        position: static !important;
+    }
+}

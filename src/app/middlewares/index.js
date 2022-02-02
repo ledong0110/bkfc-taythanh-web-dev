@@ -42,6 +42,7 @@ function isContentCreator(req, res, next) {
                 ) {
                     return next();
                 } else {
+                    res.status(403);
                     res.send('You are not permitted to access this page !');
                 }
             })
@@ -70,6 +71,7 @@ function isKnownLedgeProvider(req, res, next) {
                 ) {
                     return next();
                 } else {
+                    res.status(403);
                     res.send('You are not permitted to access this page !');
                 }
             })
@@ -93,6 +95,7 @@ function isModerator(req, res, next) {
                 if (req.app.locals.user.admin == 3) {
                     return next();
                 } else {
+                    res.status(403);
                     res.send('You are not permitted to access this page !');
                 }
             })
