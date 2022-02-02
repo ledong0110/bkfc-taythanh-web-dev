@@ -139,7 +139,7 @@ class PostController {
                         });
                 } else {
                     res.status(404);
-                    res.send("Sorry, We can't find your page");
+                    res.render('notFound');
                 }
             })
             .catch(next);

@@ -78,7 +78,7 @@ class SiteController {
     // [GET] /*
     not_found(req, res, next) {
         res.status(404);
-        res.send("Sorry we can't find your page");
+        res.render('notFound');
     }
 }
 
