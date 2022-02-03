@@ -97,7 +97,56 @@
                 </div>
             </div>
         </div>
+        {{#if auth}}
+        <div class="modal fade" id="modalAuth" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-body">
+                Bạn cần đăng nhập trước khi vào trang này
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button class="btn btn-primary" data-bs-target="#modalForm" data-bs-toggle="modal" data-bs-dismiss="modal">Đăng nhập</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        {{/if}}
+
+        {{#if access}}
+        <div class="modal fade" id="modalAccess" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn không được cấp quyền truy cập vào trang này
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok, đã rõ</button>
+                </div>
+                </div>
+            </div>
+        </div>  
+        {{/if}}
+
         <script src="/js/navMultidropdown.js"></script>
+        {{#if auth}}
+        <script>
+            let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAuth')) // Returns a Bootstrap modal instance
+            // Show or hide:
+            modal.show();
+        </script>
+        {{/if}}
+
+        {{#if access}}
+        <script>
+            let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAccess')) // Returns a Bootstrap modal instance
+            // Show or hide:
+            modal.show();
+        </script>
+        {{/if}}
     </nav>
     
     

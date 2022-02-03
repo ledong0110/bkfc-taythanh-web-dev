@@ -8,6 +8,17 @@ const options = {
 };
 function isAuthenticated(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    if (req.flash('auth').length > 0)
+        req.app.locals.auth = true;
+    else
+        req.app.locals.auth = false;
+    
+    if (req.flash('access').length > 0){
+        req.app.locals.access = true;
+    }
+    else
+        req.app.locals.access = false;
+
     if (req.oidc.isAuthenticated()) {
         return User.findOne({ email: req.oidc.user.email })
             .then((user) => {
@@ -25,6 +36,12 @@ function isAuthenticated(req, res, next) {
 
 function isContentCreator(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    
+    if (req.flash('access').length > 0)
+        req.app.locals.access = true;
+    else
+        req.app.locals.access = false;
+
     if (req.oidc.isAuthenticated()) {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
@@ -43,17 +60,27 @@ function isContentCreator(req, res, next) {
                     return next();
                 } else {
                     res.status(403);
-                    res.send('You are not permitted to access this page !');
+                    req.flash('access', '1');
+                    res.redirect('back');
                 }
             })
             .catch(() => {
                 res.redirect('/logout');
             });
-    } else res.send("You haven't logged in yet !");
+    } else {
+        req.flash('auth', '1');
+        res.redirect('back');
+    }
 }
 
 function isKnownLedgeProvider(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+
+    if (req.flash('access').length > 0)
+        req.app.locals.access = true;
+    else
+        req.app.locals.access = false;
+
     if (req.oidc.isAuthenticated()) {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
@@ -72,11 +99,15 @@ function isKnownLedgeProvider(req, res, next) {
                     return next();
                 } else {
                     res.status(403);
-                    res.send('You are not permitted to access this page !');
+                    req.flash('access', '1');
+                    res.redirect('back');
                 }
             })
             .catch(() => res.redirect('/logout'));
-    } else res.send("You haven't logged in yet !");
+    } else {
+        req.flash('auth', '1');
+        res.redirect('back');
+    } 
 }
 
 function isModerator(req, res, next) {
@@ -96,13 +127,18 @@ function isModerator(req, res, next) {
                     return next();
                 } else {
                     res.status(403);
-                    res.send('You are not permitted to access this page !');
+                    req.flash('access', '1');
+                    res.redirect('back');
+                    // res.send('You are not permitted to access this page !');
                 }
             })
             .catch(() => {
                 res.redirect('/logout');
             });
-    } else res.send("You haven't logged in yet !");
+    } else {
+        req.flash('auth', '1');
+        res.redirect('back');
+    }
 }
 
 module.exports = {

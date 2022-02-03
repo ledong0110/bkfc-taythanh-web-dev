@@ -19,7 +19,7 @@ class SiteController {
     //****************************
 
     profile(req, res) {
-        let user_profile = req.app.locals.user;
+        var user_profile = Object.assign({}, req.app.locals.user);
         user_profile.admin = convertRole(user_profile.admin);
         res.render('profile', { user_profile });
     }

@@ -1,5 +1,6 @@
 const path = require('path');
-
+const flash = require('connect-flash');
+const session = require('express-session');
 const express = require('express');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
@@ -36,6 +37,14 @@ const config = {
 
 app.use(auth(config));
 
+
+//connect flash
+app.use(session({
+    secret:'geeksforgeeks',
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(flash());
 //body parser for POST method
 app.use(
     express.urlencoded({
