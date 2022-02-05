@@ -1977,7 +1977,7 @@ img {
   top: 0; }
 
 .drop-down02 .dropdown-toggle {
-  padding: .5rem 1.1rem !important; }
+  padding: 0.5rem 1.1rem !important; }
 
 .dropdown-item {
   transition-duration: 10ms; }
