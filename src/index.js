@@ -23,9 +23,9 @@ const config = {
     baseURL: process.env.PORT
         ? 'https://bkfc-taythanh.herokuapp.com'
         : 'http://localhost:3000',
-    clientID: 'yfaaZnedjIAkRN3Pnj8yccdsw6dLDUuq',
+    clientID: '0Kk6TvIt3u6nMvgUitMcrs8gPmwGqPRy',
     issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
-    secret: '-5YfLejfmuK2TuaaOdElTUn5z6GmKrWrjRBcM5BqP51wKTTWtQBBgmRHtkus1axK',
+    secret: 'moOwr2jQwk1L1R9dJN-2CVpXtGkxUeIIY0vEsQt_6BL5n5QSL0whDjhAAOQ-xSsG',
     routes: {
         login: false,
         postLogoutRedirect: '/logout_setting',
@@ -40,7 +40,7 @@ app.use(auth(config));
 
 //connect flash
 app.use(session({
-    secret:'geeksforgeeks',
+    secret:'flashmessagetaythanhfc',
     saveUninitialized: true,
     resave: true
 }));
