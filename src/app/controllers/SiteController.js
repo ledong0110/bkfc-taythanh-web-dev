@@ -5,7 +5,7 @@ const { convertRole } = require('../../utility/convertRole');
 class SiteController {
     //[GET] /
     home(req, res, next) {
-        res.render('home', { breaking_post: [] });
+        res.redirect("/post");
     }
 
     // [GET] /profile
