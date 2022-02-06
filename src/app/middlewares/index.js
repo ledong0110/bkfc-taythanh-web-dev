@@ -32,6 +32,7 @@ function isAuthenticated(req, res, next) {
 
 function isContentCreator(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    req.app.locals.auth = false;
 
     if (req.flash('access').length > 0) req.app.locals.access = true;
     else req.app.locals.access = false;
@@ -69,6 +70,7 @@ function isContentCreator(req, res, next) {
 
 function isKnownLedgeProvider(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    req.app.locals.auth = false;
 
     if (req.flash('access').length > 0) req.app.locals.access = true;
     else req.app.locals.access = false;
@@ -104,6 +106,8 @@ function isKnownLedgeProvider(req, res, next) {
 
 function isModerator(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    req.app.locals.auth = false;
+    req.app.locals.access = false;
     if (req.oidc.isAuthenticated()) {
         User.findOne({ email: req.oidc.user.email })
             .then((user) => {
