@@ -1,5 +1,6 @@
 const path = require('path');
-
+const flash = require('connect-flash');
+const session = require('express-session');
 const express = require('express');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
@@ -22,9 +23,9 @@ const config = {
     baseURL: process.env.PORT
         ? 'https://bkfc-taythanh.herokuapp.com'
         : 'http://localhost:3000',
-    clientID: 'yfaaZnedjIAkRN3Pnj8yccdsw6dLDUuq',
+    clientID: '0Kk6TvIt3u6nMvgUitMcrs8gPmwGqPRy',
     issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
-    secret: '-5YfLejfmuK2TuaaOdElTUn5z6GmKrWrjRBcM5BqP51wKTTWtQBBgmRHtkus1axK',
+    secret: 'moOwr2jQwk1L1R9dJN-2CVpXtGkxUeIIY0vEsQt_6BL5n5QSL0whDjhAAOQ-xSsG',
     routes: {
         login: false,
         postLogoutRedirect: '/logout_setting',
@@ -36,6 +37,14 @@ const config = {
 
 app.use(auth(config));
 
+
+//connect flash
+app.use(session({
+    secret:'flashmessagetaythanhfc',
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(flash());
 //body parser for POST method
 app.use(
     express.urlencoded({
@@ -60,6 +69,7 @@ app.engine(
             // sum: (a, b) => a + b,
             equal: (a, b) => a == b,
             json: (ob) => JSON.stringify(ob),
+            or: (a, b) => a || b,
         },
     }),
 );

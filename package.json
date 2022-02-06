@@ -13,7 +13,7 @@
   },
   "engines": {
     "npm": ">=8.1.2",
-    "node": "16.13.1"
+    "node": ">=v16.13.1"
   },
   "repository": {
     "type": "git",
@@ -34,9 +34,11 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.22.2",
     "body-parser": "^1.19.1",
+    "connect-flash": "^0.1.1",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-openid-connect": "^2.5.2",
+    "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "mongoose": "^6.1.4",
     "mongoose-delete": "^0.5.4",

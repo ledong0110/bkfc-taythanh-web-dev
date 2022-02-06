@@ -27,7 +27,8 @@
 </section>
 
 <!-- ##### Breaking News Area End ##### -->
-
+<div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1" nonce="fBzCKsJJ"></script>
 <!-- ##### Post Details Title Area Start ##### -->
 <script>
     var postTime = [];
@@ -66,6 +67,10 @@
             <!-- Post Details Content Area -->
             <div class="col-12 col-lg-8">
                 <div id="editorjs" class="post-details-content mb-100"></div>
+                <!--Facebook share-->
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1" nonce="3e9seKEL"></script>
+                <div class="fb-share-button" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
                  <!-- Comment Area Start -->
                 <div class="clearfix mb-100">
                     <h4 class="mb-50">Comments</h4>
@@ -75,7 +80,7 @@
                     <script async defer crossorigin="anonymous"
                         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1"
                         nonce="nnUvxyJ6"></script>
-                    <div class="fb-comments d-flex" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-width="500" data-numposts="5"></div>
+                    <div class="fb-comments d-flex" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-adapt-container-width="true"  data-hide-cover="false" data-width="500" data-numposts="5"></div>
                 </div>
             </div>
 
@@ -151,7 +156,7 @@
 
                     {{/if}}
                     {{/each}}
-
+                    
                     {{!-- <!-- Single Widget Area -->
                     <div class="single-widget-area">
 
@@ -187,6 +192,9 @@
                         </div>
                     </div> --}}
 
+                    <div class="col-12 col-md-12 me-auto ms-auto">
+                        <div class="fb-page single-blog-post d-flex style-4 mb-5" data-href="https://www.facebook.com/BKFCTayThanh" data-tabs="" data-width="440" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/BKFCTayThanh" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/BKFCTayThanh">BK FC - THPT Tây Thạnh, TP.HCM</a></blockquote></div>
+                    </div>
                 </div>
             </div>
         </div>

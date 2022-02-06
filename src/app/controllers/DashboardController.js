@@ -20,7 +20,8 @@ class DashboardController {
             })
             .then((users) => {
                 res.render('dashboard/user_manage', {
-                    users        
+                    users,
+                    message: req.flash('message')[0]        
                 })  
             })
                 // console.log(multipleMongooseToObject(users));
@@ -30,8 +31,24 @@ class DashboardController {
 
     user_edit(req,res,next) {
         User.updateOne({ _id: req.params.id }, req.body)
-                    .then(() => res.redirect('back'))
-                    .catch(next);
+                    .then(() => {
+                        req.flash(
+                            'message', {
+                                type: 'success',
+                                message: 'Cập nhật thành công'
+                            }
+                        )
+                        res.redirect('back')
+                    })
+                    .catch((err) => {
+                        req.flash(
+                            'message', {
+                                type: 'danger',
+                                message: 'Có lỗi gì rồi, hỏi mấy cha dev thử'
+                            }
+                        )
+                        res.redirect('back')
+                    });
     }
 
     manage_post(req,res,next){
