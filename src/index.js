@@ -21,7 +21,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     baseURL: process.env.PORT
-        ? 'https://bkfc-taythanh.herokuapp.com'
+        ? 'https://bkfctaythanh.site'
         : 'http://localhost:3000',
     clientID: '0Kk6TvIt3u6nMvgUitMcrs8gPmwGqPRy',
     issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
