@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -20,12 +21,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 const config = {
     authRequired: false,
     auth0Logout: true,
-    baseURL: process.env.PORT
-        ? 'https://bkfc-taythanh.herokuapp.com'
-        : 'http://localhost:3000',
-    clientID: '0Kk6TvIt3u6nMvgUitMcrs8gPmwGqPRy',
-    issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
-    secret: 'moOwr2jQwk1L1R9dJN-2CVpXtGkxUeIIY0vEsQt_6BL5n5QSL0whDjhAAOQ-xSsG',
+    baseURL: process.env.baseURL,
+    clientID: process.env.clientID,
+    issuerBaseURL: process.env.issuerBaseURL,
+    secret: process.env.secret,
     routes: {
         login: false,
         postLogoutRedirect: '/logout_setting',
@@ -37,13 +36,14 @@ const config = {
 
 app.use(auth(config));
 
-
 //connect flash
-app.use(session({
-    secret:'flashmessagetaythanhfc',
-    saveUninitialized: true,
-    resave: true
-}));
+app.use(
+    session({
+        secret: 'flashmessagetaythanhfc',
+        saveUninitialized: true,
+        resave: true,
+    }),
+);
 app.use(flash());
 //body parser for POST method
 app.use(
