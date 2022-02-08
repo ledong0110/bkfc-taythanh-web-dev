@@ -1,4 +1,6 @@
-<section class="breaking-news-area">
+
+    <!-- ##### Breaking News Area Start ##### -->
+    <section class="breaking-news-area">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -9,7 +11,7 @@
                     </div>
                     <div id="breakingNewsTicker" class="ticker">
                         <ul>
-                            {{log breaking_post}}
+                            
                             {{#each breaking_post}}
                             <li>
                                 <a href="/post/{{this.slug}}">
@@ -23,58 +25,404 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
+    <!-- ##### Breaking News Area End ##### -->
+    <!-- ##### Intro News Area Start ##### -->
+    <script>
+        var postTime = [];
+    </script>
+    <section class="intro-news-area section-padding-100-0 mb-70">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Intro News Tabs Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="intro-news-tab">
 
-<div class="row all-post-area p-0 m-0">
-    <div class = "d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+                        <!-- Intro News Filter -->
+                        <div class="intro-news-filter d-flex justify-content-between">
+                            <h6>Tất cả bài viết</h6>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav1" data-bs-toggle="tab" href="#nav-1" role="tab" aria-controls="nav-1" aria-selected="true">Hot</a>
+                                    <a class="nav-item nav-link" id="nav2" data-bs-toggle="tab" href="#nav-2" role="tab" aria-controls="nav-2" aria-selected="false">Phổ biến</a>
+                                    <a class="nav-item nav-link" id="nav3" data-bs-toggle="tab" href="#nav-3" role="tab" aria-controls="nav-3" aria-selected="false">Tuyển sinh</a>
+                                    <a class="nav-item nav-link" id="nav4" data-bs-toggle="tab" href="#nav-4" role="tab" aria-controls="nav-4" aria-selected="false">Mới nhất</a>
+                                </div>
+                            </nav>
+                        </div>
 
-        <h4 class="mb-3 mt-3">
-            Tất cả bài viết
-        </h4>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav1">
+                                <div class="row">
+                                    <!-- Single News Area -->
+                                    <div class="col-12">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="/post/{{hot.0.slug}}"><img width='1200' height='626' src="{{hot.0.image_url}}" alt=""></a>
+                                            </div>
 
-    </div>
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date"></span>
+                                                <a href="/post/{{hot.0.slug}}" class="post-title">{{hot.0.title}}</a>
+                                                <a href="/post/{{hot.0.slug}}" class="post-author mb-30">{{hot.0.author.name}}</a>
+                                                <p>{{hot.0.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        postTime.push("{{hot.0.createdAt}}");
+                                    </script>
+                                    {{#each hot}}
+                                    <!-- Single News Area -->
+                                    {{#unless @first}}
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="/post/{{this.slug}}"><img width='600' height='410' src="{{this.image_url}}" alt=""></a>
+                                            </div>
 
-    <div class = "row post-area d-block ps-5 pe-5 container-fluid">
-        <script>
-            var postTime = [];
-        </script>
-        {{#each all_post}}
-            <div class="col-12 col-md-6 p-0 me-auto ms-auto">
-                <div class="single-blog-post animated fadeInUpBig style-2 pt-3 pb-2 mb-5 border border-3 border-top-0 border-start-0 border-end-0">
-                    <div class="blog-thumbnail pb-3">
-                        {{#if (equal this.image_url '')}}
-                            <a>
-                                <img class="thumbnail-img" src="/img/default/thumbnail.png" alt="">
-                            </a>
-                        {{else}}
-                            <a>
-                                <img class="thumbnail-img" src="{{this.image_url}}" alt="">
-                            </a>
-                        {{/if}}
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date"></span>
+                                                <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav2">
+                                <div class="row">
+                                    <!-- Single News Area -->
+                                    <div class="col-12">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{phobien.0.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date"></span>
+                                                <a href="{{phobien.0.slug}}" class="post-title">{{phobien.0.title}}</a>
+                                                <a href="{{phobien.0.slug}}" class="post-author mb-30">{{phobien.0.author.name}}</a>
+                                                <p>{{phobien.0.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        postTime.push("{{phobien.0.createdAt}}");
+                                    </script>
+                                    {{#each phobien}}
+                                    <!-- Single News Area -->
+                                    {{#unless @first}}
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{this.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date">{{this.createdAt}}</span>
+                                                <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav3">
+                                <div class="row">
+                                    <!-- Single News Area -->
+                                    <div class="col-12">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{tuyensinh.0.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date">{{tuyensinh.0.createdAt}}</span>
+                                                <a href="{{tuyensinh.0.slug}}" class="post-title">{{phobien.0.title}}</a>
+                                                <a href="{{tuyensinh.0.slug}}" class="post-author mb-30">{{phobien.0.author.name}}</a>
+                                                <p>{{tuyensinh.0.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        postTime.push("{{tuyensinh.0.createdAt}}");
+                                    </script>
+                                    {{#each tuyensinh}}
+                                    <!-- Single News Area -->
+                                    {{#unless @first}}
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{this.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date">{{this.createdAt}}</span>
+                                                <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav4">
+                                <div class="row">
+                                    <!-- Single News Area -->
+                                    <div class="col-12">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{moinhat.0.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date"></span>
+                                                <a href="{{moinhat.0.slug}}" class="post-title">{{moinhat.0.title}}</a>
+                                                <a href="{{moinhat.0.slug}}" class="post-author mb-30">{{moinhat.0.author.name}}</a>
+                                                <p>{{moinhat.0.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        postTime.push("{{moinhat.0.createdAt}}");
+                                    </script>
+                                    {{#each moinhat}}
+                                    <!-- Single News Area -->
+                                    {{#unless @first}}
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="single-blog-post style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{this.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date"></span>
+                                                <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                       
-                    <div class="blog-content pe-3">
-                        <a href="{{this.slug}}" class="post-title d-block m-0" >{{this.title}}</a>
-                        <p class="post-des d-none d-sm-block">{{this.description}}</p>
-                        <span class="post-date"></span>
-                        <script>
-                            postTime.push("{{this.createdAt}}");
-                        </script>
+                </div>
+
+                <!-- Sidebar Widget -->
+                <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                    <div class="sidebar-area">
+
+                        <!-- Newsletter Widget -->
+                        <div class="single-widget-area add-widget mb-30">
+                            <a><img class="pb-3" src="/img/ads/ad_d_2.png" alt=""></a>
+                        </div>
+
+                        <!-- Add Widget -->
+                        <div class="single-widget-area add-widget mb-30">
+                            <a href="#">
+                                <img src="img/ads/ad_d_2.png" alt="">
+                            </a>
+                        </div>
+
+                        <!-- Latest News Widget -->
+                        <div class="single-widget-area news-widget mb-30">
+                            <h4>Latest News</h4>
+                            {{#each latestNews}}
+                            <!-- Single News Area -->
+                            <div class="single-blog-post d-flex style-4 mb-30">
+                                <!-- Blog Thumbnail -->
+                                <div class="blog-thumbnail">
+                                    <a href="/post/{{this.slug}}"><img src="{{this.image_url}}" alt=""></a>
+                                </div>
+
+                                <!-- Blog Content -->
+                                <div class="blog-content">
+                                    <span class="post-date"></span>
+                                    <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                </div>
+                            </div>
+                            <script>
+                                postTime.push("{{this.createdAt}}");
+                            </script>
+                            {{/each}}
+                        </div>
+
                     </div>
                 </div>
             </div>
-        {{/each}}
-    </div>
-</div>
+        </div>
+    </section>
+    <!-- ##### Intro News Area End ##### -->
 
-<script src="/js/jquery/jquery-2.2.4.min.js"></script>
-<script src="/js/bootstrap/popper.min.js"></script>
-<script src="/js/bootstrap/bootstrap.min.js"></script>
-<script src="/js/plugins/plugins.js"></script>
-<script src="/js/active.js"></script>
+    <!-- ##### Add Area Start ##### -->
+    <div class="big-add-area">
+        <div class="container-fluid">
+            <a href="#"><img src="/img/ads/ad_d_1.png" alt=""></a>
+        </div>
+    </div>
+    <!-- ##### Add Area End ##### -->
+
+    <!-- ##### News Area Start ##### -->
+    <div class="news-area section-padding-100-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-9">
+                    <div id="post"></div>
+                    <div class="mt-3" style="justify-content: flex-end; display: flex;">
+                        <button class="btn btn-secondary" id="loadmore" type="button" onclick="getData();">Xem thêm</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/4qURtrx1rwU/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v=4qURtrx1rwU" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <div class="blog-content">
+                            <span class="post-date">June 20, 2018</span>
+                            <p class="post-title">Viral Video</p>
+                        </div>
+                    </div>
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/_9ptGWjypco/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v=_9ptGWjypco" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <div class="blog-content">
+                            <span class="post-date">June 20, 2018</span>
+                            <p class="post-title">Viral Video</p>
+                        </div>
+                    </div>
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/tvIpnOzihus/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v=tvIpnOzihus" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <div class="blog-content">
+                            <span class="post-date">June 20, 2018</span>
+                            <p class="post-title">Viral Video</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### News Area End ##### -->
+
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/bootstrap/popper.min.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/plugins/plugins.js"></script>
+<script src="js/active.js"></script>
 
 <script>
     for (element in postTime){
         displayTime("post-date", postTime);
     }
+</script>
+<script>
+    var startFrom = 0;
+    var limit = 3;
+    const options = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour12: false,
+        hour: '2-digit', 
+        minute: '2-digit',
+    };
+    function getData() {
+        console.log('yes');
+        $.ajax({
+                url: "/post/all/loadmore",
+				method: "POST",  
+                data: {startFrom},
+                success: (response) => (handleData(response)),
+                    
+                    
+                }
+        )
+    }
+
+    function handleData(data)
+    {
+        startFrom += limit;
+        if (!data.length)
+            $('#loadmore').hide(); 
+        else {
+            var html = "";
+            for (var a = 0; a < data.length; a++) {
+                html += `<div class="single-blog-post d-flex flex-wrap style-5 mb-30">
+                    <div class="blog-thumbnail">
+                        <a href="#"><img height="200px" src="${data[a].image_url}" alt=""></a>
+                    </div>
+
+                    <div class="blog-content">
+                        <span class="post-date">${new Date(data[a].createdAt).toLocaleDateString('vi-Vi', options)}</span>
+                        <a href="#" class="post-title">${data[a].title}</a>
+                        <a href="#" class="post-author">${data[a].author.name}</a>
+                        <p>${data[a].description}</p>
+                    </div>
+                </div>`
+            }
+            document.getElementById("post").innerHTML += html;
+        }
+    } 
+    
+$(document).ready(function(){
+    getData();
+});
 </script>

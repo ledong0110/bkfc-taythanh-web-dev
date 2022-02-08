@@ -65,12 +65,7 @@ app.engine(
         extname: '.hbs',
         defaultLayout: 'main',
         layoutsDir: './src/resources/views/layouts',
-        helpers: {
-            // sum: (a, b) => a + b,
-            equal: (a, b) => a == b,
-            json: (ob) => JSON.stringify(ob),
-            or: (a, b) => a || b,
-        },
+        helpers: require('./utility/helpers')
     }),
 );
 // engine.registerHelper('equal', function(lvalue, rvalue, options) {
