@@ -134,7 +134,7 @@ body {
   padding-bottom: 18rem;
   text-align: center;
   background-origin: padding-box;
-  background-color: rgba(0, 0, 0, 0.15); }
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .home-bg {
   background: url("/img/default/thumbnail.png");
@@ -148,19 +148,19 @@ body {
   bottom: 20%; }
 
 .home-header .h1-large {
-  color: #F7394A;
+  color: white;
   position: relative;
   left: 10%;
   bottom: 45%;
   font-size: 72pt;
   line-height: 100px;
   text-align: left;
-  -webkit-text-stroke: #e6e6e6 0.75px; }
+  -webkit-text-stroke: #F7394A 2px; }
 
 .btn-solid-lg {
   display: inline-block;
   padding: 1.625rem 2.625rem 1.625rem 2.625rem;
-  border: 1px solid #dc3545;
+  border: 1px solid #dc3556;
   border-radius: 4px;
   background-color: #dc3545;
   color: #ffffff;
@@ -176,6 +176,10 @@ body {
   margin-bottom: 1.375rem;
   font-size: 14pt; }
 
+.home-header .btn-solid-lg:hover {
+  color: white;
+  border-color: white; }
+
 .btn-outline-lg {
   display: inline-block;
   padding: 1.625rem 2.625rem 1.625rem 2.625rem;
@@ -190,8 +194,8 @@ body {
 .home-header .btn-outline-lg {
   padding: 30px 45px 30px 45px;
   font-size: 14pt;
-  border-color: #404040;
-  color: #404040; }
+  border-color: white;
+  color: white; }
 
 .home-header .btn-outline-lg:hover {
   background-color: #dc3545;
