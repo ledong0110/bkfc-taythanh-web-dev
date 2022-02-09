@@ -8,9 +8,8 @@ const { convertRole, getRandom } = require('../../utility/support');
 class SiteController {
     //[GET] /
     home(req, res, next) {
-        res.render('home')
-        
         // res.redirect("/post");
+        res.render("home");
     }
 
     // [GET] /profile
