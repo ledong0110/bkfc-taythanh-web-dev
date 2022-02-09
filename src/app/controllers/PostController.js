@@ -5,6 +5,7 @@ const {
     multipleMongooseToObject,
     mongooseToObject,
 } = require('../../utility/mongoose');
+const { convertRole, getRandom } = require('../../utility/support');
 
 class PostController {
     post_home(req, res, next) {
@@ -37,25 +38,48 @@ class PostController {
     }
 
     all_post(req, res, next) {
-        console.log('All post');
-        Post.find()
-            .sort({ createdAt: -1 })
-            .then((result) => {
-                console.log('All blog:', result);
+        Promise.all([
+            Post.find({})
+                .select({ _id: 0, content: 0, updatedAt: 0, deleted: 0 })
+                .populate('author', 'name')
+                .sort({ createdAt: -1 })
+                .limit(10),
+            Post_special_list.find()
+                .sort({ name: -1 })
+                .populate({
+                    path: 'posts_checked_load',
+                    options: {
+                        sort: { createdAt: -1 },
+                        populate: {
+                            path: 'author',
+                            select: {_id: 0, name: 1}
+                        }
+                    },
+                    select: { _id: 0, content: 0, views: 0, updatedAt: 0, deleted: 0 },
+                })
+        ])
+            .then(([posts, post_list_arr]) => {
                 var breaking_post = [];
                 for (let i = 0; i < 3; i++) {
-                    if (result[i] != undefined) {
-                        breaking_post.push(mongooseToObject(result[i]));
+                    if (post_list_arr[0].posts_checked_load[i] != undefined) {
+                        breaking_post.push(
+                            mongooseToObject(
+                                post_list_arr[0].posts_checked_load[i],
+                            ),
+                        );
                     }
                 }
-                res.render('posts/post-all', {
-                    all_post: multipleMongooseToObject(result),
-                    breaking_post: breaking_post,
+                posts = multipleMongooseToObject(posts);
+                res.render('posts/post-all',{
+                    hot: breaking_post,
+                    phobien: posts.concat().sort((a, b) => Number(b.views) - Number(a.views)).slice(0,5),
+                    tuyensinh: posts.slice(0, 5),
+                    moinhat: posts.slice(0, 5),
+                    latestNews: getRandom(posts, 5),
+                    viral_video: 1,
+                    breaking_post,
                 });
-            })
-            .catch((err) => {
-                res.render('posts/post-all', { all_post: null });
-            });
+        })
     }
 
     create(req, res, next) {
@@ -266,6 +290,21 @@ class PostController {
                 res.append('Signal', 0);
                 res.send('Failed');
             });
+    }
+
+    //[POST] /post/all/loadmore
+    post_loadmore(req, res, next) {
+        var limit = 3;
+        var startFrom = parseInt(req.body.startFrom);
+        Post.find({})
+                .select({ _id: 0, content: 0, updatedAt: 0, deleted: 0 })
+                .populate('author', 'name')
+                .sort({ createdAt: -1 })
+                .skip(startFrom)
+                .limit(limit)
+                .then((posts) => {
+                    res.json(multipleMongooseToObject(posts));
+                })
     }
 }
 

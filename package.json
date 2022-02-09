@@ -8,12 +8,11 @@
     "dev": "nodemon --inspect src/index.js",
     "beautify": "lint-staged",
     "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "npm": ">=8.1.2",
-    "node": ">=v16.13.1"
+    "npm": ">=8.0.0",
+    "node": ">=v16.0.0"
   },
   "repository": {
     "type": "git",
@@ -35,6 +34,7 @@
     "@editorjs/editorjs": "^2.22.2",
     "body-parser": "^1.19.1",
     "connect-flash": "^0.1.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "express-openid-connect": "^2.5.2",

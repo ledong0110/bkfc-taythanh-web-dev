@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -6,7 +7,7 @@ const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const { auth } = require('express-openid-connect');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 const route = require('./routes');
 const db = require('./config/db');
@@ -20,12 +21,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 const config = {
     authRequired: false,
     auth0Logout: true,
-    baseURL: process.env.PORT
-        ? 'https://bkfc-taythanh.herokuapp.com'
-        : 'http://localhost:3000',
-    clientID: '0Kk6TvIt3u6nMvgUitMcrs8gPmwGqPRy',
-    issuerBaseURL: 'https://dev-4kc217q2.us.auth0.com',
-    secret: 'moOwr2jQwk1L1R9dJN-2CVpXtGkxUeIIY0vEsQt_6BL5n5QSL0whDjhAAOQ-xSsG',
+    baseURL: process.env.baseURL,
+    clientID: process.env.clientID,
+    issuerBaseURL: process.env.issuerBaseURL,
+    secret: process.env.secret,
     routes: {
         login: false,
         postLogoutRedirect: '/logout_setting',
@@ -37,13 +36,14 @@ const config = {
 
 app.use(auth(config));
 
-
 //connect flash
-app.use(session({
-    secret:'flashmessagetaythanhfc',
-    saveUninitialized: true,
-    resave: true
-}));
+app.use(
+    session({
+        secret: 'flashmessagetaythanhfc',
+        saveUninitialized: true,
+        resave: true,
+    }),
+);
 app.use(flash());
 //body parser for POST method
 app.use(
@@ -65,12 +65,7 @@ app.engine(
         extname: '.hbs',
         defaultLayout: 'main',
         layoutsDir: './src/resources/views/layouts',
-        helpers: {
-            // sum: (a, b) => a + b,
-            equal: (a, b) => a == b,
-            json: (ob) => JSON.stringify(ob),
-            or: (a, b) => a || b,
-        },
+        helpers: require('./utility/helpers')
     }),
 );
 // engine.registerHelper('equal', function(lvalue, rvalue, options) {

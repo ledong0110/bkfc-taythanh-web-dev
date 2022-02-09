@@ -2,7 +2,7 @@ const Post = require('../models/Post');
 const Post_special_list = require('../models/Post-special-list');
 const User = require('../models/User');
 
-const { convertRole } = require('../../utility/convertRole');
+const { convertRole } = require('../../utility/support');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
 
 class DashboardController {

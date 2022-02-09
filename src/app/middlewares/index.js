@@ -23,7 +23,6 @@ function isAuthenticated(req, res, next) {
                 req.app.locals.user.gg_img = req.oidc.user.picture;
                 req.app.locals.user.createdAt =
                     user.createdAt.toLocaleDateString('vi-Vi', options);
-                // console.log(req.app.locals.user);
             })
             .then(() => next())
             .catch(() => res.redirect('/logout'));

@@ -10,6 +10,7 @@ router.get('/', isAuthenticated, postController.post_home);
 router.get('/create', isContentCreator,postController.create);
 router.post('/create', isContentCreator, postController.create_post);
 router.get('/all', isAuthenticated, postController.all_post);
+router.post('/all/loadmore', isAuthenticated, postController.post_loadmore);
 router.delete('/force-delete', isContentCreator, postController.post_force_delete);
 router.get('/my-post', isContentCreator, postController.my_post);
 router.get('/my-post-bin', isContentCreator, postController.my_post_bin);
