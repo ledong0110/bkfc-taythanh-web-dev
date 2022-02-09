@@ -9,6 +9,96 @@
 body {
   padding-bottom: 100px; }
 
+/***********************/
+/*     Home-Header     */
+/***********************/
+.home-header {
+  padding-top: 22rem;
+  padding-bottom: 18rem;
+  text-align: center;
+  background-origin: padding-box;
+  background-color: rgba(0, 0, 0, 0.15); }
+
+.home-bg {
+  background: url("/img/default/thumbnail.png");
+  background-size: contain;
+  background-attachment: fixed;
+  background-position-y: 600%;
+  background-repeat: no-repeat; }
+
+.home-header .button-container {
+  position: relative;
+  bottom: 20%; }
+
+.home-header .h1-large {
+  color: #F7394A;
+  position: relative;
+  left: 10%;
+  bottom: 45%;
+  font-size: 72pt;
+  line-height: 100px;
+  text-align: left;
+  -webkit-text-stroke: #e6e6e6 0.75px; }
+
+.btn-solid-lg {
+  display: inline-block;
+  padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  background-color: #dc3545;
+  color: #ffffff;
+  line-height: 0;
+  text-decoration: none;
+  transition: all 0.2s; }
+
+.btn-solid-lg:hover {
+  background-color: rgba(0, 0, 0, 0); }
+
+.home-header .btn-solid-lg {
+  padding: 30px 45px 30px 45px;
+  margin-bottom: 1.375rem;
+  font-size: 14pt; }
+
+.btn-outline-lg {
+  display: inline-block;
+  padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+  border: 1px solid #2b2b4f;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #2b2b4f;
+  line-height: 0;
+  text-decoration: none;
+  transition: all 0.2s; }
+
+.home-header .btn-outline-lg {
+  padding: 30px 45px 30px 45px;
+  font-size: 14pt;
+  border-color: #404040;
+  color: #404040; }
+
+.home-header .btn-outline-lg:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545; }
+
+/****************************/
+/*     Home-Introduction    */
+/****************************/
+.basic-1 {
+  padding-top: 9.5rem;
+  padding-bottom: 9rem;
+  background-color: #59171D; }
+
+.basic-1 h1 {
+  margin-bottom: 2.5rem;
+  color: #FFDEDE; }
+
+.basic-1 p {
+  color: white; }
+
+/***********************/
+/*     Home-Contact   */
+/***********************/
 .codex-editor__redactor {
   padding-bottom: 50px !important; }
 
