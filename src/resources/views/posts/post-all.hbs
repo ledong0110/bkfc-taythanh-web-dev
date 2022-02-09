@@ -11,7 +11,6 @@
                     </div>
                     <div id="breakingNewsTicker" class="ticker">
                         <ul>
-                            
                             {{#each breaking_post}}
                             <li>
                                 <a href="/post/{{this.slug}}">
@@ -39,7 +38,7 @@
                     <div class="intro-news-tab">
 
                         <!-- Intro News Filter -->
-                        <div class="intro-news-filter d-flex justify-content-between">
+                        <div class="intro-news-filter d-flex justify-content-between animated fadeInUpBig">
                             <h6>Tất cả bài viết</h6>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -56,7 +55,7 @@
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="/post/{{hot.0.slug}}"><img width='1200' height='626' src="{{hot.0.image_url}}" alt=""></a>
@@ -81,7 +80,7 @@
                                         postTime.push("{{this.createdAt}}");
                                     </script>
                                     <div class="col-12 col-sm-6">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="/post/{{this.slug}}"><img width='600' height='410' src="{{this.image_url}}" alt=""></a>
@@ -104,7 +103,7 @@
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{phobien.0.image_url}}" alt=""></a>
@@ -129,7 +128,7 @@
                                         postTime.push("{{this.createdAt}}");
                                     </script>
                                     <div class="col-12 col-sm-6">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{this.image_url}}" alt=""></a>
@@ -152,7 +151,7 @@
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{tuyensinh.0.image_url}}" alt=""></a>
@@ -177,7 +176,7 @@
                                         postTime.push("{{this.createdAt}}");
                                     </script>
                                     <div class="col-12 col-sm-6">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{this.image_url}}" alt=""></a>
@@ -200,7 +199,7 @@
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{moinhat.0.image_url}}" alt=""></a>
@@ -225,7 +224,7 @@
                                         postTime.push("{{this.createdAt}}");
                                     </script>
                                     <div class="col-12 col-sm-6">
-                                        <div class="single-blog-post style-2 mb-5">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
                                             <!-- Blog Thumbnail -->
                                             <div class="blog-thumbnail">
                                                 <a href="#"><img src="{{this.image_url}}" alt=""></a>
@@ -268,7 +267,7 @@
                             <h4>Latest News</h4>
                             {{#each latestNews}}
                             <!-- Single News Area -->
-                            <div class="single-blog-post d-flex style-4 mb-30">
+                            <div class="single-blog-post animated fadeInUpBig d-flex style-4 mb-30">
                                 <!-- Blog Thumbnail -->
                                 <div class="blog-thumbnail">
                                     <a href="/post/{{this.slug}}"><img src="{{this.image_url}}" alt=""></a>
@@ -307,8 +306,11 @@
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
                     <div id="post"></div>
-                    <div class="mt-3" style="justify-content: flex-end; display: flex;">
-                        <button class="btn btn-secondary" id="loadmore" type="button" onclick="getData();">Xem thêm</button>
+                    <div class="mt-3 mb-5 d-flex justify-content-center">
+                        <div class="loader hide"></div>
+                    </div>
+                    <div class="mt-3 mb-5 d-flex justify-content-end">
+                        <button class="newsbox-btn btn-2 animated fadeIn" id="loadmore" type="button" onclick="getData();">Xem thêm</button>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3">
@@ -362,11 +364,11 @@
     </div>
     <!-- ##### News Area End ##### -->
 
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<script src="js/bootstrap/popper.min.js"></script>
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/plugins/plugins.js"></script>
-<script src="js/active.js"></script>
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/js/bootstrap/popper.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/plugins.js"></script>
+<script src="/js/active.js"></script>
 
 <script>
     for (element in postTime){
@@ -385,7 +387,8 @@
         minute: '2-digit',
     };
     function getData() {
-        console.log('yes');
+        $('.loader').show();
+        $('#loadmore').addClass('fadeOut');
         $.ajax({
                 url: "/post/all/loadmore",
 				method: "POST",  
@@ -405,7 +408,7 @@
         else {
             var html = "";
             for (var a = 0; a < data.length; a++) {
-                html += `<div class="single-blog-post d-flex flex-wrap style-5 mb-30">
+                html += `<div class="single-blog-post animated fadeInUpBig d-flex flex-wrap style-5 mb-30">
                     <div class="blog-thumbnail">
                         <a href="#"><img height="200px" src="${data[a].image_url}" alt=""></a>
                     </div>
@@ -419,7 +422,12 @@
                 </div>`
             }
             document.getElementById("post").innerHTML += html;
+            setTimeout(function(){
+                $('#post .single-blog-post').removeClass('animated fadeInUpBig')
+                $('#loadmore').removeClass('fadeOut');
+            },1000)
         }
+        $('.loader').hide();
     } 
     
 $(document).ready(function(){
