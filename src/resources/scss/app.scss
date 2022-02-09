@@ -98,8 +98,7 @@ body {
 .home-header{
     padding-top: 22rem;
 	padding-bottom: 18rem;
-	text-align: center;
-    background-origin: padding-box;
+	text-align: left;
     // background-image:linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0, 0.20));
     // background-image:linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
     background-color: rgba(0,0,0, 0.5);
@@ -117,17 +116,42 @@ body {
 .home-header .button-container {
     position: relative;
     bottom: 20%;
+    left: 10%;
 }
 
 .home-header .h1-large {
     color: white;
     position: relative;
-    left: 10%;
+    left: 25%;
     bottom: 45%;
 	font-size: 72pt;
-	line-height: 100px;
+	line-height: 120px;
     text-align: left;
     -webkit-text-stroke: #F7394A 2px;
+}
+
+@media only screen and (max-width: 767px) {
+    .home-bg{
+        background-position-y: 20%;
+        background-repeat: repeat-y;
+    }
+
+    .home-header .h1-large {
+	    font-size: 52pt;
+	    line-height: 80px;
+        text-align: center;
+        left: 0%;
+    }
+
+    .home-header .button-container {
+        left: 0%;
+    }
+
+    .home-header{
+        padding-top: 15rem;
+        padding-bottom: 15rem;
+        text-align:center;
+    }
 }
 
 .btn-solid-lg {
@@ -207,6 +231,12 @@ body {
     color: white;
 }
 
+@media only screen and (max-width: 767px) {
+    .basic-1 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
 // END HOME INTRO
 
 /***********************/
@@ -978,7 +1008,7 @@ img {
 }
 .footer-area .footer-logo a {
     display: inline-block;
-    background-color: #ffffff;
+    background: transparent;
     padding: 0 10px;
 }
 .footer-area .footer-logo::after {
