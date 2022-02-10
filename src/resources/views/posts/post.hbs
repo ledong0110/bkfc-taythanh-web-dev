@@ -145,6 +145,15 @@
 <script src="/js/active.js"></script>
 
 <script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>
+
+<script>
     for (element in postTime){
         displayTime("post-date", postTime);
     }

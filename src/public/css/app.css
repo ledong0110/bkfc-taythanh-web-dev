@@ -6,6 +6,7 @@
 @import url("/css/owl.carousel.min.css");
 @import url("/css/animate.css");
 @import url("/css/magnific-popup.css");
+/* Dong Custom**********************************************************/
 .user-avatar {
   width: 28px;
   height: 28px;
@@ -123,6 +124,14 @@
   100% {
     transform: rotate(360deg); } }
 
+.bg-transparent.navbar-dark .nav-link, .bg-transparent.navbar-dark .nav-item {
+  color: #fff; }
+  .bg-transparent.navbar-dark .nav-link:hover, .bg-transparent.navbar-dark .nav-item:hover {
+    color: #f3f3f3c2; }
+
+/* Dong Custom End**********************************************************/
+/* Khoa Custom**************************************************************/
+/* Khoa Custom End**********************************************************/
 body {
   padding-bottom: 100px; }
 
@@ -140,7 +149,7 @@ body {
   background: url("/img/default/thumbnail.png");
   background-size: contain;
   background-attachment: fixed;
-  background-position-y: 600%;
+  background-position-y: 400%;
   background-repeat: no-repeat; }
 
 .home-header .button-container {

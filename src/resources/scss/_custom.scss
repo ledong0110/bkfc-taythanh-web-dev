@@ -1,4 +1,5 @@
-//Self-config
+/* Dong Custom**********************************************************/
+//Avatar
 .user-avatar {
     width: 28px;
     height: 28px;
@@ -11,7 +12,7 @@
     min-width: 10px;
     min-height: 10px;
 }
-//Button in userpage
+//Button in user manage
 .btn {
     &.btn-edit {
         &:hover {
@@ -29,7 +30,7 @@
         }
     }
 }
-
+//Profile page
 .profilepic {
     position: relative;
     width: 150px;
@@ -106,6 +107,7 @@
     max-width: 1000px !important;
 }
 
+//Multi-dropdown
 .drop-down02 .sub-menu02 {
     position: absolute !important;
     left: 100%;
@@ -129,17 +131,40 @@
     }
 }
 
+//Custom loading animation
 .loader {
-    border: 4px solid #f3f3f3; 
-    border-top: 4px solid #ef1b48; 
-    border-bottom: 4px solid #ef1b48; 
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #ef1b48;
+    border-bottom: 4px solid #ef1b48;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     animation: spin 2s linear infinite;
-  }
-  
-@keyframes spin {
-0% { transform: rotate(0deg); }
-100% { transform: rotate(360deg); }
 }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+//nav-bar-dark vs bg-transparent
+
+.bg-transparent.navbar-dark {
+    & .nav-link,
+    .nav-item {
+        color: #fff;
+        &:hover {
+            color: #f3f3f3c2;
+        }
+    }
+}
+
+/* Dong Custom End**********************************************************/
+///##########################################################################
+/* Khoa Custom**************************************************************/
+
+/* Khoa Custom End**********************************************************/

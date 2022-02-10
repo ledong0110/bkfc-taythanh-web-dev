@@ -210,6 +210,15 @@
 <script src="/js/plugins/plugins.js"></script>
 <script src="/js/active.js"></script>
 
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
@@ -236,6 +245,8 @@
 <script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
 
 <script src="/js/post-show.js"></script>
+
+
 
 <script>
     editor.isReady

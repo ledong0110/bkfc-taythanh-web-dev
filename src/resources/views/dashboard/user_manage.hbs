@@ -75,6 +75,14 @@
 </div>
 <form class="mt-4" name="save-form" method="POST"></form>
 <script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>
+<script>
   
   $(document).ready(function() {
     $(".btn.btn-edit").on("click", function(event) {

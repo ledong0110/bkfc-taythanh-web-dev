@@ -44,7 +44,14 @@
 <script>
     const bodyTag = $("body");
     bodyTag.addClass("home-bg");
-
-    const navbar = $(".navbar");
-    navbar.addClass("fixed-top");
 </script>
+<script>
+    $('#fixed-nav').addClass('bg-transparent navbar-dark');
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 100) {
+            $('#fixed-nav').removeClass('bg-transparent navbar-dark');
+        } else {
+            $('#fixed-nav').addClass('bg-transparent navbar-dark');
+        }
+      });
+    </script>

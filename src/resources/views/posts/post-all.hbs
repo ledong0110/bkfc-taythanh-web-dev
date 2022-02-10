@@ -30,7 +30,7 @@
     <script>
         var postTime = [];
     </script>
-    <section class="intro-news-area section-padding-100-0 mb-70">
+    <section class="intro-news-area section-padding-50-0 mb-70">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Intro News Tabs Area -->
@@ -369,7 +369,14 @@
 <script src="/js/bootstrap/bootstrap.min.js"></script>
 <script src="/js/plugins/plugins.js"></script>
 <script src="/js/active.js"></script>
-
+<script>
+    $(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>
 <script>
     for (element in postTime){
         displayTime("post-date", postTime);
