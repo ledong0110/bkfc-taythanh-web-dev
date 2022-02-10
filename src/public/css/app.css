@@ -124,9 +124,11 @@
   100% {
     transform: rotate(360deg); } }
 
-.bg-transparent.navbar-dark .nav-link, .bg-transparent.navbar-dark .nav-item {
+.bg-transparent.navbar-dark .nav-link,
+.bg-transparent.navbar-dark .nav-item {
   color: #fff; }
-  .bg-transparent.navbar-dark .nav-link:hover, .bg-transparent.navbar-dark .nav-item:hover {
+  .bg-transparent.navbar-dark .nav-link:hover,
+  .bg-transparent.navbar-dark .nav-item:hover {
     color: #f3f3f3c2; }
 
 /* Dong Custom End**********************************************************/
@@ -164,7 +166,7 @@ body {
   font-size: 72pt;
   line-height: 100px;
   text-align: left;
-  -webkit-text-stroke: #F7394A 2px; }
+  -webkit-text-stroke: #f7394a 2px; }
 
 .btn-solid-lg {
   display: inline-block;
@@ -217,11 +219,11 @@ body {
 .basic-1 {
   padding-top: 9.5rem;
   padding-bottom: 9rem;
-  background-color: #59171D; }
+  background-color: #59171d; }
 
 .basic-1 h1 {
   margin-bottom: 2.5rem;
-  color: #FFDEDE; }
+  color: #ffdede; }
 
 .basic-1 p {
   color: white; }
