@@ -1,0 +1,78 @@
+
+<section class="elements-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+<!-- ========== Milestones ========== -->
+                <div class="col-12">
+                    <div class="elements-title mb-30">
+                        <h2>Milestone</h2>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="newsbox-cool-facts-area">
+                        <div class="row">
+                            
+                            <!-- Single Cool Facts -->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-cool-fact mb-100">
+                                    <div class="scf-icon">
+                                        <img src="/img/icons/idea.png" alt="">
+                                    </div>
+                                    <div class="scf-text">
+                                        <h2><span class="counter">{{participants}}</span></h2>
+                                        <p>Users</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Cool Facts -->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-cool-fact mb-100">
+                                    <div class="scf-icon">
+                                        <img src="/img/icons/list.png" alt="">
+                                    </div>
+                                    <div class="scf-text">
+                                        <h2><span class="counter">{{posts}}</span></h2>
+                                        <p>Bài viết</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Cool Facts -->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-cool-fact mb-100">
+                                    <div class="scf-icon">
+                                        <img src="/img/icons/id-card.png" alt="">
+                                    </div>
+                                    <div class="scf-text">
+                                        <h2><span class="counter">{{members}}</span></h2>
+                                        <p>Thành viên</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- jQuery-2.2.4 js -->
+    <script src="/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="/js/active.js"></script>
+    <script>
+    $(document).ready(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+            $(window).resize(function(){
+                $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+            });
+        });
+    </script>

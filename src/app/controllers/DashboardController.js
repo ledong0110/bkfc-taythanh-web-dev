@@ -4,6 +4,7 @@ const User = require('../models/User');
 
 const { convertRole } = require('../../utility/support');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
+const { info } = require('node-sass');
 
 class DashboardController {
     //[GET] /
@@ -261,6 +262,17 @@ class DashboardController {
         
     }
     
+    //[GET] /dashboard/general
+    general_info (req, res, next) {
+        Promise.all([User.countDocuments(), Post.countDocuments(), User.countDocuments({'admin': 0})  ])
+        .then(([participants, posts, members]) => {
+            res.render('dashboard/general-info', {
+                participants: participants,
+                posts,
+                members: participants - members,
+            })
+        })
+    }
         
 }
 

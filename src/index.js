@@ -6,9 +6,12 @@ const express = require('express');
 const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const { auth } = require('express-openid-connect');
+
 const app = express();
 const port = process.env.PORT;
 
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 const route = require('./routes');
 const db = require('./config/db');
 // Connect to DB
@@ -92,12 +95,20 @@ console.log(__dirname);
 app.locals.authenticated = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: boolean);
 app.locals.user = null; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: object)
 app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: int)
-// Home, search, contact
+//Socket io config
+var count = 0;
+io.on('connection', function(socket) {
+    console.log('a user connected');
+    count++;
+    socket.on('disconnect', function() {
+        count--;
+        io.emit('usercnt', count)
+    })
+})
 
 //Routes init
+route(app);
 
-app.listen(port, () =>
+server.listen(port, () =>
     console.log(`App Listening at http://localhost:${port}`),
 );
-
-route(app);

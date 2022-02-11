@@ -65,7 +65,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date"></span>
                                                 <a href="/post/{{hot.0.slug}}" class="post-title">{{hot.0.title}}</a>
-                                                <a href="/post/{{hot.0.slug}}" class="post-author mb-30">{{hot.0.author.name}}</a>
+                                                <a href="/post/{{hot.0.slug}}" class="post-author mb-30">Tác giả: {{hot.0.author.name}}</a>
                                                 <p>{{hot.0.description}}</p>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date"></span>
                                                 <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
-                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">Tác giả: {{this.author.name}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date"></span>
                                                 <a href="{{phobien.0.slug}}" class="post-title">{{phobien.0.title}}</a>
-                                                <a href="{{phobien.0.slug}}" class="post-author mb-30">{{phobien.0.author.name}}</a>
+                                                <a href="{{phobien.0.slug}}" class="post-author mb-30">Tác giả: {{phobien.0.author.name}}</a>
                                                 <p>{{phobien.0.description}}</p>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date">{{this.createdAt}}</span>
                                                 <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
-                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">Tác giả: {{this.author.name}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date">{{tuyensinh.0.createdAt}}</span>
                                                 <a href="{{tuyensinh.0.slug}}" class="post-title">{{phobien.0.title}}</a>
-                                                <a href="{{tuyensinh.0.slug}}" class="post-author mb-30">{{phobien.0.author.name}}</a>
+                                                <a href="{{tuyensinh.0.slug}}" class="post-author mb-30">Tác giả: {{phobien.0.author.name}}</a>
                                                 <p>{{tuyensinh.0.description}}</p>
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date">{{this.createdAt}}</span>
                                                 <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
-                                                <a href="/post/{{this.slug}}" class="post-author">{{this.author.name}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">Tác giả: {{this.author.name}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -209,7 +209,7 @@
                                             <div class="blog-content">
                                                 <span class="post-date"></span>
                                                 <a href="{{moinhat.0.slug}}" class="post-title">{{moinhat.0.title}}</a>
-                                                <a href="{{moinhat.0.slug}}" class="post-author mb-30">{{moinhat.0.author.name}}</a>
+                                                <a href="{{moinhat.0.slug}}" class="post-author mb-30">Tác giả: {{moinhat.0.author.name}}</a>
                                                 <p>{{moinhat.0.description}}</p>
                                             </div>
                                         </div>
@@ -258,7 +258,7 @@
                         <!-- Add Widget -->
                         <div class="single-widget-area add-widget mb-30">
                             <a href="#">
-                                <img src="img/ads/ad_d_2.png" alt="">
+                                <img src="/img/ads/ad_d_2.png" alt="">
                             </a>
                         </div>
 
@@ -423,7 +423,7 @@
                     <div class="blog-content">
                         <span class="post-date">${new Date(data[a].createdAt).toLocaleDateString('vi-Vi', options)}</span>
                         <a href="#" class="post-title">${data[a].title}</a>
-                        <a href="#" class="post-author">${data[a].author.name}</a>
+                        <a href="#" class="post-author">Tác giả: ${data[a].author.name}</a>
                         <p>${data[a].description}</p>
                     </div>
                 </div>`

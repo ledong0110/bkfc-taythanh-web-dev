@@ -115,9 +115,11 @@
 
     // :: 7.0 CounterUp Active Code
     if ($.fn.counterUp) {
-        $('.counter').counterUp({
-            delay: 10,
-            time: 2000
+        $(document).ready(function(){
+            $('.counter').counterUp({
+                delay: 10,
+                time: 2000
+            });
         });
     }
 

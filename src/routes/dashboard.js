@@ -12,5 +12,6 @@ router.get('/post-manage', isModerator, dashboardController.manage_post);
 router.post('/post-manage/top-post', isModerator, dashboardController.manage_top_post);
 router.post('/post-manage/popular-post', dashboardController.manage_popular_post);
 router.get('/trash-bin', isModerator, dashboardController.trash_bin);
+router.get('/general', isModerator, dashboardController.general_info);
 
 module.exports = router;

@@ -84,6 +84,11 @@ class SiteController {
         res.status(404);
         res.render('notFound');
     }
+
+    //[GET] /test
+    test(req, res) {
+        res.render('site/test');
+    }
 }
 
 module.exports = new SiteController();
