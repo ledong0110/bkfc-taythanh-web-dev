@@ -100,9 +100,11 @@ var count = 0;
 io.on('connection', function(socket) {
     console.log('a user connected');
     count++;
+    io.emit('usercnt', count);
     socket.on('disconnect', function() {
         count--;
         io.emit('usercnt', count)
+        console.log('a user disconnected');
     })
 })
 
