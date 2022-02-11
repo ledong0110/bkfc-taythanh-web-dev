@@ -45,7 +45,8 @@
                                     <a class="nav-item nav-link active" id="nav1" data-bs-toggle="tab" href="#nav-1" role="tab" aria-controls="nav-1" aria-selected="true">Hot</a>
                                     <a class="nav-item nav-link" id="nav2" data-bs-toggle="tab" href="#nav-2" role="tab" aria-controls="nav-2" aria-selected="false">Phổ biến</a>
                                     <a class="nav-item nav-link" id="nav3" data-bs-toggle="tab" href="#nav-3" role="tab" aria-controls="nav-3" aria-selected="false">Tuyển sinh</a>
-                                    <a class="nav-item nav-link" id="nav4" data-bs-toggle="tab" href="#nav-4" role="tab" aria-controls="nav-4" aria-selected="false">Mới nhất</a>
+                                    <a class="nav-item nav-link" id="nav4" data-bs-toggle="tab" href="#nav-4" role="tab" aria-controls="nav-4" aria-selected="false">Quan tâm</a>
+                                    <a class="nav-item nav-link" id="nav5" data-bs-toggle="tab" href="#nav-5" role="tab" aria-controls="nav-5" aria-selected="false">Mới nhất</a>
                                 </div>
                             </nav>
                         </div>
@@ -160,8 +161,8 @@
                                             <!-- Blog Content -->
                                             <div class="blog-content">
                                                 <span class="post-date">{{tuyensinh.0.createdAt}}</span>
-                                                <a href="{{tuyensinh.0.slug}}" class="post-title">{{phobien.0.title}}</a>
-                                                <a href="{{tuyensinh.0.slug}}" class="post-author mb-30">Tác giả: {{phobien.0.author.name}}</a>
+                                                <a href="{{tuyensinh.0.slug}}" class="post-title">{{tuyensinh.0.title}}</a>
+                                                <a href="{{tuyensinh.0.slug}}" class="post-author mb-30">Tác giả: {{tuyensinh.0.author.name}}</a>
                                                 <p>{{tuyensinh.0.description}}</p>
                                             </div>
                                         </div>
@@ -196,6 +197,54 @@
                             </div>
 
                             <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav4">
+                                <div class="row">
+                                    <!-- Single News Area -->
+                                    <div class="col-12">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{quantam.0.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date">{{quantam.0.createdAt}}</span>
+                                                <a href="{{quantam.0.slug}}" class="post-title">{{quantam.0.title}}</a>
+                                                <a href="{{quantam.0.slug}}" class="post-author mb-30">Tác giả: {{quantam.0.author.name}}</a>
+                                                <p>{{quantam.0.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        postTime.push("{{quantam.0.createdAt}}");
+                                    </script>
+                                    {{#each quantam}}
+                                    <!-- Single News Area -->
+                                    {{#unless @first}}
+                                    <script>
+                                        postTime.push("{{this.createdAt}}");
+                                    </script>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="single-blog-post animated fadeInUpBig style-2 mb-5">
+                                            <!-- Blog Thumbnail -->
+                                            <div class="blog-thumbnail">
+                                                <a href="#"><img src="{{this.image_url}}" alt=""></a>
+                                            </div>
+
+                                            <!-- Blog Content -->
+                                            <div class="blog-content">
+                                                <span class="post-date">{{this.createdAt}}</span>
+                                                <a href="/post/{{this.slug}}" class="post-title">{{this.title}}</a>
+                                                <a href="/post/{{this.slug}}" class="post-author">Tác giả: {{this.author.name}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/unless}}
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav5">
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">

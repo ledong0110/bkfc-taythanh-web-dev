@@ -73,6 +73,7 @@ class PostController {
                 res.render('posts/post-all',{
                     hot: breaking_post,
                     phobien: posts.concat().sort((a, b) => Number(b.views) - Number(a.views)).slice(0,5),
+                    quantam: posts.concat().sort((a, b) => Number(b.views) - Number(a.views)).slice(0,5),
                     tuyensinh: posts.slice(0, 5),
                     moinhat: posts.slice(0, 5),
                     latestNews: getRandom(posts, 5),
