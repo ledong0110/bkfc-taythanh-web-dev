@@ -8,6 +8,46 @@ const {
 const { convertRole, getRandom } = require('../../utility/support');
 
 class PostController {
+    post_default(res, req, next){
+        let currentTime = new Date();
+        Post_special_list
+            .findOne({name: "popular"})
+            .then(popList => {
+                if ((currentTime.getDate() - popList.updatedAt.getDate()) >= 1){
+                    console.log("Updating pop list");
+                    Post
+                        .find({
+                            createdAt: {"$gte": currentTime.setDate(currentTime.getDate()-30)}
+                        })
+                        .limit(6)
+                        .sort({views: -1})
+                        .then(postList => {
+                            // console.log("List of post to update:");
+                            // console.log(postList);
+                            for(let i = postList.length-1; i>=0 ; i--){
+                                popList.posts_checked_load.unshift(postList[i]._id);
+                                popList.posts_checked[postList[i]._id.toString()] = "1";
+                            }
+
+                            // console.log("After push in:");
+                            // console.log(popList.posts_checked_load);
+
+                            while (popList.posts_checked_load.length > 4){
+                                delete popList.posts_checked[popList.posts_checked_load[4]];
+                                popList.posts_checked_load.pop();
+                            }
+
+                            // console.log("After delete:");
+                            // console.log(popList.posts_checked_load);
+
+                            popList.save();
+                        })
+                }
+            })
+
+        next();
+    }
+
     post_home(req, res, next) {
         Post_special_list.find()
             .sort({ name: -1 })
@@ -18,15 +58,19 @@ class PostController {
                 },
             })
             .then((post_list_arr) => {
-                console.log('rendering post page...');
+                // console.log('rendering post page...');
                 var breaking_post = [];
-                for (let i = 0; i < 3; i++) {
-                    if (post_list_arr[0].posts_checked_load[i] != undefined) {
-                        breaking_post.push(
-                            mongooseToObject(
-                                post_list_arr[0].posts_checked_load[i],
-                            ),
-                        );
+                for (let singleList in post_list_arr){
+                    if (post_list_arr[singleList].name == "hot"){
+                        let numPost = post_list_arr[singleList].posts_checked_load.length;
+                        for (let i = 0; i < numPost; i++) {
+                            breaking_post.push(
+                                mongooseToObject(
+                                    post_list_arr[singleList].posts_checked_load[i],
+                                ),
+                            );
+                        }
+                        break;
                     }
                 }
                 // console.log(breaking_post);
@@ -60,13 +104,17 @@ class PostController {
         ])
             .then(([posts, post_list_arr]) => {
                 var breaking_post = [];
-                for (let i = 0; i < 3; i++) {
-                    if (post_list_arr[0].posts_checked_load[i] != undefined) {
-                        breaking_post.push(
-                            mongooseToObject(
-                                post_list_arr[0].posts_checked_load[i],
-                            ),
-                        );
+                for (let singleList in post_list_arr){
+                    if (post_list_arr[singleList].name == "hot"){
+                        let numPost = post_list_arr[singleList].posts_checked_load.length;
+                        for (let i = 0; i < numPost; i++) {
+                            breaking_post.push(
+                                mongooseToObject(
+                                    post_list_arr[singleList].posts_checked_load[i],
+                                ),
+                            );
+                        }
+                        break;
                     }
                 }
                 posts = multipleMongooseToObject(posts);
