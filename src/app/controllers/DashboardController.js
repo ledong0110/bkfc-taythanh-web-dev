@@ -72,7 +72,7 @@ class DashboardController {
                 .count({})
                 .then(result_2 => {
                     var top_list;
-                    var pop_list;
+                    var hot_list;
                     var ele;
                     console.log("Post length now:", result[0].posts_all.length);
                     console.log("Post count now:", result_2)
@@ -118,8 +118,8 @@ class DashboardController {
                                             top_list = mongooseToObject(result[ele]);
                                             break;
         
-                                        case "popular":
-                                            pop_list = mongooseToObject(result[ele]);
+                                        case "hot":
+                                            hot_list = mongooseToObject(result[ele]);
                                             // break;
                                     }
                                     Post_special_list
@@ -143,12 +143,12 @@ class DashboardController {
                                     top_list = mongooseToObject(result[ele]);
                                     break;
 
-                                case "popular":
-                                    pop_list = mongooseToObject(result[ele]);
+                                case "hot":
+                                    hot_list = mongooseToObject(result[ele]);
                                     // break;
                             }
                         }
-                        res.render("dashboard/post-manage", {topList: top_list, popList: pop_list, deletedPost});
+                        res.render("dashboard/post-manage", {topList: top_list, hotList: hot_list, deletedPost});
                     }
                     })
                     .catch(err => {
@@ -209,9 +209,8 @@ class DashboardController {
         
     }
 
-    manage_popular_post(req, res, next){
-        
-        console.log("Updating pop post...")
+    manage_hot_post(req, res, next){
+        console.log("Updating hot post...")
         console.log(req.body);
 
         let updateOptions = { upsert: true };
@@ -236,7 +235,7 @@ class DashboardController {
         }
 
         Post_special_list
-            .findOneAndUpdate({name: "popular"}, popList, updateOptions)
+            .findOneAndUpdate({name: "hot"}, popList, updateOptions)
             .then(result => {
                 console.log("List updated");
                 res.append('Signal', 1);
@@ -244,7 +243,7 @@ class DashboardController {
 
             })
             .catch(err => {
-                console.log("Failed to update popular list");
+                console.log("Failed to update hot list");
                 console.log(err);
                 res.append('Signal', 0);
                 res.send("Failed")
