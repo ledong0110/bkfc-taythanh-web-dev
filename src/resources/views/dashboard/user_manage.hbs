@@ -5,109 +5,140 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {{/if}}
-<div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-dark text-capitalize ps-3">Authors table</h6>
-              </div>
-            </div>
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table table-hover align-items-center mb-0" id="my-table">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên người dùng</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Vai trò</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tham gia</th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody id="user-list">
-                      
-  
-                  </tbody>
-                  <div class="loader" hidden></div>
-                </table>
-              </div>
-              <ul class="pagination table-responsive__pagination">
-              </ul>
-              <script src="/js/pagination.js"></script>
-              <script>
-                var totalPages = {{totalPages}};
-                var page = 1;
-                var userId = {{user._id}};
-                $(document).ready(function () {
-                  crawlUsers(totalPages, page); 
-                });
-                $('ul.pagination').on('click', 'li.pagination-item', function(e) {
-                  page = $(this).data('pag');
-                  crawlUsers(totalPages, page);
-                })
-                function crawlUsers(totalPages, page)
-                {
-                    $('.loader').show();
-                    createPagination(totalPages, page);
-                    $.ajax({
-                      url: "/dashboard/users/load-more-users",
-                      method: "POST",  
-                      data: {page: page-1},
-                      success: (response) => (handleData(response)),
-                    });
-                  function handleData(data) {
-                    var html = "";
-                    for (var a = 0; a < data.length; a++) {
-                        html += `<tr id = "${data[a]._id}" data-id="${data[a]._id}"> 
-                                <td>
-                                  <div class="d-flex px-2 py-1">
-                                    <div>
-                                      <img src="${data[a].picture}" class="avatar  me-3 border border-primary border-2 rounded-circle" alt="${data[a].name}">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                      <h6 class="mb-0 text-sm">${data[a].name}` 
-                        if (data[a]._id == userId)
-                          html+= ` <span class="text-secondary">(bạn)</span>`
-                        html += `</h6>
-                                <p class="text-xs text-secondary mb-0">${data[a].email}</p>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="align-middle edit-role form-group">
-                                  <p class="text-secondary text-xs font-weight-bold">${data[a].admin}</p>
-                                </td>
-                                <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold">${data[a].createdAt}</span>
-                                </td>
-                                <td class="align-middle float-right">`
-                        if (data[a].default_user) {
-                          html += `<p class="text-secondary text-xs font-weight-bold"> <span class="p-1"><i class="fa fa-star" style="color:rgba(235, 177, 19, 0.856);" aria-hidden="true"></i></span>Super Idol</p>`;
-                        } 
-                        else {
-                          html +=`<button class="btn btn-edit btn-dark edit">
-                                    Edit
-                                  </button>
-                                  <button class="btn btn-save btn-danger d-none">
-                                    Save
-                                  </button>
-                                  <button class="btn btn-cancle btn-primary d-none">
-                                    Cancle
-                                  </button>`;
-                        };
-                        html += `</td>
-                                </tr>`;
-                    }
-                    $("#user-list").html(html);
-                    $('.loader').hide();
-                  }
-                } 
-              </script>
-            </div>
-          </div>
-        </div>
+<div class="container-table100">
+  <div class="table100-title line-break">Quản lí người dùng</div>
+  <div class="wrap-table100">
+    <div class="table100 ver1 m-b-110">
+      <div class="table100-head">
+          <table id="my-table">
+            <thead>
+              <tr>
+                <th class="cell100 column1">Tên người dùng</th>
+                <th class="cell100 column2" >Vai trò</th>
+                <th class="cell100 column3">Ngày tham gia</th>
+                <th class="cell100 column4">Tùy chỉnh</th>
+              </tr>
+            </thead>  
+        </table>
       </div>
+      <div class="table100-body">
+        <table>
+              <tbody id="user-list" class="animated fadeInUpBig">
+                  {{#each users}}
+                <tr id="{{this._id}}" data-id="{{this._id}}" class="row100 body"> 
+                  <td class="cell100 column1">
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="{{this.picture}}" class="avatar  me-3 border border-primary border-2 rounded-circle" alt="{{this.name}}">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{this.name}} {{#if (equal this._id @root.user._id)}} <span class="text-secondary">(bạn)</span>{{/if}}</h6>
+                        <p class="text-xs text-secondary mb-0">{{this.email}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="cell100 column2 edit-role form-group">
+                    <p class="text-secondary text-xs font-weight-bold">{{this.admin}}</p>
+                  </td>
+                  <td class="cell100 column3">
+                    <span class="text-secondary text-xs font-weight-bold">{{this.createdAt}}</span>
+                  </td>
+                  <td class="cell100 column4">
+                    {{#if this.default_user}}
+                    
+                    <p class="text-secondary text-xs font-weight-bold"> <span class="p-1"><i class="fa fa-star" style="color:rgba(235, 177, 19, 0.856);" aria-hidden="true"></i></span>Super Idol</p>
+                    {{else}}
+                    <button class="btn btn-edit btn-dark edit">
+                      Edit
+                    </button>
+                    <button class="btn btn-save btn-danger d-none">
+                      Save
+                    </button>
+                    <button class="btn btn-cancle btn-primary d-none">
+                      Cancle
+                    </button>
+                    {{/if}}
+                  </td>
+                </tr>
+                {{/each}}
+
+              </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+<ul class="pagination table-responsive__pagination">
+</ul>
+<script src="/js/pagination.js"></script>
+<script>
+  var totalPages = {{totalPages}};
+  var page = 1;
+  var userId = {{user._id}};
+  $(document).ready(function () {
+    createPagination(totalPages, page); 
+  });
+  $('ul.pagination').on('click', 'li.pagination-item', function(e) {
+    page = $(this).data('pag');
+    crawlUsers(totalPages, page);
+  })
+  function crawlUsers(totalPages, page)
+  {
+      $('.loader').show();
+      createPagination(totalPages, page);
+      $.ajax({
+        url: "/dashboard/users/load-more-users",
+        method: "POST",  
+        data: {page: page-1},
+        success: (response) => (handleData(response)),
+      });
+    function handleData(data) {
+      var html = "";
+      for (var a = 0; a < data.length; a++) {
+          html += ` <tr id="${data[a]._id}" data-id="${data[a]._id}" class="row100 body"> 
+                  <td class="cell100 column1">
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img src="${data[a].picture}" class="avatar me-3 border border-primary border-2 rounded-circle" alt="${data[a].name}">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${data[a].name} ` 
+          if (data[a]._id == userId)
+            html+= ` <span class="text-secondary">(bạn)</span>`
+          html += `</h6>
+                  <p class="text-xs text-secondary mb-0">${data[a].email}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="cell100 column2 edit-role form-group">
+                    <p class="text-secondary text-xs font-weight-bold">${data[a].admin}</p>
+                  </td>
+                  <td class="cell100 column3">
+                    <span class="text-secondary text-xs font-weight-bold">${data[a].createdAt}</span>
+                  </td>
+                  <td class="cell100 column4">`
+          if (data[a].default_user) {
+            html += `<p class="text-secondary text-xs font-weight-bold"> <span class="p-1"><i class="fa fa-star" style="color:rgba(235, 177, 19, 0.856);" aria-hidden="true"></i></span>Super Idol</p>`;
+          } 
+          else {
+            html +=`<button class="btn btn-edit btn-dark edit">
+                      Edit
+                    </button>
+                    <button class="btn btn-save btn-danger d-none">
+                      Save
+                    </button>
+                    <button class="btn btn-cancle btn-primary d-none">
+                      Cancle
+                    </button>`;
+          };
+          html += `</td>
+                  </tr>`;
+      }
+      $("#user-list").html(html);
+      $('.loader').hide();
+    }
+  } 
+</script>
 <form class="mt-4" name="save-form" method="POST"></form>
 <script>
 $(document).ready(function(){
@@ -191,3 +222,5 @@ $(document).ready(function(){
 
 
 </script>
+
+      
