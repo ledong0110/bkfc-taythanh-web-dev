@@ -5,6 +5,9 @@ const { isContentCreator, isAuthenticated } = require('../app/middlewares')
 const postController = require('../app/controllers/PostController');
 
 // newsController.index();
+
+router.use(postController.post_default);
+
 router.delete('/', isContentCreator, postController.post_delete);
 router.get('/', isAuthenticated, postController.post_home);
 router.get('/create', isContentCreator,postController.create);
@@ -18,6 +21,5 @@ router.get('/edit/:slug', isContentCreator, postController.post_edit);
 router.post('/edit', isContentCreator, postController.post_edit_save);
 router.patch('/:id/restore', isContentCreator, postController.post_restore);
 router.get('/:slug', isAuthenticated, postController.show);
-
 
 module.exports = router;

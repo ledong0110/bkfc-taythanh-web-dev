@@ -82,10 +82,10 @@
     {{#each all_list}}
         {{#if (equal this.name "top")}}
             <div class = "row post-area d-blockcontainer-fluid">
-            <script>
-                var postTime = [];
-            </script>
             {{#each this.posts_checked_load}}
+                <script>
+                    postTime.push("{{this.createdAt}}");
+                </script>
                 <div class="col-12 p-0 me-auto ms-auto">
                     <div class="single-blog-post animated fadeInUpBig style-1 mb-4">
                         <div class="blog-thumbnail bg-overlay">
@@ -104,9 +104,6 @@
                             <a href="/post/{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
                             <p class="post-des d-none d-sm-block">{{this.description}}</p>
                             <span class="post-date"></span>
-                            <script>
-                                postTime.push("{{this.createdAt}}");
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -154,9 +151,8 @@ $(document).ready(function(){
 </script>
 
 <script>
-    for (element in postTime){
-        displayTime("post-date", postTime);
-    }
+    console.log(postTime);
+    displayTime("post-date", postTime);
 </script>
 
 <!-- Blog Thumbnail -->

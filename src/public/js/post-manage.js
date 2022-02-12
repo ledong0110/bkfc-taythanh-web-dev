@@ -54,9 +54,9 @@ $(function(){
     })
 });
 
-// TOP PAGE POST
+// HOT PAGE POST
 $(function(){
-    $("form.popular-post-submit-form").on("submit", function(e){
+    $("form.hot-post-submit-form").on("submit", function(e){
         e.preventDefault();
         var dataStr_arr = $(this).serializeArray();
         // console.log(dataStr_arr);
@@ -77,7 +77,7 @@ $(function(){
             // console.log(dataStr);
             var callback = $.ajax({
                 type: "POST",
-                url: "/dashboard/post-manage/popular-post",
+                url: "/dashboard/post-manage/hot-post",
                 data: dataStr,
                 success: ()=>{
                     // console.log("Update pop:", dataStr);
@@ -116,10 +116,10 @@ $(function(){
     })
 })
 
-// POPULAR POST CLEAR
+// HOT POST CLEAR
 $(function(){
-    $("form.popular-post-submit-form").on("click",".clear-all-btn",function(e){
-        $("form.popular-post-submit-form")[0].reset();
+    $("form.hot-post-submit-form").on("click",".clear-all-btn",function(e){
+        $("form.hot-post-submit-form")[0].reset();
     })
 })
 

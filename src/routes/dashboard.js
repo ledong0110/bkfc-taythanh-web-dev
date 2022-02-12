@@ -11,7 +11,7 @@ router.post('/users/load-more-users', isModerator, dashboardController.user_load
 router.patch('/users/:id', isModerator, dashboardController.user_edit);
 router.get('/post-manage', isModerator, dashboardController.manage_post);
 router.post('/post-manage/top-post', isModerator, dashboardController.manage_top_post);
-router.post('/post-manage/popular-post', dashboardController.manage_popular_post);
+router.post('/post-manage/hot-post', dashboardController.manage_hot_post);
 router.get('/trash-bin', isModerator, dashboardController.trash_bin);
 router.get('/general', isModerator, dashboardController.general_info);
 
