@@ -25,49 +25,84 @@
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
-                  <tbody>
-                      {{#each users}}
-                    <tr id = "{{this._id}}" data-id="{{this._id}}"> 
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{{this.picture}}" class="avatar  me-3 border border-primary border-2 rounded-circle" alt="{{this.name}}">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{this.name}} {{#if (equal this._id @root.user._id)}} <span class="text-secondary">(bạn)</span>{{/if}}</h6>
-                            <p class="text-xs text-secondary mb-0">{{this.email}}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle edit-role form-group">
-                        <p class="text-secondary text-xs font-weight-bold">{{this.admin}}</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">{{this.createdAt}}</span>
-                      </td>
-                      <td class="align-middle float-right">
-                        {{#if this.default_user}}
-                        
-                        <p class="text-secondary text-xs font-weight-bold"> <span class="p-1"><i class="fa fa-star" style="color:rgba(235, 177, 19, 0.856);" aria-hidden="true"></i></span>Super Idol</p>
-                        {{else}}
-                        <button class="btn btn-edit btn-dark edit">
-                          Edit
-                        </button>
-                        <button class="btn btn-save btn-danger d-none">
-                          Save
-                        </button>
-                        <button class="btn btn-cancle btn-primary d-none">
-                          Cancle
-                        </button>
-                        {{/if}}
-                      </td>
-                    </tr>
-                    {{/each}}
-                    
-                    
+                  <tbody id="user-list">
+                      
+  
                   </tbody>
+                  <div class="loader" hidden></div>
                 </table>
               </div>
+              <ul class="pagination table-responsive__pagination">
+              </ul>
+              <script src="/js/pagination.js"></script>
+              <script>
+                var totalPages = {{totalPages}};
+                var page = 1;
+                var userId = {{user._id}};
+                $(document).ready(function () {
+                  crawlUsers(totalPages, page); 
+                });
+                $('ul.pagination').on('click', 'li.pagination-item', function(e) {
+                  page = $(this).data('pag');
+                  crawlUsers(totalPages, page);
+                })
+                function crawlUsers(totalPages, page)
+                {
+                    $('.loader').show();
+                    createPagination(totalPages, page);
+                    $.ajax({
+                      url: "/dashboard/users/load-more-users",
+                      method: "POST",  
+                      data: {page: page-1},
+                      success: (response) => (handleData(response)),
+                    });
+                  function handleData(data) {
+                    var html = "";
+                    for (var a = 0; a < data.length; a++) {
+                        html += `<tr id = "${data[a]._id}" data-id="${data[a]._id}"> 
+                                <td>
+                                  <div class="d-flex px-2 py-1">
+                                    <div>
+                                      <img src="${data[a].picture}" class="avatar  me-3 border border-primary border-2 rounded-circle" alt="${data[a].name}">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                      <h6 class="mb-0 text-sm">${data[a].name}` 
+                        if (data[a]._id == userId)
+                          html+= ` <span class="text-secondary">(bạn)</span>`
+                        html += `</h6>
+                                <p class="text-xs text-secondary mb-0">${data[a].email}</p>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td class="align-middle edit-role form-group">
+                                  <p class="text-secondary text-xs font-weight-bold">${data[a].admin}</p>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <span class="text-secondary text-xs font-weight-bold">${data[a].createdAt}</span>
+                                </td>
+                                <td class="align-middle float-right">`
+                        if (data[a].default_user) {
+                          html += `<p class="text-secondary text-xs font-weight-bold"> <span class="p-1"><i class="fa fa-star" style="color:rgba(235, 177, 19, 0.856);" aria-hidden="true"></i></span>Super Idol</p>`;
+                        } 
+                        else {
+                          html +=`<button class="btn btn-edit btn-dark edit">
+                                    Edit
+                                  </button>
+                                  <button class="btn btn-save btn-danger d-none">
+                                    Save
+                                  </button>
+                                  <button class="btn btn-cancle btn-primary d-none">
+                                    Cancle
+                                  </button>`;
+                        };
+                        html += `</td>
+                                </tr>`;
+                    }
+                    $("#user-list").html(html);
+                    $('.loader').hide();
+                  }
+                } 
+              </script>
             </div>
           </div>
         </div>
@@ -85,7 +120,7 @@ $(document).ready(function(){
 <script>
   
   $(document).ready(function() {
-    $(".btn.btn-edit").on("click", function(event) {
+    $("body").on("click",".btn.btn-edit", function(event) {
       let rowId = event.target.parentNode.parentNode.id;
       document.getElementById(rowId).querySelector('.btn.btn-edit').classList.add('d-none');
       document.getElementById(rowId).querySelector('.btn.btn-save').classList.remove('d-none');
@@ -116,7 +151,7 @@ $(document).ready(function(){
     })
   })
   $(document).ready(function() {
-    $(".btn.btn-cancle").on("click", function(event) {
+    $("body").on("click", ".btn.btn-cancle", function(event) {
       let rowId = event.target.parentNode.parentNode.id;
       document.getElementById(rowId).querySelector('.btn.btn-edit').classList.remove('d-none');
       document.getElementById(rowId).querySelector('.btn.btn-save').classList.add('d-none');
@@ -130,7 +165,7 @@ $(document).ready(function(){
   })
   
   $(document).ready(function() {
-    $(".btn.btn-save").on("click", function(event) {
+    $("body").on("click", ".btn.btn-save", function(event) {
       let rowId = event.target.parentNode.parentNode.id;
       document.getElementById(rowId).querySelector('.btn.btn-edit').classList.remove('d-none');
       document.getElementById(rowId).querySelector('.btn.btn-save').classList.add('d-none');

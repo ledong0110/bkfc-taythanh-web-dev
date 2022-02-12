@@ -131,6 +131,36 @@
   .bg-transparent.navbar-dark .nav-item:hover {
     color: #f3f3f3c2; }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none; }
+  .pagination .pagination-item {
+    margin: 0 12px; }
+    .pagination .pagination-item .pagination-item__link {
+      display: block;
+      text-decoration: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #939393;
+      min-width: 45px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%; }
+      .pagination .pagination-item .pagination-item__link:hover {
+        background-color: #e47c93;
+        color: #ffffff;
+        cursor: pointer; }
+    .pagination .pagination-item.pagination-item--active .pagination-item__link {
+      background-color: #ef1b48;
+      color: #ffffff; }
+
+.table-responsive__pagination {
+  margin-top: 20px; }
+
 /* Dong Custom End**********************************************************/
 /* Khoa Custom**************************************************************/
 /* Khoa Custom End**********************************************************/

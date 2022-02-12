@@ -447,7 +447,7 @@
         $('#loadmore').addClass('fadeOut');
         $.ajax({
                 url: "/post/all/loadmore",
-				method: "POST",  
+				method: "GET",  
                 data: {startFrom},
                 success: (response) => (handleData(response)),
                     

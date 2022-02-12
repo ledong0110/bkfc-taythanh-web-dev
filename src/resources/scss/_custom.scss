@@ -162,7 +162,50 @@
         }
     }
 }
+//Pagination
 
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+
+    & .pagination-item {
+        margin: 0 12px;
+        & .pagination-item__link {
+            $local-height: 40px;
+            display: block;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #939393;
+            min-width: 45px;
+            height: $local-height;
+            line-height: $local-height;
+            text-align: center;
+            border-radius: 50%;
+            &:hover {
+                background-color: #e47c93;
+                color: $white-color;
+                cursor: pointer;
+            }
+        }
+        
+        & .pagination-item__icon {
+            
+        }
+        &.pagination-item--active .pagination-item__link {
+            background-color: #ef1b48;
+            color: $white-color;
+        }
+    }
+
+
+}
+.table-responsive__pagination {
+    margin-top: 20px;
+}
 /* Dong Custom End**********************************************************/
 ///##########################################################################
 /* Khoa Custom**************************************************************/

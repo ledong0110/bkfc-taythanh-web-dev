@@ -9,19 +9,10 @@ const { info } = require('node-sass');
 class DashboardController {
     //[GET] /
     user_management(req,res,next){
-        User.find({}).sort({ default_user: -1, admin: -1 , updatedAt: 1})
-            .then((users) =>{
-                users = multipleMongooseToObject(users);
-                users.forEach((user) => {
-                    user.admin = convertRole(user.admin)
-                    user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                });
-                
-                return users
-            })
-            .then((users) => {
+        User.countDocuments()
+            .then((totalPages) =>{
                 res.render('dashboard/user_manage', {
-                    users,
+                    totalPages: Math.ceil(totalPages/10),
                     message: req.flash('message')[0]        
                 })  
             })
@@ -250,7 +241,7 @@ class DashboardController {
                 res.send("Failed")
             })
     }
-
+    //[GET] /dashboard/trash-bin
     trash_bin(req, res, next){
         Post.findDeleted()
                     .then((posts) =>
@@ -272,6 +263,24 @@ class DashboardController {
                 members: participants - members,
             })
         })
+    }
+    //[POST] /dashboard/users/load-more-users
+    user_loading (req, res, next) {
+        const limit = 10;
+        User.find()
+            .select({ updatedAt: 0})
+            .sort({ default_user: -1, admin: -1 , updatedAt: 1})
+            .skip(req.body.page*limit)
+            .limit(limit)
+            .then((users) => {
+                users = multipleMongooseToObject(users);
+                users.forEach((user) => {
+                    user.admin = convertRole(user.admin)
+                    user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                });
+                res.json(users);
+            })
+        
     }
         
 }
