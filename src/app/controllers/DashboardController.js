@@ -9,30 +9,51 @@ const { info } = require('node-sass');
 class DashboardController {
     //[GET] /
     user_management(req,res,next){
-        User.find({}).sort({ default_user: -1, admin: -1 , updatedAt: 1})
-            .then((users) =>{
+        const limit = 10;
+        Promise.all([
+            User.countDocuments(),
+            User.find()
+            .select({ updatedAt: 0})
+            .sort({ default_user: -1, admin: -1 , updatedAt: 1})
+            .limit(limit)
+        ])
+        .then(([totalPages, users]) => {
+            users = multipleMongooseToObject(users);
+            users.forEach((user) => {
+                user.admin = convertRole(user.admin)
+                user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            });
+            res.render('dashboard/user_manage', {
+                totalPages: Math.ceil(totalPages/limit),
+                message: req.flash('message')[0],
+                users, 
+            })       
+        })
+        // console.log(multipleMongooseToObject(users));
+        
+        .catch(next);
+    }
+    
+    user_loading (req, res, next) {
+        const limit = 10;
+        User.find()
+            .select({ updatedAt: 0})
+            .sort({ default_user: -1, admin: -1 , updatedAt: 1})
+            .skip(req.body.page*limit)
+            .limit(limit)
+            .then((users) => {
                 users = multipleMongooseToObject(users);
                 users.forEach((user) => {
                     user.admin = convertRole(user.admin)
                     user.createdAt = user.createdAt.toLocaleDateString('vi-Vi', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                 });
-                
-                return users
+                res.json(users);
             })
-            .then((users) => {
-                res.render('dashboard/user_manage', {
-                    users,
-                    message: req.flash('message')[0]        
-                })  
-            })
-                // console.log(multipleMongooseToObject(users));
-            
-            .catch(next);
+        
     }
-
     user_edit(req,res,next) {
         User.updateOne({ _id: req.params.id }, req.body)
-                    .then(() => {
+        .then(() => {
                         req.flash(
                             'message', {
                                 type: 'success',
@@ -249,7 +270,7 @@ class DashboardController {
                 res.send("Failed")
             })
     }
-
+    //[GET] /dashboard/trash-bin
     trash_bin(req, res, next){
         Post.findDeleted()
                     .then((posts) =>
@@ -272,6 +293,7 @@ class DashboardController {
             })
         })
     }
+    //[POST] /dashboard/users/load-more-users
         
 }
 
