@@ -7,6 +7,7 @@ const postController = require('../app/controllers/PostController');
 
 // newsController.index();
 router.get('/users', isModerator, dashboardController.user_management);
+router.post('/users/load-more-users', isModerator, dashboardController.user_loading);
 router.patch('/users/:id', isModerator, dashboardController.user_edit);
 router.get('/post-manage', isModerator, dashboardController.manage_post);
 router.post('/post-manage/top-post', isModerator, dashboardController.manage_top_post);

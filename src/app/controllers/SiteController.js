@@ -1,15 +1,17 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const Post_special_list = require('../models/Post-special-list');
-const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
+const {
+    multipleMongooseToObject,
+    mongooseToObject,
+} = require('../../utility/mongoose');
 const { convertRole, getRandom } = require('../../utility/support');
-
 
 class SiteController {
     //[GET] /
     home(req, res, next) {
         // res.redirect("/post");
-        res.render("home");
+        res.render('home');
     }
 
     // [GET] /profile
@@ -66,7 +68,8 @@ class SiteController {
                     email: req.oidc.user.email,
                     picture: req.oidc.user.picture,
                     admin: 0,
-                }.then(() => res.redirect('/'));
+                };
+                res.redirect('/');
             } else {
                 req.app.locals.user = user;
                 res.redirect('/');
