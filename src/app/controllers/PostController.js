@@ -212,7 +212,7 @@ class PostController {
                         });
                 } else {
                     res.status(404);
-                    res.render('notFound');
+                    res.render('site/notFound');
                 }
             })
             .catch(next);
