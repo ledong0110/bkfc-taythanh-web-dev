@@ -244,7 +244,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav5">
+                            <div class="tab-pane fade" id="nav-5" role="tabpanel" aria-labelledby="nav5">
                                 <div class="row">
                                     <!-- Single News Area -->
                                     <div class="col-12">
@@ -363,50 +363,107 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3">
-
-                    <!-- Single News Area -->
-                    <div class="single-blog-post style-6 mb-30">
-                        <!-- Blog Thumbnail -->
-                        <div class="blog-thumbnail">
-                            <a href="#"><img src="https://img.youtube.com/vi/4qURtrx1rwU/sddefault.jpg" alt=""></a>
-                            <a href="https://www.youtube.com/watch?v=4qURtrx1rwU" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-
-                        <!-- Blog Content -->
-                        <div class="blog-content">
-                            <span class="post-date">June 20, 2018</span>
-                            <p class="post-title">Viral Video</p>
-                        </div>
-                    </div>
-                    <!-- Single News Area -->
-                    <div class="single-blog-post style-6 mb-30">
-                        <!-- Blog Thumbnail -->
-                        <div class="blog-thumbnail">
-                            <a href="#"><img src="https://img.youtube.com/vi/_9ptGWjypco/sddefault.jpg" alt=""></a>
-                            <a href="https://www.youtube.com/watch?v=_9ptGWjypco" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-
-                        <!-- Blog Content -->
-                        <div class="blog-content">
-                            <span class="post-date">June 20, 2018</span>
-                            <p class="post-title">Viral Video</p>
-                        </div>
-                    </div>
-                    <!-- Single News Area -->
-                    <div class="single-blog-post style-6 mb-30">
-                        <!-- Blog Thumbnail -->
-                        <div class="blog-thumbnail">
-                            <a href="#"><img src="https://img.youtube.com/vi/tvIpnOzihus/sddefault.jpg" alt=""></a>
-                            <a href="https://www.youtube.com/watch?v=tvIpnOzihus" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
-                        </div>
-
-                        <!-- Blog Content -->
-                        <div class="blog-content">
-                            <span class="post-date">June 20, 2018</span>
-                            <p class="post-title">Viral Video</p>
-                        </div>
-                    </div>
                     
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/{{videos.video1}}/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v={{videos.video1}}" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <!--<div class="blog-content">
+                            <span class="post-date"></span>
+                            <p class="post-title"></p>
+                        </div>-->
+                    </div>
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/{{videos.video2}}/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v={{videos.video2}}" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <!--<div class="blog-content">
+                            <span class="post-date"></span>
+                            <p class="post-title"></p>
+                        </div>-->
+                    </div>
+                    <!-- Single News Area -->
+                    <div class="single-blog-post style-6 mb-30">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://img.youtube.com/vi/{{videos.video3}}/sddefault.jpg" alt=""></a>
+                            <a href="https://www.youtube.com/watch?v={{videos.video3}}" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        </div>
+
+                        <!-- Blog Content -->
+                        <!--<div class="blog-content">
+                            <span class="post-date"></span>
+                            <p class="post-title"></p>
+                        </div>-->
+                    </div>
+                    {{#unless (equal user.admin 0)}}
+                    <div class="single-blog-post style-6 mb-30">
+                        <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#videoModal" data-bs-whatever="@mdo" >Điều chỉnh video</button>
+                    </div>
+                    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Take Videos From Youtube</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="videoForm">
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">ID Video 1:</label>
+                                        <input type="text" value="{{videos.video1}}" class="form-control" name="video1">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">ID Video 2:</label>
+                                        <input type="text" value="{{videos.video2}}" class="form-control" name="video2">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">ID Video 3:</label>
+                                        <input type="text" value="{{videos.video3}}" class="form-control" name="video3">
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" form="videoForm" class="btn btn-primary">Save</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $('#videoForm').on('submit', function (e) {
+                            e.preventDefault();
+                            var dataVid = $(this).serializeArray();
+                            console.log(dataVid);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/dashboard/submit_video',
+                                data: dataVid,
+                                success: () => {
+                                    
+                                    Swal.fire(
+                                        'Updated !',
+                                        'Video của bạn được cập nhật',
+                                        'success',
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                },
+                            });
+                        });
+                    </script>
+                    {{/unless}}
                 </div>
             </div>
         </div>

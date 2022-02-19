@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const Post_special_list = require('../models/Post-special-list');
 const User = require('../models/User');
+const Video = require('../models/Video');
 
 const { convertRole } = require('../../utility/support');
 const { multipleMongooseToObject, mongooseToObject } = require('../../utility/mongoose');
@@ -34,6 +35,7 @@ class DashboardController {
         .catch(next);
     }
     
+    //[POST] /dashboard/users/load-more-users
     user_loading (req, res, next) {
         const limit = 10;
         User.find()
@@ -293,7 +295,13 @@ class DashboardController {
             })
         })
     }
-    //[POST] /dashboard/users/load-more-users
+    //[POST] /dashboard/submit_video
+    submit_video (req, res, next) {
+        Video.updateOne({code: 1}, req.body, {upsert: 1})
+             .then (() => {
+                res.send('1');
+             })
+    }
         
 }
 

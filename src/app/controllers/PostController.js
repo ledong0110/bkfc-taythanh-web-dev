@@ -1,5 +1,7 @@
 const Post = require('../models/Post');
 const Post_special_list = require('../models/Post-special-list');
+const Video = require('../models/Video');
+
 const multer = require('multer');
 const {
     multipleMongooseToObject,
@@ -81,7 +83,7 @@ class PostController {
                 });
             });
     }
-
+    //[GET] /post/all
     all_post(req, res, next) {
         Promise.all([
             Post.find({})
@@ -101,9 +103,11 @@ class PostController {
                         }
                     },
                     select: { _id: 0, content: 0, views: 0, updatedAt: 0, deleted: 0 },
-                })
+                }),
+            Video.findOne({code: 1})
+                 .select({video1: 1, video2: 1, video3: 1}),
         ])
-            .then(([posts, post_list_arr]) => {
+            .then(([posts, post_list_arr, videos]) => {
                 var breaking_post = [];
                 for (let singleList in post_list_arr){
                     if (post_list_arr[singleList].name == "hot"){
@@ -126,7 +130,7 @@ class PostController {
                     tuyensinh: posts.slice(0, 5),
                     moinhat: posts.slice(0, 5),
                     latestNews: getRandom(posts, 5),
-                    viral_video: 1,
+                    videos: mongooseToObject(videos),
                     breaking_post,
                 });
         })
