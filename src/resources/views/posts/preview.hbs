@@ -1,0 +1,265 @@
+<!-- ##### Breaking News Area Start ##### -->
+<section class="breaking-news-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Breaking News Widget -->
+                <div class="breaking-news-ticker d-flex flex-wrap align-items-center">
+                    <div class="title pe-auto ps-auto">
+                        <h6>Bài viết mới</h6>
+                    </div>
+                    <div id="breakingNewsTicker" class="ticker">
+                        <ul>
+                            {{#each breaking_post}}
+                            <li>
+                                <a href="/post/{{this.slug}}">
+                                    {{this.title}}
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ##### Breaking News Area End ##### -->
+<div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1" nonce="fBzCKsJJ"></script>
+<!-- ##### Post Details Title Area Start ##### -->
+<script>
+    var postTime = [];
+    postTime.push("{{post.createdAt}}")
+</script>
+
+{{#if (equal post.image_url '')}}
+    <div class="post-details-title-area bg-overlay clearfix" style="background-image: url(/img/default/thumbnail.png)">
+{{else}}
+    <div class="post-details-title-area bg-overlay clearfix" style="background-image: url({{post.image_url}})">
+{{/if}}
+
+    <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 col-lg-8">
+                <!-- Post Content -->
+                <div class="post-content">
+                    <p class="tag"><span>Bài viết</span></p>
+                    <p class="post-title">{{post.title}}</p>
+                    <div class="d-flex align-items-center">
+                        <span class="post-date mr-30"></span>
+                        <span class="author-detail">Được đăng bởi {{post.author.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- ##### Post Details Title Area End ##### -->
+
+<!-- ##### Post Details Area Start ##### -->
+<section class="post-news-area section-padding-100-0 mb-70">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Post Details Content Area -->
+            <div class="col-12 col-lg-8">
+                <div id="editorjs" class="post-details-content mb-100"></div>
+                <!--Facebook share-->
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1" nonce="3e9seKEL"></script>
+                <div class="fb-share-button" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                 <!-- Comment Area Start -->
+                <div class="clearfix mb-100">
+                    <h4 class="mb-50">Comments</h4>
+
+                    <!-- FACEBOOK Plugin comment -->
+                    <div id="fb-root d-flex"></div>
+                    <script async defer crossorigin="anonymous"
+                        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=429832765548741&autoLogAppEvents=1"
+                        nonce="nnUvxyJ6"></script>
+                    <div class="fb-comments d-flex" data-href="https://bkfc-taythanh.herokuapp.com/post/{{post.slug}}" data-adapt-container-width="true"  data-hide-cover="false" data-width="500" data-numposts="5"></div>
+                </div>
+            </div>
+
+            <!-- Sidebar Widget -->
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="sidebar-area">
+
+                    <!-- Newsletter Widget -->
+                    {{!-- <div class="single-widget-area newsletter-widget mb-30">
+                        <h4>Subscribe to our newsletter</h4>
+                        <form action="#" method="post">
+                            <input type="email" name="nl-email" id="nlemail" placeholder="Your E-mail">
+                            <button type="submit" class="btn newsbox-btn w-100">Subscribe</button>
+                        </form>
+                        <p class="mt-30">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum.
+                            Etiam pretium turpis eget nibh . volutpat lobortis.</p>
+                    </div> --}}
+
+                    <!-- Add Widget -->
+                    {{!-- <div class="single-widget-area add-widget mb-30">
+                        <a href="#">
+                            <img src="/img/bg-img/add3.png" alt="">
+                        </a>
+                    </div> --}}
+
+                    {{!-- ADVERTISEMENT --}}
+                    <div class = "col-md-12 col-12 ps-3 pe-3 pb-5 order-md-3 order-3"> 
+                        <div class="post-list-title bg-light pb-3">
+                            <p class="p-0 text-center mb-0">Quảng cáo</p>      
+                        </div> 
+                        <a>
+                            <img class="pb-3" src="/img/ads/ad_1.png" alt="">
+                        </a>
+                    </div>
+
+                    <!-- POPULAR News Widget -->
+                    {{#each all_list}}
+                    {{#if (equal this.name "popular")}}
+
+                    <div class="post-list-area border border-1 border-danger border-top-0 border-start-0 border-end-0 mb-5">
+                        <div class="post-list-title bg-light">
+                            <h4 class="ms-auto me-auto mt-auto mb-auto p-2 text-center">Phổ biến</h4>      
+                        </div> 
+                    </div>
+                    <div class="col-12 col-md-12 me-auto ms-auto">
+                        {{#each this.posts_checked_load}}
+                        <script>
+                            postTime.push("{{this.createdAt}}");
+                        </script>
+
+                        <div class="single-blog-post d-flex style-4 mb-5">
+                            <div class="blog-thumbnail pb-1">
+                                {{#if (equal this.image_url '')}}
+                                    <a>
+                                        <img class="thumbnail-img" src="/img/default/thumbnail.png" alt="">
+                                    </a>
+                                {{else}}
+                                    <a>
+                                        <img class="thumbnail-img" src="{{this.image_url}}" alt="">
+                                    </a>
+                                {{/if}}
+                            </div>
+                            
+                            <div class="blog-content blog-content-small">
+                                <a href="/post/{{this.slug}}" class="post-title d-block" >{{this.title}}</a>
+                                {{!-- <p class="post-des d-none d-sm-block">{{this.description}}</p> --}}
+                                <span class="post-date"></span>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                    {{/if}}
+                    {{/each}}
+                    
+                    {{!-- <!-- Single Widget Area -->
+                    <div class="single-widget-area">
+
+                        <!-- Single News Area -->
+                        <div class="single-blog-post style-2 mb-5">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="/img/bg-img/14.jpg" alt=""></a>
+                            </div>
+
+                            <!-- Blog Content -->
+                            <div class="blog-content">
+                                <span class="post-date">June 20, 2018</span>
+                                <a href="#" class="post-title">Elon Musk: Tesla worker admitted to sabotage</a>
+                                <a href="#" class="post-author">By Michael Smith</a>
+                            </div>
+                        </div>
+
+                        <!-- Single News Area -->
+                        <div class="single-blog-post style-2 mb-5">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="/img/bg-img/15.jpg" alt=""></a>
+                            </div>
+
+                            <!-- Blog Content -->
+                            <div class="blog-content">
+                                <span class="post-date">June 20, 2018</span>
+                                <a href="#" class="post-title">Rachel Sm ith breaks down while discussing border
+                                    crisis</a>
+                                <a href="#" class="post-author">By Michael Smith</a>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="col-12 col-md-12 me-auto ms-auto">
+                        <div class="fb-page single-blog-post d-flex style-4 mb-5" data-href="https://www.facebook.com/BKFCTayThanh" data-tabs="" data-width="440" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/BKFCTayThanh" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/BKFCTayThanh">BK FC - THPT Tây Thạnh, TP.HCM</a></blockquote></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Post Details Area End ##### -->
+
+
+<!-- ##### All Javascript Script ##### -->
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/js/bootstrap/popper.min.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/plugins.js"></script>
+<script src="/js/active.js"></script>
+
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist --> --}}
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote --> --}}
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table --> --}}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning --> --}}
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.1.22/dist/bundle.js"></script> <!-- Color font-->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+{{!--
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code --> --}}
+<script src="https://cdn.jsdelivr.net/npm/editorjs-paragraph-with-alignment@3.0.0"></script>
+
+<script src="/js/post-show.js"></script>
+
+
+
+<script>
+    editor.isReady
+    .then(() => {
+        console.log('Editor.js is ready to work!')
+        editor.render({{{ json post.content }}})
+       })
+       .catch ((reason) => {
+    console.log(`Editor.js initialization failed because of ${reason}`)
+});
+</script>
+
+<script>
+    for (element in postTime){
+        displayTime("post-date", postTime);
+    }
+</script>

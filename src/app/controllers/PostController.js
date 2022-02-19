@@ -6,6 +6,7 @@ const {
     mongooseToObject,
 } = require('../../utility/mongoose');
 const { convertRole, getRandom } = require('../../utility/support');
+const Preview = require('../models/Preview');
 
 class PostController {
     post_default(res, req, next){
@@ -354,6 +355,33 @@ class PostController {
                 .then((posts) => {
                     res.json(multipleMongooseToObject(posts));
                 })
+    }
+
+    //[POST] /post/edit/preview
+    post_edit_preview (req, res, next) {
+        req.body.content = JSON.parse(req.body.content);
+        Preview.updateOne({_id: '62107375d8ed192260884712'},{
+            title: req.body.title,
+            description: req.body.description,
+            content: req.body.content,
+            image_url: req.body.image_url,
+            })
+            .then(() => (res.send('1')));
+    }
+
+    //[GET] /post/edit/preview
+    post_edit_preview_watch (req, res, next) {
+        if (req.query.id == "62107375d8ed192260884712")
+        {    
+            Preview.findOne({_id: req.query.id})
+            .then((post) => {
+                post = mongooseToObject(post);
+                res.render('posts/preview', {post});
+            })
+        }
+        else
+            res.render('site/notFound');
+        
     }
 }
 

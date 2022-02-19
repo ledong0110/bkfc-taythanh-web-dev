@@ -19,6 +19,8 @@ router.get('/my-post', isContentCreator, postController.my_post);
 router.get('/my-post-bin', isContentCreator, postController.my_post_bin);
 router.get('/edit/:slug', isContentCreator, postController.post_edit);
 router.post('/edit', isContentCreator, postController.post_edit_save);
+router.post('/preview', isContentCreator, postController.post_edit_preview);
+router.get('/preview', isContentCreator, postController.post_edit_preview_watch);
 router.patch('/:id/restore', isContentCreator, postController.post_restore);
 router.get('/:slug', isAuthenticated, postController.show);
 

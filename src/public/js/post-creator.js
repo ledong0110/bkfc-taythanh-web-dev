@@ -114,3 +114,31 @@ $(function () {
         });
     });
 });
+
+
+
+function preview() {
+    form = $('form.post-submit-form');
+    var dt = form.serializeArray();
+    editor.save()
+        .then((outputData) => {
+            console.log('data:', Object.values(outputData));
+            dt.push({
+                name: 'content',
+                value: JSON.stringify(outputData),
+            });
+            return dt;
+        })
+        .then( (dt) => {
+            $.ajax({
+                method: 'POST',
+                url: '/post/preview',
+                data: dt,
+                success: (res) => {
+                    
+                   console.log(res);
+                   window.open('/post/preview?id=62107375d8ed192260884712', '_blank');
+                },
+            });
+        });
+};
