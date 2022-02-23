@@ -1,0 +1,96 @@
+<div class="mt-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <button>HOC NGAY</button>
+        </div>
+        <div class="col-lg-9">
+            <h2>{{course.name}}</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{course.idV}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>{{course.description}}</p>
+        </div>
+    </div>
+    
+</div>
+
+<div class="row d-flex justify-content-center">
+    <ul>
+        {{#each course.lessons}}
+        <li><a class="btn-link" href="/learning/courses/{{@root.course.slug}}/lesson?id={{@index}}">{{@index}}. {{this.name}}</a> <span><button class="btn btn-primary delete d-none" data-bs-toggle="modal" data-id="{{@index}}" data-bs-target="#delete-modal">Xóa</button></li>
+        {{else}}
+        Chưa đăng bài học.
+        {{/each}}
+    </ul>
+    <div id="input_course" class="d-none">
+        <form method="POST" action="/learning/courses/{{course.slug}}/addLesson">
+            <label for="nameLesson">Tên bài học</label>
+            <input type="text" name="nameLesson">
+            <label for="linkLesson">Đường dãn azota</label>
+            <input type="text" name="linkLesson">
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+    <div class="col-lg-3">
+        <button type="button" class="btn btn-primary" onclick="toggleField()">Thêm bài học</button>
+        <button type="button" class="btn btn-primary" onclick="toggleDelete()">Chỉnh sửa</button>
+    </div>
+        {{!--Confirm delete course--}}
+    <div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Bạn chắc chắn muốn xóa chứ ?</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Hành động này sẽ xóa luôn bài học của bạn</p>
+        </div>
+        <div class="modal-footer">
+            <button id="btn-delete-lesson" type="button" class="btn btn-danger">Xóa bỏ</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        function toggleField() {
+            $('#input_course').toggleClass('d-none');
+        }
+        function toggleDelete() {
+            $('.btn.delete').toggleClass('d-none');
+        }      
+    </script>
+    <script>
+        var lessonId;
+        $('#delete-modal').on('show.bs.modal', function (event) {
+            var button = jQuery(event.relatedTarget) // Button that triggered the modal
+            lessonId = button.data('id') // Extract info from data-* attributes
+        });
+        $('#btn-delete-lesson').click(function() {
+            $.ajax({
+                method: 'DELETE',
+                url: '/learning/courses/{{course._id}}/deleteLesson',
+                data: {lessonId},
+                success: () => {
+                    console.log('Uploaded post:', lessonId);
+                    Swal.fire(
+                        'Updated !',
+                        'Completely delete',
+                        'success',
+                    ).then(() => {
+                        window.location.reload();
+                    });
+                },
+            });
+        })
+    </script>
+</div>
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>

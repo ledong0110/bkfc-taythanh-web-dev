@@ -1,0 +1,31 @@
+<a class="btn btn-link" href="/learning/courses/create">Đăng khóa học</a>
+<a class="btn btn-link" href="/learning/courses/manage">Quản lý khóa học</a>
+<div class="mt-4">
+    <div class="row">
+        {{#each courses}}
+        <div class="col-sm-6 col-lg-4">
+            <div class="card card-course-item" style="width: 18rem;">
+                <a href="/learning/courses/{{this.slug}}">
+                    <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                    <a href="/learning/courses/{{this.slug}}">
+                        <h5 class="card-title">{{this.name}}</h5>
+                    </a>
+                    
+                    <p class="card-text">{{this.description}}</p>
+                    <a href="" class="btn btn-primary">Buy</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>  
+</div>
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>

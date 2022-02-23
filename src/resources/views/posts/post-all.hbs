@@ -406,6 +406,7 @@
                             <p class="post-title"></p>
                         </div>-->
                     </div>
+                    {{#if authenticated}}
                     {{#unless (equal user.admin 0)}}
                     <div class="single-blog-post style-6 mb-30">
                         <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#videoModal" data-bs-whatever="@mdo" >Điều chỉnh video</button>
@@ -464,6 +465,7 @@
                         });
                     </script>
                     {{/unless}}
+                    {{/if}}
                 </div>
             </div>
         </div>

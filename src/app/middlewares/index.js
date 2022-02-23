@@ -67,7 +67,7 @@ function isContentCreator(req, res, next) {
     }
 }
 
-function isKnownLedgeProvider(req, res, next) {
+function isKnowLedgeProvider(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
     req.app.locals.auth = false;
 
@@ -139,6 +139,6 @@ function isModerator(req, res, next) {
 module.exports = {
     isAuthenticated,
     isContentCreator,
-    isKnownLedgeProvider,
+    isKnowLedgeProvider,
     isModerator,
 };
