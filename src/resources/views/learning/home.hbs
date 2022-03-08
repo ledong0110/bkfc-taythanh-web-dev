@@ -1,10 +1,14 @@
-<a class="btn btn-link" href="/learning/courses/create">Đăng khóa học</a>
 <a class="btn btn-link" href="/learning/courses/manage">Quản lý khóa học</a>
-<div class="mt-4">
-    <div class="row">
-        {{#each courses}}
-        <div class="col-sm-6 col-lg-4">
-            <div class="card card-course-item" style="width: 18rem;">
+
+{{#each list_courses}}
+<div class="carousel-wrap">
+  <a class="btn btn-link" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#courseModal">Tạo khóa học</a>
+  <a class="btn btn-link deleteList" href="" data-id="{{this._id}}">Xóa danh mục</a>
+  <h1>{{this.list_name}}</h1>
+    <div class="owl-carousel owl-theme">
+    {{#each this.courses}}
+        <div class="item">
+          <div class="card card-course-item" style="width: 18rem;">
                 <a href="/learning/courses/{{this.slug}}">
                     <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
                 </a>
@@ -14,18 +18,174 @@
                     </a>
                     
                     <p class="card-text">{{this.description}}</p>
-                    <a href="" class="btn btn-primary">Buy</a>
+                    <a href="" class="btn btn-primary">Vào học ngay</a>
                 </div>
             </div>
         </div>
-        {{/each}}
-    </div>  
+      {{else}}
+      <h2>Danh sách trống</h2>
+    {{/each}}
+    </div>
 </div>
+{{/each}}
+<a class="btn-link" href="" data-bs-toggle="modal" data-bs-target="#listModal"><i class="fa-solid fa-plus"></i> Tạo một danh mục mới</a>
+<div class="modal fade" id="listModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tạo danh sách</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="playlists" method="POST" action="/learning/courses/playlist">
+          <div class="mb-3">
+            <label for="list_name" class="col-form-label">Tên danh sách:</label>
+            <input type="text" class="form-control" name="list_name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="submit" form="playlists" class="btn btn-primary">Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Khóa Học</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="course_submit">
+          <div class="mb-3">
+              <label for="name">Title Course</label>
+              <input type="text" name="name" class="form-control">
+          </div>
+          <div class="mb-3">
+              <label for="idV">ID video</label>
+              <input type="text" name="idV" class="form-control">
+          </div>
+          <div class="mb-3">
+              <label for="level">Level</label>
+              <input type="text" name="level" class="form-control">
+          </div>
+          <div class="mb-3">
+              <label for="description">Description</label>
+              <textarea class="form-control" name="description"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Thêm Khóa Học</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-$(document).ready(function(){
-        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
-        $(window).resize(function(){
+    $(document).ready(function(){
             $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+            $(window).resize(function(){
+                $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+            });
         });
+</script>
+<script src="/js/owl.carousel.min.js"></script>
+<script>
+    $(window).on('load', function() {
+        $('.owl-carousel').owlCarousel({
+                margin: 10,
+                nav: true,
+                navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+                dots: true,
+                autoplay: true,
+                autoplayTimeOut: 1,
+                autoplayHoverPause: true,
+                smartSpeed: 2000,
+                loop: true,
+                responsiveBaseElement:".app",
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
     });
+</script>
+<script>
+  $('.deleteList').on('click', function(e){
+    e.preventDefault();
+    var deleteList = $(this).data('id');
+    Swal.fire({
+            title: 'Bạn có chắc muốn xóa danh sách này?',
+            text: "Danh sách sẽ bị xóa vĩnh viễn",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa luôn!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var callback = $.ajax({
+                        type: "DELETE",
+                        url: "/learning/",
+                        data: {deleteList},
+                        success: ()=>{
+                          Swal.fire(
+                              'Đã xóa',
+                              'Kiểm tra được chưa mate',
+                              'success'
+                          ).then(()=>{
+                              window.location.reload();
+                          })
+                           
+                            
+                        }
+                    })   
+                }
+            })
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function (){
+      var listId;
+      $('#courseModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      listId = button.data('id') 
+      });
+
+
+      $('form#course_submit').on('submit', function (e) {
+          e.preventDefault();
+          var dataStr = $(this).serializeArray();
+          dataStr.push({
+            name: 'list_id',
+            value: listId
+          });
+          
+          $.ajax({
+              type: 'POST',
+              url: '/learning/courses/store',
+              data: dataStr,
+              success: () => {
+                  console.log('Uploaded post:', dataStr);
+                  Swal.fire(
+                      'Uploaded !',
+                      'Your course is now online',
+                      'success',
+                  ).then(() => {
+                      window.location.reload();
+                  });
+              },
+          });
+      });
+  })
 </script>
