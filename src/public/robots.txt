@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /post/create
+Disallow: /post/edit
+Disallow: /dashboard
+Disallow: /learning/courses/store
