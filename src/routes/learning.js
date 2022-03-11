@@ -16,6 +16,16 @@ router.delete(
     learningController.course_playlist_delete,
 );
 router.post(
+    '/get_list_courses',
+    isKnowLedgeProvider,
+    learningController.course_list_return,
+);
+router.put(
+    '/save_list_courses',
+    isKnowLedgeProvider,
+    learningController.list_save_courses,
+);
+router.post(
     '/courses/playlist',
     isKnowLedgeProvider,
     learningController.course_playlist,

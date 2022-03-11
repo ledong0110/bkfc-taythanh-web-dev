@@ -1,7 +1,8 @@
 <div class="mt-4">
     <div class="row">
         <div class="col-lg-3">
-            <button>HOC NGAY</button>
+            <button onclick="history.back();">Quay lại</button>
+            
         </div>
         <div class="col-lg-9">
             <h2>{{course.name}}</h2>
@@ -15,7 +16,7 @@
 <div class="row d-flex justify-content-center">
     <ul>
         {{#each course.lessons}}
-        <li><a class="btn-link" href="/learning/courses/{{@root.course.slug}}/lesson?id={{@index}}">{{@index}}. {{this.name}}</a> <span><button class="btn btn-primary delete d-none" data-bs-toggle="modal" data-id="{{@index}}" data-bs-target="#delete-modal">Xóa</button></li>
+        <li><a class="btn-link" href="/learning/courses/{{@root.course.slug}}/lesson?id={{@index}}">{{sum @index 1}}. {{this.name}}</a> <span><button class="btn btn-primary delete d-none" data-bs-toggle="modal" data-id="{{@index}}" data-bs-target="#delete-modal">Xóa</button></li>
         {{else}}
         Chưa đăng bài học.
         {{/each}}
@@ -39,9 +40,7 @@
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Bạn chắc chắn muốn xóa chứ ?</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <p>Hành động này sẽ xóa luôn bài học của bạn</p>

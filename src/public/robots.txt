@@ -4,4 +4,5 @@ Disallow: /post/create
 Disallow: /post/edit
 Disallow: /dashboard
 Disallow: /learning/courses/store
+Disallow: /learning/courses/*/lesson
 Sitemap: https://bkfc-taythanh.herokuapp.com/sitemap.xml

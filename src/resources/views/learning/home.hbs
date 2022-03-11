@@ -1,8 +1,9 @@
 <a class="btn btn-link" href="/learning/courses/manage">Quản lý khóa học</a>
-
+<a class="btn btn-link" href="/learning/courses/create">Tạo khóa học mới</a>
 {{#each list_courses}}
 <div class="carousel-wrap">
   <a class="btn btn-link" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#courseModal">Tạo khóa học</a>
+  <a class="btn btn-link" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#selectModal">Chọn khóa học</a>
   <a class="btn btn-link deleteList" href="" data-id="{{this._id}}">Xóa danh mục</a>
   <h1>{{this.list_name}}</h1>
     <div class="owl-carousel owl-theme">
@@ -84,6 +85,33 @@
   </div>
 </div>
 
+<div class="modal  fade" id="selectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Chọn khóa học</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form id="course-list-submit-form" class="course-list-submit-form form-check col" method="POST" action="/learning/save_list_courses">
+            <div class="post-manage-post-area overflow-auto container">
+              {{#each all_courses}}
+              <div class="form-check-inline pt-3 d-block pb-3">
+                  <div class="p-2 rounded checkbox-form">
+                      <div class="form-check"> <input class="form-check-input course-check" type="checkbox" name="courses_saved_in_list[]" value="{{this._id}}" id="e{{this._id}}"> <label class="form-check-label" for="e{{this._id}}"> {{this.name}} </label> </div>
+                  </div>
+              </div>
+              {{/each}}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="course-list-submit-form" class="btn btn-primary">Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     $(document).ready(function(){
             $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
@@ -100,11 +128,7 @@
                 nav: true,
                 navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
                 dots: true,
-                autoplay: true,
-                autoplayTimeOut: 1,
-                autoplayHoverPause: true,
-                smartSpeed: 2000,
-                loop: true,
+                smartSpeed: 1500,
                 responsiveBaseElement:".app",
                 responsive: {
                     0: {
@@ -158,8 +182,8 @@
   document.addEventListener('DOMContentLoaded', function (){
       var listId;
       $('#courseModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      listId = button.data('id') 
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        listId = button.data('id') 
       });
 
 
@@ -176,7 +200,6 @@
               url: '/learning/courses/store',
               data: dataStr,
               success: () => {
-                  console.log('Uploaded post:', dataStr);
                   Swal.fire(
                       'Uploaded !',
                       'Your course is now online',
@@ -187,5 +210,58 @@
               },
           });
       });
+
+      
   })
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function (){
+    var listId;
+    $('#selectModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      listId = button.data('id');
+      $.ajax({
+              url: '/learning/get_list_courses',
+              method: 'POST',
+              data: {id_list: listId},
+              success: (response) => handleListCourse(response),
+          });
+    });
+    $('form#course-list-submit-form').on('submit', function (e) {
+          e.preventDefault();
+          var dataStr = $(this).serializeArray();
+          dataStr.push({
+            name: 'list_id',
+            value: listId
+          });
+          
+          $.ajax({
+              type: 'PUT',
+              url: '/learning/save_list_courses',
+              data: dataStr,
+              success: () => {
+                  Swal.fire(
+                      'Updated !',
+                      'Đã cập nhật xong danh sách khóa học',
+                      'success',
+                  ).then(() => {
+                      window.location.reload();
+                  });
+              },
+          });
+      });
+
+  
+  });
+  function handleListCourse(response) {
+    console.log(response);
+    $('input[type="checkbox"][class="form-check-input course-check"]').each(function() { 
+        this.checked = false; 
+      });
+    for(var i=0; i < response.length; i++){
+	    $(`input[type="checkbox"][class="form-check-input course-check"][value="${response[i]}"]`).prop('checked', 'true');
+    }
+  }
+  
 </script>

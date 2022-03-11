@@ -11,26 +11,35 @@ const { info } = require('node-sass');
 class LearningController {
     //[GET] /learning/
     course_list(req, res, next) {
-        CourseList.find({})
-            .select({ courses: 1, list_name: 1 })
-            .populate({
-                path: 'courses',
-                options: {
-                    sort: { createdAt: -1 },
-                },
-                select: {
-                    lessons: 0,
-                    idV: 0,
-                    __v: 0,
-                    updatedAt: 0,
-                    createdAt: 0,
-                    deleted: 0,
-                },
-            })
-            .then((list_courses) => {
+        Promise.all([
+            CourseList.find({})
+                .select({ courses: 1, list_name: 1 })
+                .populate({
+                    path: 'courses',
+                    options: {
+                        sort: { createdAt: -1 },
+                    },
+                    select: {
+                        lessons: 0,
+                        idV: 0,
+                        __v: 0,
+                        updatedAt: 0,
+                        createdAt: 0,
+                        deleted: 0,
+                    },
+                }),
+            Course.find({}).sort({ updatedAt: -1 }).select({
+                lessons: 0,
+                idV: 0,
+                __v: 0,
+                createdAt: 0,
+            }),
+        ])
+            .then(([list_courses, all_courses]) => {
                 list_courses = multipleMongooseToObject(list_courses);
                 res.render('learning/home', {
                     list_courses,
+                    all_courses: multipleMongooseToObject(all_courses),
                 });
             })
             .catch(next);
@@ -163,8 +172,31 @@ class LearningController {
         courseList.save().then(() => res.redirect('/learning'));
     }
 
+    //[DELETE] /learning/
     course_playlist_delete(req, res, next) {
         CourseList.deleteOne({ _id: req.body.deleteList }).then(() => {
+            res.send('done');
+        });
+    }
+
+    //[POST] /learning/get_list_courses
+    course_list_return(req, res, next) {
+        CourseList.findOne({ _id: req.body.id_list })
+            .select({ courses: 1 })
+            .then((course_id) => {
+                res.json(mongooseToObject(course_id).courses);
+            });
+    }
+
+    //[PUT] /learning/save_list_courses
+    list_save_courses(req, res, next) {
+        var saved = [];
+        if (req.body.courses_saved_in_list)
+            saved = req.body.courses_saved_in_list.map(Number);
+        CourseList.updateOne(
+            { _id: req.body.list_id },
+            { courses: saved },
+        ).then(() => {
             res.send('done');
         });
     }
