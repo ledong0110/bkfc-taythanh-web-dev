@@ -8,6 +8,7 @@ const options = {
 };
 function isAuthenticated(req, res, next) {
     req.app.locals.authenticated = req.oidc.isAuthenticated();
+    req.session.returnTo = req.originalUrl;
     if (req.flash('auth').length > 0) req.app.locals.auth = true;
     else req.app.locals.auth = false;
 

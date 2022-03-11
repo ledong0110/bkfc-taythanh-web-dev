@@ -69,10 +69,10 @@ class SiteController {
                     picture: req.oidc.user.picture,
                     admin: 0,
                 };
-                res.redirect('/');
+                res.redirect(req.session.returnTo);
             } else {
                 req.app.locals.user = user;
-                res.redirect('/');
+                res.redirect(req.session.returnTo);
             }
         });
     }
