@@ -240,6 +240,23 @@
     }
 }
 
+.tutorial-list {
+    padding-left: 0;
+    & li {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+        position: relative;
+        & button {
+            float: right;
+        }
+    }
+}
+
+.btn.btn-back {
+    &:hover {
+        opacity: 0.8;
+    }
+}
 /* Dong Custom End**********************************************************/
 ///##########################################################################
 /* Khoa Custom**************************************************************/

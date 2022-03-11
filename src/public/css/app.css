@@ -188,6 +188,18 @@
     left: 0;
     background-color: #ffffff; } }
 
+.tutorial-list {
+  padding-left: 0; }
+  .tutorial-list li {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    position: relative; }
+    .tutorial-list li button {
+      float: right; }
+
+.btn.btn-back:hover {
+  opacity: 0.8; }
+
 /* Dong Custom End**********************************************************/
 /* Khoa Custom**************************************************************/
 /* Khoa Custom End**********************************************************/
@@ -2634,7 +2646,7 @@ img {
   /* fix firefox animation glitch */ }
 
 .owl-carousel .owl-stage:after {
-  content: ".";
+  content: '.';
   display: block;
   clear: both;
   visibility: hidden;
@@ -2767,7 +2779,8 @@ img {
   opacity: 0;
   transition: opacity 400ms ease; }
 
-.owl-carousel .owl-item .owl-lazy[src^=""], .owl-carousel .owl-item .owl-lazy:not([src]) {
+.owl-carousel .owl-item .owl-lazy[src^=''],
+.owl-carousel .owl-item .owl-lazy:not([src]) {
   max-height: 0; }
 
 .owl-carousel .owl-item img.owl-lazy {
