@@ -1,25 +1,31 @@
-<a class="btn btn-link" href="/learning/courses/manage">Quản lý khóa học</a>
-<a class="btn btn-link" href="/learning/courses/create">Tạo khóa học mới</a>
+{{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+<div class="mt-4">
+  <a class="btn btn-primary shadow-none" href="/learning/courses/manage">Quản lý khóa học</a>
+  <a class="btn btn-primary shadow-none" href="/learning/courses/create">Tạo khóa học mới</a>
+</div>
+{{/if}}
 {{#each list_courses}}
-<div class="carousel-wrap">
-  <a class="btn btn-link" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#courseModal">Tạo khóa học</a>
-  <a class="btn btn-link" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#selectModal">Chọn khóa học</a>
-  <a class="btn btn-link deleteList" href="" data-id="{{this._id}}">Xóa danh mục</a>
+<div class="carousel-wrap mt-4">
+  {{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+  <a class="btn btn-dark shadow-none" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#courseModal">Tạo khóa học</a>
+  <a class="btn btn-success shadow-none" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#selectModal">Chọn khóa học</a>
+  <a class="btn btn-danger shadow-none deleteList" href="" data-id="{{this._id}}">Xóa danh mục</a>
+  {{/if}}
   <h1>{{this.list_name}}</h1>
     <div class="owl-carousel owl-theme">
     {{#each this.courses}}
-        <div class="item">
-          <div class="card card-course-item" style="width: 18rem;">
+        <div class="item d-flex align-items-stretch">
+          <div class="card card-course-item" style="width: 20rem;height: 30rem">
                 <a href="/learning/courses/{{this.slug}}">
                     <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
                 </a>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <a href="/learning/courses/{{this.slug}}">
                         <h5 class="card-title">{{this.name}}</h5>
                     </a>
                     
                     <p class="card-text">{{this.description}}</p>
-                    <a href="/learning/courses/{{this.slug}}" class="btn btn-primary">Vào học ngay</a>
+                    <a href="/learning/courses/{{this.slug}}" class="btn btn-primary mt-auto">Vào học ngay</a>
                 </div>
             </div>
         </div>
@@ -29,7 +35,10 @@
     </div>
 </div>
 {{/each}}
-<a class="btn-link" href="" data-bs-toggle="modal" data-bs-target="#listModal"><i class="fa-solid fa-plus"></i> Tạo một danh mục mới</a>
+{{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+<div class="d-flex justify-content-center">
+  <button class="btn btn-back btn-lg shadow-none mt-4" data-bs-toggle="modal" data-bs-target="#listModal"><i class="fa-solid fa-plus"></i> Tạo một danh mục mới</button>
+</div>
 <div class="modal fade" id="listModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -67,7 +76,7 @@
               <input type="text" name="name" class="form-control">
           </div>
           <div class="mb-3">
-              <label for="idV">ID video</label>
+              <label for="idV">Đường dẫn hình ảnh</label>
               <input type="text" name="idV" class="form-control">
           </div>
           <div class="mb-3">
@@ -111,7 +120,7 @@
     </div>
   </div>
 </div>
-
+{{/if}}
 <script>
     $(document).ready(function(){
             $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
@@ -124,7 +133,8 @@
 <script>
     $(window).on('load', function() {
         $('.owl-carousel').owlCarousel({
-                margin: 10,
+                margin: 20,
+                stagePadding: 30,
                 nav: true,
                 navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
                 dots: true,
@@ -144,6 +154,7 @@
             });
     });
 </script>
+{{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
 <script>
   $('.deleteList').on('click', function(e){
     e.preventDefault();
@@ -265,3 +276,4 @@
   }
   
 </script>
+{{/if}}

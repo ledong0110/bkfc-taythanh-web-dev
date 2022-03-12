@@ -257,6 +257,16 @@
         opacity: 0.8;
     }
 }
+//Card
+.card {
+    &:hover {
+        transform: scale(1.05);
+    }
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+    border-radius: 0.2;
+    border: 0;
+}
 /* Dong Custom End**********************************************************/
 ///##########################################################################
 /* Khoa Custom**************************************************************/
@@ -313,4 +323,8 @@ services
 }
 .owl-carousel .next-slide:hover {
     background-position: -24px -53px;
+}
+
+.owl-stage-outer {
+    padding: 15px;
 }
