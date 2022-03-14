@@ -14,5 +14,6 @@ router.post('/post-manage/top-post', isModerator, dashboardController.manage_top
 router.post('/post-manage/hot-post', dashboardController.manage_hot_post);
 router.get('/trash-bin', isModerator, dashboardController.trash_bin);
 router.get('/general', isModerator, dashboardController.general_info);
+router.post('/submit_video', isModerator, dashboardController.submit_video);
 
 module.exports = router;

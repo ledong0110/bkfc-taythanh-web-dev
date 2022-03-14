@@ -1,0 +1,31 @@
+<div class="mt-4">
+    <h3>Cập Nhật Khóa Học</h3>
+    <form class="mt-4" method="POST" action="/learning/courses/{{course._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Title Course</label>
+            <input type="text" name="name" value="{{course.name}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" value="{{course.description}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="idV">ID video</label>
+            <input type="text" name="idV" value="{{course.idV}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="level">Level</label>
+            <input type="text" name="level" value="{{course.level}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu Lại</button>
+        </form>
+</div>
+
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>

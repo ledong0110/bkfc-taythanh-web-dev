@@ -11,7 +11,7 @@ class SiteController {
     //[GET] /
     home(req, res, next) {
         // res.redirect("/post");
-        res.render('home');
+        res.render('site/home');
     }
 
     // [GET] /profile
@@ -27,7 +27,7 @@ class SiteController {
     profile(req, res) {
         var user_profile = Object.assign({}, req.app.locals.user);
         user_profile.admin = convertRole(user_profile.admin);
-        res.render('profile', { user_profile });
+        res.render('site/profile', { user_profile });
     }
 
     // [PATCH] /profile/update-avatar
@@ -42,7 +42,7 @@ class SiteController {
 
     // [GET] /contact
     contact(req, res) {
-        res.render('contact');
+        res.render('site/contact');
     }
 
     // [GET] /login
@@ -69,10 +69,10 @@ class SiteController {
                     picture: req.oidc.user.picture,
                     admin: 0,
                 };
-                res.redirect('/');
+                res.redirect(req.session.returnTo);
             } else {
                 req.app.locals.user = user;
-                res.redirect('/');
+                res.redirect(req.session.returnTo);
             }
         });
     }
@@ -85,12 +85,12 @@ class SiteController {
     // [GET] /*
     not_found(req, res, next) {
         res.status(404);
-        res.render('notFound');
+        res.render('site/notFound');
     }
 
     //[GET] /test
     test(req, res) {
-        res.render('site/test');
+        res.render('test');
     }
 }
 

@@ -1,0 +1,91 @@
+<div class="mt-4">
+    <div>
+      <h3>My Courses</h3>
+    </div>
+        <table class="table mt-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Course name</th>
+            <th scope="col">Level</th>
+            <th scope="col" colspan="2">Time Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each courses}}
+        <tr>
+            <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.name}}</td>
+            <td>{{this.level}}</td>
+            <td>{{this.createdAt}}</td>
+            <td>
+                <a href="/learning/courses/{{this._id}}/edit" class="btn btn-link">Edit</a>
+                <a href="" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-modal">Delete</a>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="5" class="text-center">
+              Bạn chưa đăng khóa học nào
+              <a href="/learning/courses/create">Đăng khóa học</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+</div>
+
+{{!--Confirm delete course--}}
+<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Bạn chắc chắn muốn xóa chứ ?</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Hành động này sẽ xóa luôn khóa học của bạn</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form method="POST" name="delete-form"></form>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function (){
+      //When diaglog confirm click
+      var courseId;
+      var deleteForm = document.forms['delete-form']
+      jQuery('#delete-modal').on('show.bs.modal', function (event) {
+      var button = jQuery(event.relatedTarget) // Button that triggered the modal
+      courseId = button.data('id') // Extract info from data-* attributes
+
+    });
+
+    var btnDeleteCourse = document.getElementById('btn-delete-course');
+
+    btnDeleteCourse.onclick = function () {
+      deleteForm.action = '/learning/courses/' + courseId + '?_method=DELETE';
+      deleteForm.submit();
+    }
+    
+  });
+</script>
+
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>

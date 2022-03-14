@@ -1,0 +1,31 @@
+<div class="mt-4">
+    <h3>Đăng Khóa Học</h3>
+    <form method="POST" action="/learning/courses/store">
+        <div class="form-group">
+            <label for="name">Title Course</label>
+            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="idV">ID video</label>
+            <input type="text" name="idV" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="level">Level</label>
+            <input type="text" name="level" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm Khóa Học</button>
+    </form>
+</div>
+
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 10);
+        });
+    });
+</script>

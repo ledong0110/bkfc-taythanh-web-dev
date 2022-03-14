@@ -1,11 +1,14 @@
 const Post = require('../models/Post');
 const Post_special_list = require('../models/Post-special-list');
+const Video = require('../models/Video');
+
 const multer = require('multer');
 const {
     multipleMongooseToObject,
     mongooseToObject,
 } = require('../../utility/mongoose');
 const { convertRole, getRandom } = require('../../utility/support');
+const Preview = require('../models/Preview');
 
 class PostController {
     post_default(res, req, next){
@@ -80,7 +83,7 @@ class PostController {
                 });
             });
     }
-
+    //[GET] /post/all
     all_post(req, res, next) {
         Promise.all([
             Post.find({})
@@ -100,9 +103,11 @@ class PostController {
                         }
                     },
                     select: { _id: 0, content: 0, views: 0, updatedAt: 0, deleted: 0 },
-                })
+                }),
+            Video.findOne({code: 1})
+                 .select({video1: 1, video2: 1, video3: 1}),
         ])
-            .then(([posts, post_list_arr]) => {
+            .then(([posts, post_list_arr, videos]) => {
                 var breaking_post = [];
                 for (let singleList in post_list_arr){
                     if (post_list_arr[singleList].name == "hot"){
@@ -125,7 +130,7 @@ class PostController {
                     tuyensinh: posts.slice(0, 5),
                     moinhat: posts.slice(0, 5),
                     latestNews: getRandom(posts, 5),
-                    viral_video: 1,
+                    videos: mongooseToObject(videos),
                     breaking_post,
                 });
         })
@@ -212,7 +217,7 @@ class PostController {
                         });
                 } else {
                     res.status(404);
-                    res.render('notFound');
+                    res.render('site/notFound');
                 }
             })
             .catch(next);
@@ -354,6 +359,33 @@ class PostController {
                 .then((posts) => {
                     res.json(multipleMongooseToObject(posts));
                 })
+    }
+
+    //[POST] /post/edit/preview
+    post_edit_preview (req, res, next) {
+        req.body.content = JSON.parse(req.body.content);
+        Preview.updateOne({_id: '62107375d8ed192260884712'},{
+            title: req.body.title,
+            description: req.body.description,
+            content: req.body.content,
+            image_url: req.body.image_url,
+            })
+            .then(() => (res.send('1')));
+    }
+
+    //[GET] /post/edit/preview
+    post_edit_preview_watch (req, res, next) {
+        if (req.query.id == "62107375d8ed192260884712")
+        {    
+            Preview.findOne({_id: req.query.id})
+            .then((post) => {
+                post = mongooseToObject(post);
+                res.render('posts/preview', {post});
+            })
+        }
+        else
+            res.render('site/notFound');
+        
     }
 }
 

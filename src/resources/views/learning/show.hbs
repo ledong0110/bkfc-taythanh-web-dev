@@ -1,0 +1,101 @@
+<div class="mt-3 p-2">
+    <button class="btn btn-back shadow-none" onclick="history.back();"><i class="fa fa-arrow-left"></i><span class="p-1">Quay lại</span></button>
+</div>
+<div class="row p-5 m-0">
+    <div class="col-md-6">
+        <img src="{{course.image}}" width="500" alt="{{course.name}}">
+        <div>
+            <h2>{{course.name}}</h2>
+            <h5>Nội dung</h5>
+            <p>{{course.description}}</p>
+            <p>Mức độ: {{course.level}}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+       <ul class="tutorial-list">
+            {{#each course.lessons}}
+            <li><a href="/learning/courses/{{@root.course.slug}}/lesson?id={{@index}}">{{sum @index 1}}. {{this.name}}</a> 
+            {{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+            <span><button class="btn btn-danger btn-sm shadow-none delete d-none" data-bs-toggle="modal" data-id="{{@index}}" data-bs-target="#delete-modal">Xóa</button></li>
+            {{/if}}
+            {{else}}
+            <h4>Chưa có bài học được đăng</h4>
+            {{/each}}
+        </ul>
+        {{#if (or (equal user.admin 2) (equal user.admin 3))}}
+        <div id="input_course" class="d-none">
+            <form method="POST" action="/learning/courses/{{course.slug}}/addLesson">
+                <label for="nameLesson">Tên bài học</label>
+                <input type="text" name="nameLesson">
+                <label for="linkLesson">Đường dãn azota</label>
+                <input type="text" name="linkLesson">
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+        <div class="mt-4 d-flex justify-content-center">
+            <button type="button" class="newsbox-btn btn-sm" onclick="toggleField()"><i class="fa-solid fa-plus"></i>Thêm bài học</button>&nbsp;
+            <button type="button" class="newsbox-btn btn-sm" onclick="toggleDelete()">Chỉnh sửa</button>
+        </div>
+        {{/if}}
+    </div>
+</div>
+{{#if (or (equal user.admin 2) (equal user.admin 3))}}
+    {{!--Confirm delete course--}}
+<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Bạn chắc chắn muốn xóa chứ ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Hành động này sẽ xóa luôn bài học của bạn</p>
+        </div>
+        <div class="modal-footer">
+            <button id="btn-delete-lesson" type="button" class="btn btn-danger">Xóa bỏ</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleField() {
+        $('#input_course').toggleClass('d-none');
+    }
+    function toggleDelete() {
+        $('.btn.delete').toggleClass('d-none');
+    }      
+</script>
+<script>
+    var lessonId;
+    $('#delete-modal').on('show.bs.modal', function (event) {
+        var button = jQuery(event.relatedTarget) // Button that triggered the modal
+        lessonId = button.data('id') // Extract info from data-* attributes
+    });
+    $('#btn-delete-lesson').click(function() {
+        $.ajax({
+            method: 'DELETE',
+            url: '/learning/courses/{{course._id}}/deleteLesson',
+            data: {lessonId},
+            success: () => {
+                console.log('Uploaded post:', lessonId);
+                Swal.fire(
+                    'Updated !',
+                    'Completely delete',
+                    'success',
+                ).then(() => {
+                    window.location.reload();
+                });
+            },
+        });
+    })
+</script>
+{{/if}}
+<script>
+$(document).ready(function(){
+        $(document.body).css('padding-top', $('#fixed-nav').height() + 15);
+        $(window).resize(function(){
+            $(document.body).css('padding-top', $('#fixed-nav').height() + 15);
+        });
+    });
+</script>
