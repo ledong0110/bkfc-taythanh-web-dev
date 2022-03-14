@@ -13,15 +13,16 @@ const Course = new Schema(
         description: { type: String },
         image: { type: String },
         slug: { type: String, slug: 'name', unique: true },
-        lessons: { 
-            type: [{
-                name: {type: String, default: ''},
-                link: {type: String, default: ''},
-            }],
+        lessons: {
+            type: [
+                {
+                    name: { type: String, default: '' },
+                    link: { type: String, default: '' },
+                },
+            ],
             default: [],
             required: false,
-        } ,
-        idV: { type: String, required: true },
+        },
         level: { type: String },
     },
     {

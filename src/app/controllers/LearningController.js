@@ -52,12 +52,10 @@ class LearningController {
 
     //[POST] /learning/courses/store
     course_store(req, res, next) {
-        req.body.image = `https://img.youtube.com/vi/${req.body.idV}/sddefault.jpg`;
         const course = new Course({
             name: req.body.name,
             description: req.body.description,
             image: req.body.image,
-            idV: req.body.idV,
             level: req.body.level,
         });
         course
