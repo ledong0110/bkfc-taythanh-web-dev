@@ -62,14 +62,15 @@ class SiteController {
                     email: req.oidc.user.email,
                     picture: req.oidc.user.picture,
                 });
-                add_user.save();
-                req.app.locals.user = {
-                    name: req.oidc.user.name,
-                    email: req.oidc.user.email,
-                    picture: req.oidc.user.picture,
-                    admin: 0,
-                };
-                res.redirect(req.session.returnTo);
+                add_user.save().then(() => {
+                    req.app.locals.user = {
+                        name: req.oidc.user.name,
+                        email: req.oidc.user.email,
+                        picture: req.oidc.user.picture,
+                        admin: 0,
+                    };
+                    res.redirect(req.session.returnTo);
+                });
             } else {
                 req.app.locals.user = user;
                 res.redirect(req.session.returnTo);
