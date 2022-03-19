@@ -525,13 +525,13 @@
             for (var a = 0; a < data.length; a++) {
                 html += `<div class="single-blog-post animated fadeInUpBig d-flex flex-wrap style-5 mb-30">
                     <div class="blog-thumbnail">
-                        <a href="#"><img height="200px" src="${data[a].image_url}" alt=""></a>
+                        <a href="/post/${data[a].slug}"><img height="200px" src="${data[a].image_url}" alt=""></a>
                     </div>
 
                     <div class="blog-content">
                         <span class="post-date">${new Date(data[a].createdAt).toLocaleDateString('vi-Vi', options)}</span>
-                        <a href="#" class="post-title">${data[a].title}</a>
-                        <a href="#" class="post-author">Tác giả: ${data[a].author.name}</a>
+                        <a href="/post/${data[a].slug}" class="post-title">${data[a].title}</a>
+                        <a href="/post/${data[a].slug}" class="post-author">Tác giả: ${data[a].author.name}</a>
                         <p>${data[a].description}</p>
                     </div>
                 </div>`
