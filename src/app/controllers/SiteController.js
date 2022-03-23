@@ -69,12 +69,14 @@ class SiteController {
                         picture: req.oidc.user.picture,
                         admin: 0,
                     };
-                    if (req.session.returnTo == 'undefined') res.redirect('/');
+                    if (typeof req.session.returnTo == 'undefined')
+                        res.redirect('/');
                     else res.redirect(req.session.returnTo);
                 });
             } else {
                 req.app.locals.user = user;
-                if (req.session.returnTo == 'undefined') res.redirect('/');
+                if (typeof req.session.returnTo == 'undefined')
+                    res.redirect('/');
                 else res.redirect(req.session.returnTo);
             }
         });
