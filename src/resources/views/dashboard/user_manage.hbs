@@ -23,9 +23,9 @@
       </div>
       <div class="table100-body">
         <table>
-              <tbody id="user-list" class="animated fadeInUpBig">
+              <tbody id="user-list">
                   {{#each users}}
-                <tr id="{{this._id}}" data-id="{{this._id}}" class="row100 body"> 
+                <tr id="{{this._id}}" data-id="{{this._id}}" class="row100 body animated fadeInUpBig"> 
                   <td class="cell100 column1">
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -84,7 +84,6 @@
   })
   function crawlUsers(totalPages, page)
   {
-      $('.loader').show();
       createPagination(totalPages, page);
       $.ajax({
         url: "/dashboard/users/load-more-users",
@@ -95,7 +94,7 @@
     function handleData(data) {
       var html = "";
       for (var a = 0; a < data.length; a++) {
-          html += ` <tr id="${data[a]._id}" data-id="${data[a]._id}" class="row100 body"> 
+          html += ` <tr id="${data[a]._id}" data-id="${data[a]._id}" class="row100 body animated fadeInUpBig"> 
                   <td class="cell100 column1">
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -135,7 +134,7 @@
                   </tr>`;
       }
       $("#user-list").html(html);
-      $('.loader').hide();
+      
     }
   } 
 </script>

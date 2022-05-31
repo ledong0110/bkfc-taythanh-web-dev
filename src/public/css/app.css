@@ -2602,8 +2602,8 @@ th, td {
   left: 0; }
 
 .table100-body {
-  max-height: 585px;
-  overflow: auto; }
+  max-height: 900px;
+  overflow: hidden; }
 
 /*==================================================================
   [ Ver1 ]*/
