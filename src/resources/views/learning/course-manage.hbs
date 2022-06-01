@@ -1,83 +1,148 @@
-<div class="mt-4">
-    <div>
-      <h3>My Courses</h3>
-    </div>
-        <table class="table mt-4">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Course name</th>
-            <th scope="col">Level</th>
-            <th scope="col" colspan="2">Time Created</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each courses}}
-        <tr>
-            <th scope="row">{{sum @index 1}}</th>
-            <td>{{this.name}}</td>
-            <td>{{this.level}}</td>
-            <td>{{this.createdAt}}</td>
-            <td>
-                <a href="/learning/courses/{{this._id}}/edit" class="btn btn-link">Edit</a>
-                <a href="" class="btn btn-link" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-modal">Delete</a>
-            </td>
-        </tr>
-        {{else}}
-        <tr>
-            <td colspan="5" class="text-center">
-              Bạn chưa đăng khóa học nào
-              <a href="/learning/courses/create">Đăng khóa học</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-    </table>
+<!--//////////////////////////////////////////-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+{{#if message}}
+<div class="alert alert-{{message.type}} alert-dismissible fade show" role="alert">
+  {{message.message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+{{/if}}
+<div class="container-table100">
+  <div class="table100-title line-break">Quản lí khóa học</div>
+  <div class="wrap-table100">
+    <div class="table100 ver1 m-b-110">
+      <div class="table100-head">
+          <table id="my-table">
+            <thead>
+              <tr>
+                <th class="cell100 column1 small">No.</th>
+                <th class="cell100 column2" >Tên khóa học</th>
+                <th class="cell100 column3 small">Ngày khởi tạo</th>
+                <th class="cell100 column4">Người tạo</th>
+                <th class="cell100 column5 small">Tùy chỉnh</th>
+              </tr>
+            </thead>  
+        </table>
+      </div>
+      <div class="table100-body">
+        <table>
+              <tbody id="course-list">
+                  {{#each courses}}
+                <tr id="{{this._id}}" data-id="{{this._id}}" class="row100 body animated fadeInUpBig"> 
+                  <td class="cell100 column1 small">
+                      <p calss="text-xs font-bold">{{sum @index 1}}</p>
+                  </td>
+                  <td class="cell100 column2">
+                    <p class="text-xs font-bold"><a class="text-primary" href="/learning/courses/{{this.slug}}">{{this.name}}</a></p>
+                  </td>
+                  <td class="cell100 column3 small">
+                    <span class="text-secondary text-xs font-weight-bold">{{this.createdAt}}</span>
+                  </td>
+                  <td class="cell100 column4">
+                    <p class="text-secondary text-xs font-bold">{{this.initial_user.name}}</p>
+                  </td>
+                  <td class="cell100 column5 small">
+                    <a href="/learning/courses/{{this._id}}/edit" class="btn btn-link">Edit</a>
+                    <a href="" class="btn btn-link deleteCourse"  data-id="{{this._id}}" >Delete</a>
+                  </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                      Bạn chưa đăng khóa học nào
+                      <a href="/learning/courses/create">Đăng khóa học</a>
+                    </td>
+                </tr>
+                {{/each}}
 
-{{!--Confirm delete course--}}
-<div id="delete-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Bạn chắc chắn muốn xóa chứ ?</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Hành động này sẽ xóa luôn khóa học của bạn</p>
-      </div>
-      <div class="modal-footer">
-        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+              </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-
-{{!-- Delete hidden form --}}
-<form method="POST" name="delete-form"></form>
+<ul class="pagination table-responsive__pagination"></ul>
+<script src="/js/pagination.js"></script>
+<script>
+  var totalPages = {{counts}};
+  var page = 1;
+  $(document).ready(function () {
+    createPagination(totalPages, page); 
+  });
+  $('ul.pagination').on('click', 'li.pagination-item', function(e) {
+    page = $(this).data('pag');
+    crawlCourses(totalPages, page);
+  })
+  function crawlCourses(totalPages, page)
+  {
+      createPagination(totalPages, page);
+      $.ajax({
+        url: "/learning/courses/load-more-courses",
+        method: "POST",  
+        data: {page: page-1},
+        success: (response) => (handleData(response)),
+      });
+    function handleData(data) {
+      var html = "";
+      for (var a = 0; a < data.length; a++) {
+         html += `<tr id="${data[a]._id}" data-id="${data[a]._id}" class="row100 body animated fadeInUpBig"> 
+            <td class="cell100 column1 small">
+                ${(page-1)*10 +1 + a}
+            </td>
+            <td class="cell100 column2">
+              <p class="text-xs font-bold"><a class="text-primary" href="/learning/courses/${data[a].slug}">${data[a].name}</a></p>
+            </td>
+            <td class="cell100 column3 small">
+              <span class="text-secondary text-xs font-weight-bold">${data[a].createdAt}</span>
+            </td>
+            <td class="cell100 column4">
+              <p class="text-secondary text-xs font-bold">${data[a].initial_user.name}</p>
+            </td>
+            <td class="cell100 column5 small">
+              <a href="/learning/courses/${data[a]._id}/edit" class="btn btn-link">Edit</a>
+              <a href="" class="btn btn-link deleteCourse"  data-id="${data[a]._id}" >Delete</a>
+            </td>
+          </tr>`;
+      }
+      $("#course-list").html(html);
+      
+    }
+  } 
+</script>
 
 <script>
-    
     document.addEventListener('DOMContentLoaded', function (){
-      //When diaglog confirm click
-      var courseId;
-      var deleteForm = document.forms['delete-form']
-      jQuery('#delete-modal').on('show.bs.modal', function (event) {
-      var button = jQuery(event.relatedTarget) // Button that triggered the modal
-      courseId = button.data('id') // Extract info from data-* attributes
-
-    });
-
-    var btnDeleteCourse = document.getElementById('btn-delete-course');
-
-    btnDeleteCourse.onclick = function () {
-      deleteForm.action = '/learning/courses/' + courseId + '?_method=DELETE';
-      deleteForm.submit();
-    }
-    
+    var courseId;
+    $("body").on("click",".deleteCourse",function(e) {
+      e.preventDefault();
+      courseId = $(this).data('id');
+      Swal.fire({
+            title: 'Bạn có chắc muốn xóa khóa học này?',
+            text: "Khóa học sẽ bị xóa vĩnh viễn",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa luôn!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var callback = $.ajax({
+                        type: "DELETE",
+                        url: `/learning/courses/${courseId}`,
+                        success: ()=>{
+                          Swal.fire(
+                              'Đã xóa',
+                              'Kiểm tra được chưa mate',
+                              'success'
+                          ).then(()=>{
+                              window.location.reload();
+                          })
+                           
+                            
+                        }
+                    })   
+                }
+            })
+    })
   });
 </script>
 

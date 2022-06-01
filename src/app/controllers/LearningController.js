@@ -53,21 +53,28 @@ class LearningController {
     //[POST] /learning/courses/store
     course_store(req, res, next) {
         const course = new Course({
-            name: req.body.name,
-            description: req.body.description,
-            image: req.body.image,
-            level: req.body.level,
+            name: req.body.course_name,
+            description: req.body.course_description,
+            image: req.body.course_image,
+            level: req.body.course_level,
+            initial_user: req.app.locals.user._id
         });
         course
             .save()
             .then((saved_course) => {
-                CourseList.updateOne(
-                    { _id: req.body.list_id },
-                    { $push: { courses: saved_course._id } },
-                ).then(() => {
-                    res.send('Done');
-                });
+                if (req.body.state == 1)
+                {
+                    CourseList.updateOne(
+                        { _id: req.body.list_id },
+                        { $push: { courses: saved_course._id } },
+                    )
+                    .catch(() => {
+                        res.send("Bị lỗi gì rồi đó anh bạn à !")
+                    })
+                }
+                
             })
+            .then(() => res.redirect('back'))
             .catch((error) => {
                 console.log(error);
                 res.send('Someting error');
@@ -86,17 +93,21 @@ class LearningController {
     }
     //[PUT] /learning/courses/:id
     course_update(req, res, next) {
-        req.body.image = `https://img.youtube.com/vi/${req.body.idV}/sddefault.jpg`;
-        Course.updateOne({ _id: req.params.id }, req.body)
+        Course.updateOne({ _id: req.params.id }, {
+            name: req.body.course_name,
+            description: req.body.course_description,
+            image: req.body.course_image,
+            level: req.body.course_level,
+        })
             .then(() => {
                 res.redirect('/learning/courses/manage');
             })
-            .catch((err) => console.log('err'));
+            .catch((err) => console.log('lỗi rổi bạn tôi ơi!'));
     }
     //[DELETE] /learning/courses/:id
     course_delete(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
+            .then(() => res.send('done'))
             .catch(next);
     }
     //[DELETE] /learning/courses/:id/deleteLesson
@@ -116,11 +127,30 @@ class LearningController {
     }
     //[GET] /learning/courses/manage
     course_manage(req, res, next) {
-        Course.find({})
-            .then((courses) =>
+        const limit = 10;
+        Promise.all([Course.find({}).populate('initial_user', 'name').limit(limit), Course.countDocuments()])
+            .then(([courses, counts]) => {
+                courses = multipleMongooseToObject(courses);
+                courses.forEach((course) => {
+                    course.createdAt = course.createdAt.toLocaleDateString(
+                        'vi-Vi',
+                        {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        },
+                    );
+                });
+                return [courses, counts]
+                }      
+            )
+            .then(([courses, counts]) => 
                 res.render('learning/course-manage', {
-                    courses: multipleMongooseToObject(courses),
-                }),
+                    courses: courses,
+                    counts: Math.ceil(counts/ limit)
+                    }
+                )
             )
             .catch(next);
     }
@@ -197,6 +227,32 @@ class LearningController {
         ).then(() => {
             res.send('done');
         });
+    }
+
+    //[POST] /courses/load more
+    course_loading(req, res, next) {
+        const limit = 10;
+        Course.find()
+            .select({ updatedAt: 0 })
+            .sort({ default_user: -1, admin: -1, updatedAt: 1 })
+            .skip(req.body.page * limit)
+            .limit(limit)
+            .populate('initial_user', 'name')
+            .then((courses) => {
+                courses = multipleMongooseToObject(courses);
+                courses.forEach((course) => {
+                    course.createdAt = course.createdAt.toLocaleDateString(
+                        'vi-Vi',
+                        {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        },
+                    );
+                });
+                res.json(courses);
+            });
     }
 }
 
