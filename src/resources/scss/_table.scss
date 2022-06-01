@@ -113,20 +113,32 @@
     padding-left: 40px;
   }
   
+  .column1.small {
+    width: 9%;
+  }
+
   .column2 {
-    width: 13%;
+    width: 20%;
   }
   
   .column3 {
     width: 22%;
   }
   
+  .column3.small {
+    width: 18%
+  }
+
   .column4 {
     width: 19%;
   }
   
   .column5 {
     width: 13%;
+  }
+
+  .column5.small {
+    width: 15%
   }
   .table100-head th {
       padding-top: 18px;
@@ -162,8 +174,9 @@
     }
   
   .table100-body {
-    max-height: 585px;
-    overflow: auto;
+    height: auto;
+    min-height: 908px;
+    overflow: hidden;
   }
   
   

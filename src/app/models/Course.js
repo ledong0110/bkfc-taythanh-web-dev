@@ -24,6 +24,7 @@ const Course = new Schema(
             required: false,
         },
         level: { type: String },
+        initial_user: {type: Number, ref: 'User'}
     },
     {
         _id: false,

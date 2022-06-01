@@ -65,6 +65,11 @@ router.post(
     isKnowLedgeProvider,
     learningController.course_store,
 );
+router.post(
+    '/courses/load-more-courses',
+    isKnowLedgeProvider,
+    learningController.course_loading,
+);
 router.get('/courses/:slug', isAuthenticated, learningController.course_access);
 router.post(
     '/courses/:slug/addLesson',

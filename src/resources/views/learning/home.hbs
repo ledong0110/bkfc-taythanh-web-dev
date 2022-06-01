@@ -1,5 +1,5 @@
 {{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
-<div class="mt-4">
+<div class="p-5">
   <a class="btn btn-primary shadow-none" href="/learning/courses/manage">Quản lý khóa học</a>
   <a class="btn btn-primary shadow-none" href="/learning/courses/create">Tạo khóa học mới</a>
 </div>
@@ -88,6 +88,7 @@
               <textarea class="form-control" name="description"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Thêm Khóa Học</button>
+          <input type="hidden" name="state" value="1">
       </form>
       </div>
     </div>

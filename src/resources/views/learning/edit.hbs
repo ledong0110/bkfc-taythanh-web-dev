@@ -1,25 +1,33 @@
-<div class="mt-4">
-    <h3>Cập Nhật Khóa Học</h3>
-    <form class="mt-4" method="POST" action="/learning/courses/{{course._id}}?_method=PUT">
-        <div class="form-group">
-            <label for="name">Title Course</label>
-            <input type="text" name="name" value="{{course.name}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div class="row create-post-area p-0 m-0">
+    <div class = "d-block ps-5 pe-5 mb-3 mt-3 bg-gray">
+        <h3 class="mb-3 mt-3">
+           Chỉnh Sửa Khóa Học
+        </h3>
+    </div>
+    <form class="post-submit-form d-block ps-5 pe-5" method="POST" action="/learning/courses/{{course._id}}?_method=PUT">
+        <div class="mb-3">
+            <label for="title" class="form-label">Tên khóa học</label>
+            <input type="text" class="form-control" name="course_name" value="{{course.name}}" aria-describedby="title-help" required>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" name="description" value="{{course.description}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô tả khóa học</label> <span class="des-max">(tối đa 300 ký tự)</span>
+            <textarea type="text" class="form-control" name="course_description" aria-describedby="description-help" required rows=3 maxlength="300">{{course.description}}</textarea>
         </div>
-        <div class="form-group">
-            <label for="idV">ID video</label>
-            <input type="text" name="idV" value="{{course.idV}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div class="mb-3">
+            <label for="image_url" class="form-label">Ảnh bìa bài viết</label> <span class="des-max">(không bắt buộc, nên chọn hình có tỉ lệ 16:9)</span>
+            <input type="url" class="form-control" name="course_image" value="{{course.image}}" aria-describedby="image_url-help">
+            <div id="image_url-help" class="form-text">Ảnh bìa sẽ được hiển thị cùng khóa học</div>
         </div>
-        <div class="form-group">
-            <label for="level">Level</label>
-            <input type="text" name="level" value="{{course.level}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div class="mb-3">
+            <label for="description" class="form-label">Mức độ</label>
+            <input type="text" class="form-control" name="course_level" value="{{course.level}}" aria-describedby="title-help" required>
         </div>
-        <button type="submit" class="btn btn-primary">Lưu Lại</button>
-        </form>
+        <input type="hidden" name="state" value="0">
+        <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+    </form>
 </div>
+
+
 
 <script>
 $(document).ready(function(){
