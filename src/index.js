@@ -10,8 +10,8 @@ const { auth } = require('express-openid-connect');
 const app = express();
 const port = process.env.PORT;
 
-const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 const route = require('./routes');
 const db = require('./config/db');
 // Connect to DB
@@ -68,7 +68,7 @@ app.engine(
         extname: '.hbs',
         defaultLayout: 'main',
         layoutsDir: './src/resources/views/layouts',
-        helpers: require('./utility/helpers')
+        helpers: require('./utility/helpers'),
     }),
 );
 // engine.registerHelper('equal', function(lvalue, rvalue, options) {
@@ -95,18 +95,30 @@ console.log(__dirname);
 app.locals.authenticated = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: boolean);
 app.locals.user = null; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: object)
 app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: int)
+app.locals.onlUserIds = [];
 //Socket io config
 var count = 0;
-io.on('connection', function(socket) {
+var users = [];
+io.on('connection', function (socket) {
     console.log('a user connected');
-    count++;
+    ++count;
+    if (app.locals.user) {
+        app.locals.onlUserIds.indexOf(app.locals.user._id) === -1 &&
+            app.locals.onlUserIds.push(app.locals.user._id);
+    }
     io.emit('usercnt', count);
-    socket.on('disconnect', function() {
+
+    socket.on('disconnect', function () {
         count--;
-        io.emit('usercnt', count)
+        if (app.locals.user) {
+            app.locals.onlUserIds = app.locals.onlUserIds.filter(
+                (onlId) => onlId !== app.locals.user._id,
+            );
+        }
+        io.emit('usercnt', count);
         console.log('a user disconnected');
-    })
-})
+    });
+});
 
 //Routes init
 route(app);

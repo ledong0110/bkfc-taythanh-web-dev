@@ -17,6 +17,7 @@
                 <th class="cell100 column2" >Vai trò</th>
                 <th class="cell100 column3">Ngày tham gia</th>
                 <th class="cell100 column4">Tùy chỉnh</th>
+                <th class="cell100 column5">Active</th>
               </tr>
             </thead>  
         </table>
@@ -57,6 +58,13 @@
                     <button class="btn btn-cancle btn-primary d-none">
                       Cancle
                     </button>
+                    {{/if}}
+                  </td>
+                  <td class="cell100 column5">
+                    {{#if (include @root.onlUserIds this._id)}}
+                    <span style="padding: 5; color: green"><i class="fa-solid fa-circle"></i></span> Online
+                    {{else}}
+                    <span style="padding: 5; color: red"><i class="fa-solid fa-circle"></i></span> Offline
                     {{/if}}
                   </td>
                 </tr>

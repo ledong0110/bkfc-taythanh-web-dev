@@ -3,4 +3,5 @@ module.exports = {
     equal: (a, b) => a == b,
     json: (ob) => JSON.stringify(ob),
     or: (a, b) => a || b,
-}
+    include: (usrs, id) => usrs.includes(id),
+};
