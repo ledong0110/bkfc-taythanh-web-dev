@@ -37,6 +37,15 @@
     <script>
         var socket = io();
     </script>
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
 
@@ -46,7 +55,7 @@
 
     <script>
       var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "100199995570104");
+      chatbox.setAttribute("page_id", "102454765113538");
       chatbox.setAttribute("attribution", "biz_inbox");
     </script>
 
@@ -67,14 +76,6 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
 
     <div class="app">
         {{> header}}
