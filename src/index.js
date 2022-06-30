@@ -95,27 +95,29 @@ console.log(__dirname);
 app.locals.authenticated = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: boolean);
 app.locals.user = null; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: object)
 app.locals.admin = 0; // Using in hbs 'authenticated', using in controllers 'req.app.locals.authenticated (type: int)
-app.locals.onlUserIds = [];
 //Socket io config
 var count = 0;
 var users = [];
 io.on('connection', function (socket) {
     console.log('a user connected');
     ++count;
-    if (app.locals.user) {
-        app.locals.onlUserIds.indexOf(app.locals.user._id) === -1 &&
-            app.locals.onlUserIds.push(app.locals.user._id);
-    }
     io.emit('usercnt', count);
-
+    socket.on('add user', (id) => {
+        if (!users.includes({ ids: socket.id, id }))
+            users.push({ ids: socket.id, id });
+        io.emit(
+            'onlineUsers',
+            users.map((user) => user.id),
+        );
+    });
     socket.on('disconnect', function () {
         count--;
-        if (app.locals.user) {
-            app.locals.onlUserIds = app.locals.onlUserIds.filter(
-                (onlId) => onlId !== app.locals.user._id,
-            );
-        }
+        users = users.filter((user) => user.ids != socket.id);
         io.emit('usercnt', count);
+        io.emit(
+            'onlineUsers',
+            users.map((user) => user.id),
+        );
         console.log('a user disconnected');
     });
 });

@@ -14,10 +14,12 @@
             </div>
         </div>
     </footer>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
+   <script>
         socket.on('usercnt', function(active) {
                 $('#active-user').text(active);
             })
+    {{#if @root.authenticated}}
+        socket.emit('add user', {{@root.user._id}});
+    {{/if}}
+        
     </script>

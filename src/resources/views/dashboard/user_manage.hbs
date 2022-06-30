@@ -17,7 +17,7 @@
                 <th class="cell100 column2" >Vai trò</th>
                 <th class="cell100 column3">Ngày tham gia</th>
                 <th class="cell100 column4">Tùy chỉnh</th>
-                <th class="cell100 column5">Active</th>
+                <th class="cell100 column5">Status</th>
               </tr>
             </thead>  
         </table>
@@ -60,12 +60,8 @@
                     </button>
                     {{/if}}
                   </td>
-                  <td class="cell100 column5">
-                    {{#if (include @root.onlUserIds this._id)}}
-                    <span style="padding: 5; color: green"><i class="fa-solid fa-circle"></i></span> Online
-                    {{else}}
+                  <td  data-id={{this._id}} class="cell100 column5 status--activity">
                     <span style="padding: 5; color: red"><i class="fa-solid fa-circle"></i></span> Offline
-                    {{/if}}
                   </td>
                 </tr>
                 {{/each}}
@@ -78,7 +74,27 @@
 </div>
 <ul class="pagination table-responsive__pagination"></ul>
 <script src="/js/pagination.js"></script>
+<script>   
+  function updateOnlineUsers () {
+    (document.querySelectorAll('.status--activity')).forEach((userField) => {
+      if (onlineUsersList.includes(parseInt(userField.dataset.id)))
+      {
+        userField.innerHTML = '<span style="padding: 5; color: green"><i class="fa-solid fa-circle"></i></span> Online'
+      }
+      else
+      {
+        userField.innerHTML = '<span style="padding: 5; color: red"><i class="fa-solid fa-circle"></i></span> Offline';
+      }
+     
+    })
+  }
+</script>
 <script>
+  var onlineUsersList;
+  socket.on('onlineUsers', function (users) {
+    onlineUsersList = users;
+    updateOnlineUsers();    
+  })
   var totalPages = {{totalPages}};
   var page = 1;
   var userId = {{user._id}};
@@ -87,7 +103,7 @@
   });
   $('ul.pagination').on('click', 'li.pagination-item', function(e) {
     page = $(this).data('pag');
-    crawlUsers(totalPages, page);
+    crawlUsers(totalPages, page)
   })
   function crawlUsers(totalPages, page)
   {
@@ -137,11 +153,23 @@
                       Cancle
                     </button>`;
           };
-          html += `</td>
-                  </tr>`;
+          html += `</td>`
+          if (onlineUsersList.includes(parseInt(data[a]._id)))
+          {
+            html+=  `<td  data-id=${data[a]._id} class="cell100 column5 status--activity">
+                        <span style="padding: 5; color: green"><i class="fa-solid fa-circle"></i></span> Online
+                      </td>`
+            
+          }
+          else
+          {
+              html+=`<td  data-id=${data[a]._id} class="cell100 column5 status--activity">
+                        <span style="padding: 5; color: red"><i class="fa-solid fa-circle"></i></span> Offline
+                      </td>`
+          }
+          html+= `</tr>`;
       }
       $("#user-list").html(html);
-      
     }
   } 
 </script>
@@ -225,8 +253,7 @@ $(document).ready(function(){
     })
     
   })
-
-
 </script>
+
 
       

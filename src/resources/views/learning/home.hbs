@@ -1,4 +1,4 @@
-{{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+{{#if (and (or (equal @root.user.admin 2) (equal @root.user.admin 3)) @root.authenticated)}}
 <div class="p-5">
   <a class="btn btn-primary shadow-none" href="/learning/courses/manage">Quản lý khóa học</a>
   <a class="btn btn-primary shadow-none" href="/learning/courses/create">Tạo khóa học mới</a>
@@ -6,7 +6,7 @@
 {{/if}}
 {{#each list_courses}}
 <div class="carousel-wrap mt-4">
-  {{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+  {{#if (and (or (equal @root.user.admin 2) (equal @root.user.admin 3)) @root.authenticated)}}
   <a class="btn btn-dark shadow-none" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#courseModal">Tạo khóa học</a>
   <a class="btn btn-success shadow-none" href="" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#selectModal">Chọn khóa học</a>
   <a class="btn btn-danger shadow-none deleteList" href="" data-id="{{this._id}}">Xóa danh mục</a>
@@ -35,7 +35,7 @@
     </div>
 </div>
 {{/each}}
-{{#if (or (equal @root.user.admin 2) (equal @root.user.admin 3))}}
+{{#if (and (or (equal @root.user.admin 2) (equal @root.user.admin 3)) @root.authenticated)}}
 <div class="d-flex justify-content-center">
   <button class="btn btn-back btn-lg shadow-none mt-4" data-bs-toggle="modal" data-bs-target="#listModal"><i class="fa-solid fa-plus"></i> Tạo một danh mục mới</button>
 </div>
